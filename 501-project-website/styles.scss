@@ -1,0 +1,35 @@
+/* spacing for sections */
+#about, #introduction, #datagathering, #datacleaning, #exploringdata, #clustering, #armandnetworking, #decisiontrees, 
+#naivebayes, #svm, #conclusions {
+    font-family: 'Castoro';
+    font-size: 20px;
+    margin-top: 4em;
+}
+
+/* banner image css */
+.banner {
+    width: 100%;
+    height: 250px;
+}
+
+/* about section image css */
+.headshot {
+    width: 400px;
+    height: 400px;
+}
+
+/* pink navbar on scroll after banner img */
+.navbarScroll.navbar {
+    background-color: pink;
+}
+
+.text-center { 
+    margin-bottom: 40px;
+    font-weight: bold;
+}
+
+.nav-item {
+    font-family: 'Castoro';
+    font-size: 16px;
+    font-weight: bold;
+}
