@@ -9,9 +9,8 @@ from tqdm import tqdm
 import tweepy
 from datetime import datetime, timedelta
 
-input_path = '../01-data-gathering/twitterapiauth.txt'
-input_path = os.path.join(os.path.dirname(__file__), input_path)
-api = pd.read_csv(input_path, sep=" ", header=None)
+
+api = pd.read_csv("./twitterapiauth.txt", sep=" ", header=None)
 
 consumer_key        = api.loc[0,1]
 consumer_secret     = api.loc[1,1]
