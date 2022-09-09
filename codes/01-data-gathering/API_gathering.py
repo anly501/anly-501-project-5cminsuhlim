@@ -46,8 +46,11 @@ def pretty_print_json(input):
     
 
 max_results = 100
-query = "%23wagegap%20OR%20%23earningsgap%20OR%20%23feminism%20OR%20%23men%27srights%20OR%20%23women%27srights%20OR%20%23MGTOW%20"
 tweet_fields = "tweet.fields=text,lang"
+
+# search for commonly associated words with gender equality
+# e.g. wagegap, earningsgap, feminism, men's rights, women's rights, MGTOW
+query = "%23wagegap%20OR%20%23earningsgap%20OR%20%23feminism%20OR%20%23men%27srights%20OR%20%23women%27srights%20OR%20%23MGTOW%20"
 
 # gather the 100 tweets each over the last week. x CANNOT exceed 6
 def collect(x=6):
@@ -79,5 +82,6 @@ d = {}
 for word in words:
     d[word] = d.get(word, 0) + 1
 
+# export to csv
 df = pd.DataFrame(d.items(), columns=['Word', 'Count'])
 pd.DataFrame.to_csv(df, "Tweets.csv")
