@@ -27,6 +27,12 @@
   margin-left: 40px;
 }
 
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 p {
   padding: 20px;
 }

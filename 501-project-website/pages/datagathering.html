@@ -78,7 +78,7 @@
             <div class="row">
                 <div>
                     <p>
-                        The data sources used for this project can be found below.
+                        The data sources used for this project can be found below. Please have browser pop-ups enabled!
                     </p>
                     <li class="questionsref"><a href="#DirectDownload">Direct Download of Data</a></li>
                     <li class="questionsref"><a href="#RAPI">Download Data via API in R</a></li>
@@ -89,10 +89,42 @@
                     
                 </div>
 
-                <div class="col-lg-8">
+                <div>
                     <h2 id="DirectDownload">Direct Download of Data</h2>
+                    <h4>Bureau of Labor Statistics (BLS) Data</h4>
                     <p>
-                        placeholder
+                        "<a href="https://www.bls.gov/" target="_blank">The Bureau of Labor Statistics</a> is a unit of the United States Department of Labor. It is the principal fact-finding agency for the U.S. government in the broad field of labor economics and statistics and serves as a principal agency of the U.S. Federal Statistical System."<sup>1</sup> The advantage of using the BLS as a data source is not only the abundance and specificity of the data but also the reliability of a well-organized and managed government source. 
+                    </p>
+                    <img class="center-block" src="../images/datagathering/BLS_ex.png">
+                    <p>
+                        As shown in the image above, all of the data obtained from the BLS follows a similar tabular format. To directly download the BLS data, click <a href="/data/00-raw-data/BLSdirect.zip" download>here</a>. To visit the original pages from which the data was downloaded, click <a href="" onclick="openMultipleLinks(BLSLinks)">here</a>.
+                    </p>
+
+                    <h4>National Center for Education Statistics (NCES) Data</h4>
+                    <p>
+                        "<a href="https://nces.ed.gov/about/" target="_blank">The National Center for Education Statistics</a> is the primary federal entity for collecting and analyzing data related to education in the U.S."<sup>2</sup> The NCES is also responsible for gathering, analyzing, and report data on the condition of American education. Similar to the BLS, the NCES is a data source that is highly reliable and abundant in available resources relating to education.
+                    </p>
+                    <img class="center-block" src="../images/datagathering/NCES_ex.png">
+                    <p>
+                        As shown in the image above, all of the data obtained from the NCES follows a similar tabular format. To directly download the BLS data, click <a href="/data/00-raw-data/NCESdirect.zip" download>here</a>. To visit the original pages from which the data was downloaded, click <a href="" onclick="openMultipleLinks(NCESLinks)">here</a>.
+                    </p>
+
+                    <h4>United States Census Bureau Data</h4>
+                    <p>
+                        <a href="https://www.census.gov/about.html" target="_blank">The U.S. Census Bureau</a> is "the nation's leading provider of quality data about its people and economy."<sup>3</sup> Similar to the BLS, the Census Bureau is a data source that is highly reliable and abundant in available resources relating to the economy.
+                    </p>
+                    <img class="center-block" src="../images/datagathering/CB_ex.png">
+                    <p>
+                        As shown in the image above, all of the data obtained from the Census Bureau follows a similar tabular format. To directly download the BLS data, click <a href="/data/00-raw-data/CBdirect.zip" download>here</a>. To visit the original pages from which the data was downloaded, click <a href="" onclick="openMultipleLinks(CBLinks)">here</a>.
+                    </p>
+
+                    <h4>Center for American Women and Politics (CAWP) Data</h4>
+                    <p>
+                        <a href="https://cawp.rutgers.edu/about" target="_blank">The Center for American Women and Politics</a> is a nationally recognized and leading source of scholarly research and current data about women’s political participation in the United States.<sup>4</sup> CAWP is a unit in <a href="https://eagleton.rutgers.edu/what-we-do/" target="_blank">the Eagleton Institute of Politics at Rutgers University—New Brunswick</a>, which studies, analyzes, and promotes various aspects of government and public participation. With its connections to a prestigious educational institution, CAWP is a highly reliable data source relating to the field of politics, especially women's involvement in politics.
+                    </p>
+                    <img class="center-block" src="../images/datagathering/CAWP_ex.png">
+                    <p>
+                        As shown in the image above, all of the data obtained from the CAWP follows a similar tabular format. To directly download the CAWP data, click <a href="/data/00-raw-data/CAWPdirect.zip" download>here</a>. To visit the original pages from which the data was downloaded, click <a href="" onclick="openMultipleLinks(CAWPLinks)">here</a>.
                     </p>
                 </div>
 
@@ -100,12 +132,40 @@
                     <h2 id="RAPI">Download Data via API in R</h2>
                     <h4>Bureau of Labor Statistics (BLS) Data</h4>
                     <p>
-                        placeholder
+                        Various data sets relating to employment rate in the U.S. from 1948 to 2022 were collected using the BLS API and associated data series codes. To better see trends across multiple age groups, I gathered cumulative employment rate data, as well as employment rate data split into age ranges of 16-24, 25-34, 35-44, 45-54, and 55+. 
+                    </p>
+                    <p>
+                        To see the specific R code that contains associated data series codes, click <a href="./API_gathering_BLS_R.html" target="_blank">here</a>. To directly download all of the BLS data gathered by the API calls, click <a href="/data/00-raw-data/BLSemploymentrate.zip" download>here</a>.
+                    </p>
+                    
+                    <img class="center-block" src="../images/datagathering/employmentrateex.png">
+
+                    <p>
+                        In the image above, I took 10 instances from the BLS employment rate for the age group 25-34. The employment rates are displayed per month. The sexes are distinguished by the associated series codes LNS12300164 for men and LNS12300327 for women. The other employment rate data sets that were gathered also follow a similar pattern of year, period, periodName, footnotes, associated series codes, and date. For better readability, I will adjust the associated series codes to the appropriate labels in the next <a href="./datacleaning.html">Data Cleaning</a> section.
                     </p>
 
-                    <h4>Big Five Personality Data</h4>
+                    <h4>Big Five Personality (BFP) Data</h4>
                     <p>
-                        placeholder
+                        <a href="https://en.wikipedia.org/wiki/Big_Five_personality_traits" target="_blank">The Big Five Personality Traits</a> refer to a branch of psychological trait theory that emerged in the mid-20th century. The BFP traits categorize people's temperaments to five broad, factored traits of:
+                    </p>
+                    <ol type="1">
+                        <li class="questionsref">openness to experience (inventive/curious vs. consistent/cautious),</li>
+                        <li class="questionsref">conscientiousness (efficient/organized vs. extravagant/careless),</li>
+                        <li class="questionsref">extraversion (outgoing/energetic vs. solitary/reserved),</li>
+                        <li class="questionsref">agreeableness (friendly/compassionate vs. critical/rational), and</li>
+                        <li class="questionsref">neuroticism (sensitive/nervous vs. resilient/confident).<sup>5</sup></li>
+                    </ol>
+                    <p>
+                        The BFP data was obtained through a <a href="https://github.com/automoto/big-five-data" target="_blank">GitHub repository</a> containing the BFP scores of over 300,000 people from different countries. The data gathered by this user originated from the raw data available from the <a href="https://ipip.ori.org/" target="_blank"></a>International Personality Item Pool (IPIP)</a> NEO-300 questionnaire. The IPIP is an acknowledged and reliable source from which the data in this repository was aggregated.<sup>6</sup> Furthermore, the data in this repository underwent another process of data filtering to remove suspicious or invalid responses according to the <a href="https://ipip.ori.org/newValidity.htm" target="_blank">IPIP validity measurement standards</a>.
+                    </p>
+                    <p>
+                        To see the specific R code, click <a href="./API_gathering_BigFive_R.html" target="_blank">here</a>. To directly download all of the BFP data gathered by the API call, click <a href="/data/00-raw-data/big_five.csv" download>here</a>.
+                    </p>
+                    
+                    <img class="center-block" src="../images/datagathering/bigfiveex.png">
+
+                    <p>
+                        In the image above, I took 10 instances from the BFP. The scores for each of the five personality categories are on a 0-1 scale, where 0 indicates a low tendency and 1 indicates a high tendency towards a specific trait. Additionally, the coding for sex is 1 for males and 2 for females. Using the first item as an example, the individual of case_id 1 would be a male showing relatively high agreeableness, openness, and conscientiousness, while having relatively average extraversion and neuroticism. To accurately restrict the scope to just the U.S. population, I will subset the data in the next <a href="./datacleaning.html">Data Cleaning</a> section.
                     </p>
                 </div>
 
@@ -113,8 +173,43 @@
                     <h2 id="PythonAPI">Download Data via API in Python</h2>
                     <h4>Twitter</h4>
                     <p>
-                        placeholder
+                        While we have a fair amount of hard data regarding multiple facets for measuring gender equality in the U.S., we lack information on the public sentiment towards this topic. To gain better insight into how the general population views gender equality in the U.S., we will gather Tweets via the Twitter API for specific keywords often used within the feminist and men's rights spheres. The keywords used in the Twitter API call were wage gap, earnings gap, feminism, men's rights, women's rights, and MGTOW.
                     </p>
+                    <p>
+                        To see the specific Python code that contains the specific query format, click <a href="./API_gathering_py.html" target="_blank">here</a>. To directly download all of the Tweets gathered by the API calls, click <a href="/data/00-raw-data/Tweets.csv" download>here</a>.
+                    </p>
+
+                    <img class="center-block" src="../images/datagathering/tweetsex.png">
+
+                    <p>
+                        In the image above, I took 10 instances from the gathered Tweets. The data is presented in a data frame format with words found through the query alongside the counts of each word. To facilitate more accurate analysis, I will filter the data in the next <a href="./datacleaning.html">Data Cleaning</a> section.
+                    </p>
+                </div>
+
+                <div class="col-lg-8">
+                    <p>
+                        <strong>Notes:</strong>
+                    </p>
+                    <ol type="1">
+                        <li>
+                            "Bureau of Labor Statistics." <i>Wikipedia</i>, Wikimedia Foundation, 24 Aug 2022, <a href="https://en.wikipedia.org/wiki/Bureau_of_Labor_Statistics" target="_blank">URL</a>
+                        </li>
+                        <li>
+                            <i>National Center for Education Statistics - About Us</i>, <a href="https://nces.ed.gov/about/" target="_blank">URL</a>
+                        </li>
+                        <li>
+                            Bureau, US Census. "About the Bureau." <i>Census.gov</i>, 4 Aug 2022, <a href="https://www.census.gov/about.html" target="_blank">URL</a>
+                        </li>
+                        <li>
+                            "About CAWP" <i>Center for American Women and Politics</i>, <a href="https://cawp.rutgers.edu/about" target="_blank">URL</a>
+                        </li>
+                        <li>
+                            "Big Five personality traits." <i>Wikipedia</i>, Wikimedia Foundation, 6 Sep 2022, <a href="https://en.wikipedia.org/wiki/Big_Five_personality_traits" target="_blank">URL</a>
+                        </li>
+                        <li>
+                            Maples, Jessica L et al. “A test of the International Personality Item Pool representation of the Revised NEO Personality Inventory and development of a 120-item IPIP-based measure of the five-factor model.” <i>Psychological assessment</i> vol. 26,4 (2014): 1070-84. doi:10.1037/pas0000004, <a href="https://pubmed.ncbi.nlm.nih.gov/24932643/" target="_blank">URL</a>
+                        </li>
+                    </ol>
                 </div>
             </div>
         </div>
