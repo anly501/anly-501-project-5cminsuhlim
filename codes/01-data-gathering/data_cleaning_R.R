@@ -30,12 +30,63 @@ write.csv(df, "employment_(by_occupation_and_by_sex)_final.csv", row.names=F)
 
 
 df <- read.xlsx('../../data/00-raw-data/hours_worked_(by_sex_and_by_occupation).xlsx', 1, header=F)
-df <- df %>% filter(row_number() %in% c(23:50)) %>% 
-        select(c(X1, X2, X3, X7, X8, X9))
+df <- df %>% filter(row_number() %in% c(9:50)) %>% 
+        select(c(X1, X2, X3, X7, X8, X9)) %>%
+        filter(row_number() %in% c(1, 2, 5, 6, 9, 12, 
+                                   15, 16, 19, 20, 23, 26,
+                                   29, 30, 33, 34, 37, 40)) %>% 
+        mutate(X2 = as.numeric(X2) * 1000, X3 = as.numeric(X3) * 1000, 
+               X7 = as.numeric(X7) * 1000, X8 = as.numeric(X8),
+               X9 = as.numeric(X9))
+df[1,1] <- 'Cumulative Counts'
+df[7,1] <- 'Male Total'
+df[13,1] <- 'Female Total'
+df_t <- df[1:6,]
+df_t <- df_t %>%
+        rename(Category = X1, `No. people at work` = X2, 
+               `No. people who worked < 35hrs` = X3, 
+               `No. people who worked 35+ hrs` = X7, 
+               `Average hrs worked among all workers` = X8, 
+               `Average hrs worked among full-time workers` = X9)
+df_m <- df[7:12,]
+df_m <- df_m %>%
+        rename(Category = X1, `No. men at work` = X2, 
+               `No. men who worked < 35hrs` = X3, 
+               `No. men who worked 35+ hrs` = X7, 
+               `Average hrs worked among all men` = X8, 
+               `Average hrs worked among full-time men` = X9)
+df_f <- df[13:18,]
+df_f <- df_f %>%
+        rename(Category = X1, `No. women at work` = X2, 
+               `No. women who worked < 35hrs` = X3, 
+               `No. women who worked 35+ hrs` = X7, 
+               `Average hrs worked among all women` = X8, 
+               `Average hrs worked among full-time women` = X9)
+df <- cbind(df_t, df_m[, 2:6], df_f[, 2:6])
+df <- df %>% 
+        relocate(`No. men at work`, .after=`No. people at work`) %>%
+        relocate(`No. women at work`, .after=`No. men at work`) %>%
+        relocate(`No. men who worked < 35hrs`, .after=`No. people who worked < 35hrs`) %>%
+        relocate(`No. women who worked < 35hrs`, .after=`No. men who worked < 35hrs`) %>%
+        relocate(`No. men who worked 35+ hrs`, .after=`No. people who worked 35+ hrs`) %>%
+        relocate(`No. women who worked 35+ hrs`, .after=`No. men who worked 35+ hrs`) %>%
+        relocate(`Average hrs worked among all men`, .after=`Average hrs worked among all workers`) %>%
+        relocate(`Average hrs worked among all women`, .after=`Average hrs worked among all men`) %>%
+        relocate(`Average hrs worked among full-time men`, .after=`Average hrs worked among full-time workers`) %>%
+        relocate(`Average hrs worked among full-time women`, .after=`Average hrs worked among full-time men`)
+write.csv(df, "hours_worked_(by_sex_and_by_occupation)_final.csv", row.names=F)
 
 
 df <- read.xlsx('../../data/00-raw-data/wages_(by_occupation_may_2021).xlsx', 1, header=F)
+df <- df[, c(10, 11, 12, 13, 19, 20)]
+names(df) <- df[1,]
+df <- df[-1,]
 
+#Management, professional, and related occupations
+#Service occupations
+#Sales and office occupations
+#Natural resources, construction, and maintenance occupations
+#Production, transportation, and material moving occupations
 
 ## BLS EMPLOYMENT RATE DATA ##
 df <- read.csv('../../data/00-raw-data/employmentRate.csv')
