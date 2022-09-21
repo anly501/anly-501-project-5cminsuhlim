@@ -1,0 +1,566 @@
+"Occupation","Total Count","Women employed (%)","Men employed (%)"
+"Chief executives",1664000,29.1,70.9
+"General and operations managers",1085000,36.4,63.6
+"Legislators",21000,NA,NA
+"Advertising and promotions managers",72000,42.4,57.6
+"Marketing managers",576000,61.4,38.6
+"Sales managers",537000,30.6,69.4
+"Public relations and fundraising managers",1e+05,68,32
+"Administrative services managers",60000,79,21
+"Facilities managers",146000,21.3,78.7
+"Computer and information systems managers",715000,26.7,73.3
+"Financial managers",1307000,54.6,45.4
+"Compensation and benefits managers",16000,NA,NA
+"Human resources managers",273000,80.8,19.2
+"Training and development managers",55000,59.9,40.1
+"Industrial production managers",256000,24.1,75.9
+"Purchasing managers",232000,45.9,54.1
+"Transportation, storage, and distribution managers",314000,22.4,77.6
+"Farmers, ranchers, and other agricultural managers",875000,26.3,73.7
+"Construction managers",999000,8.6,91.4
+"Education and childcare administrators",956000,65.5,34.5
+"Architectural and engineering managers",178000,11.5,88.5
+"Food service managers",1133000,48.5,51.5
+"Funeral home managers",9000,NA,NA
+"Entertainment and recreation managers",43000,NA,NA
+"Lodging managers",116000,47.6,52.4
+"Medical and health services managers",791000,75,25
+"Natural sciences managers",21000,NA,NA
+"Postmasters and mail superintendents",16000,NA,NA
+"Property, real estate, and community association managers",780000,50.7,49.3
+"Social and community service managers",391000,68.6,31.4
+"Emergency management directors",13000,NA,NA
+"Personal service managers, all other",1000,NA,NA
+"Managers, all other",5235000,36.4,63.6
+"Agents and business managers of artists, performers, and athletes",40000,NA,NA
+"Buyers and purchasing agents, farm products",11000,NA,NA
+"Wholesale and retail buyers, except farm products",159000,55.1,44.9
+"Purchasing agents, except wholesale, retail, and farm products",223000,62.2,37.8
+"Claims adjusters, appraisers, examiners, and investigators",330000,58.2,41.8
+"Compliance officers",291000,53.2,46.8
+"Cost estimators",127000,15.5,84.5
+"Human resources workers",871000,75.2,24.8
+"Compensation, benefits, and job analysis specialists",67000,71.2,28.8
+"Training and development specialists",166000,52.9,47.1
+"Logisticians",132000,39.3,60.7
+"Project management specialists",769000,42.9,57.1
+"Management analysts",1001000,45.5,54.5
+"Meeting, convention, and event planners",116000,82.1,17.9
+"Fundraisers",93000,73.3,26.7
+"Market research analysts and marketing specialists",4e+05,63.6,36.4
+"Business operations specialists, all other",584000,59.2,40.8
+"Accountants and auditors",1630000,62,38
+"Property appraisers and assessors",80000,30.4,69.6
+"Budget analysts",61000,55.6,44.4
+"Credit analysts",38000,NA,NA
+"Financial and investment analysts",343000,40.2,59.8
+"Personal financial advisors",535000,33.8,66.2
+"Insurance underwriters",128000,61.4,38.6
+"Financial examiners",16000,NA,NA
+"Credit counselors and loan officers",440000,52.2,47.8
+"Tax examiners and collectors, and revenue agents",63000,54.8,45.2
+"Tax preparers",101000,54.2,45.8
+"Other financial specialists",61000,65.2,34.8
+"Computer and information research scientists",41000,NA,NA
+"Computer systems analysts",464000,37.5,62.5
+"Information security analysts",152000,18.2,81.8
+"Computer programmers",444000,19.5,80.5
+"Software developers",1932000,19.7,80.3
+"Software quality assurance analysts and testers",74000,46.5,53.5
+"Web developers",81000,38.7,61.3
+"Web and digital interface designers",64000,51.1,48.9
+"Computer support specialists",660000,23.8,76.2
+"Database administrators and architects",111000,35,65
+"Network and computer systems administrators",212000,17.2,82.8
+"Computer network architects",102000,11.8,88.2
+"Computer occupations, all other",889000,27.2,72.8
+"Actuaries",29000,NA,NA
+"Mathematicians",0,NA,NA
+"Operations research analysts",141000,51,49
+"Statisticians",45000,NA,NA
+"Other mathematical science occupations",245000,49.2,50.8
+"Architects, except landscape and naval",212000,31.6,68.4
+"Landscape architects",27000,NA,NA
+"Surveyors, cartographers, and photogrammetrists",41000,NA,NA
+"Aerospace engineers",129000,14.3,85.7
+"Agricultural engineers",8000,NA,NA
+"Bioengineers and biomedical engineers",15000,NA,NA
+"Chemical engineers",75000,12.8,87.2
+"Civil engineers",431000,17.4,82.6
+"Computer hardware engineers",88000,13.4,86.6
+"Electrical and electronics engineers",299000,7.1,92.9
+"Environmental engineers",33000,NA,NA
+"Industrial engineers, including health and safety",216000,26,74
+"Marine engineers and naval architects",12000,NA,NA
+"Materials engineers",43000,NA,NA
+"Mechanical engineers",354000,9.4,90.6
+"Mining and geological engineers, including mining safety engineers",8000,NA,NA
+"Nuclear engineers",11000,NA,NA
+"Petroleum engineers",16000,NA,NA
+"Engineers, all other",666000,16.3,83.7
+"Architectural and civil drafters",32000,NA,NA
+"Other drafters",93000,24.3,75.7
+"Electrical and electronic engineering technologists and technicians",74000,10.9,89.1
+"Other engineering technologists and technicians, except drafters",293000,21.3,78.7
+"Surveying and mapping technicians",57000,12.6,87.4
+"Agricultural and food scientists",32000,NA,NA
+"Biological scientists",94000,48.1,51.9
+"Conservation scientists and foresters",22000,NA,NA
+"Medical scientists",121000,49.6,50.4
+"Life scientists, all other",8000,NA,NA
+"Astronomers and physicists",22000,NA,NA
+"Atmospheric and space scientists",11000,NA,NA
+"Chemists and materials scientists",94000,32.1,67.9
+"Environmental scientists and specialists, including health",40000,NA,NA
+"Geoscientists and hydrologists, except geographers",42000,NA,NA
+"Physical scientists, all other",370000,41.2,58.8
+"Economists",21000,NA,NA
+"Survey researchers",1000,NA,NA
+"Clinical and counseling psychologists",13000,NA,NA
+"School psychologists",58000,90.4,9.59999999999999
+"Other psychologists",149000,74.9,25.1
+"Sociologists",2000,NA,NA
+"Urban and regional planners",28000,NA,NA
+"Miscellaneous social scientists and related workers",54000,53.5,46.5
+"Agricultural and food science technicians",30000,NA,NA
+"Biological technicians",18000,NA,NA
+"Chemical technicians",48000,NA,NA
+"Environmental science and geoscience technicians",15000,NA,NA
+"Nuclear technicians",2000,NA,NA
+"Social science research assistants",6000,NA,NA
+"Other life, physical, and social science technicians",269000,47.3,52.7
+"Occupational health and safety specialists and technicians",72000,30.9,69.1
+"Substance abuse and behavioral disorder counselors",121000,69.1,30.9
+"Educational, guidance, and career counselors and advisors",362000,76.5,23.5
+"Marriage and family therapists",44000,NA,NA
+"Mental health counselors",212000,75.6,24.4
+"Rehabilitation counselors",11000,NA,NA
+"Counselors, all other",250000,67.1,32.9
+"Child, family, and school social workers",54000,86.8,13.2
+"Healthcare social workers",77000,73.4,26.6
+"Mental health and substance abuse social workers",15000,NA,NA
+"Social workers, all other",681000,83.6,16.4
+"Probation officers and correctional treatment specialists",88000,50.5,49.5
+"Social and human service assistants",194000,81.2,18.8
+"Other community and social service specialists",1e+05,82.5,17.5
+"Clergy",404000,16.2,83.8
+"Directors, religious activities and education",67000,53.7,46.3
+"Religious workers, all other",96000,70.9,29.1
+"Lawyers",1085000,37.9,62.1
+"Judicial law clerks",24000,NA,NA
+"Judges, magistrates, and other judicial workers",77000,58,42
+"Paralegals and legal assistants",431000,84.8,15.2
+"Title examiners, abstractors, and searchers",107000,72.1,27.9
+"Legal support workers, all other",80000,61.9,38.1
+"Postsecondary teachers",1154000,51.2,48.8
+"Preschool and kindergarten teachers",613000,96.8,3.2
+"Elementary and middle school teachers",3260000,79.2,20.8
+"Secondary school teachers",940000,59.5,40.5
+"Special education teachers",362000,82.8,17.2
+"Tutors",168000,70.5,29.5
+"Other teachers and instructors",737000,65.3,34.7
+"Archivists, curators, and museum technicians",62000,61.4,38.6
+"Librarians and media collections specialists",158000,79.9,20.1
+"Library technicians",38000,NA,NA
+"Teaching assistants",1309000,81,19
+"Other educational instruction and library workers",145000,78.9,21.1
+"Artists and related workers",286000,54.2,45.8
+"Commercial and industrial designers",11000,NA,NA
+"Fashion designers",33000,NA,NA
+"Floral designers",50000,76.8,23.2
+"Graphic designers",271000,59.9,40.1
+"Interior designers",123000,83.8,16.2
+"Merchandise displayers and window trimmers",27000,NA,NA
+"Other designers",389000,41.5,58.5
+"Actors",45000,NA,NA
+"Producers and directors",182000,39.6,60.4
+"Athletes and sports competitors",37000,NA,NA
+"Coaches and scouts",235000,44.3,55.7
+"Umpires, referees, and other sports officials",17000,NA,NA
+"Dancers and choreographers",11000,NA,NA
+"Music directors and composers",52000,29.8,70.2
+"Musicians and singers",127000,24,76
+"Disc jockeys, except radio",15000,NA,NA
+"Entertainers and performers, sports and related workers, all other",43000,NA,NA
+"Broadcast announcers and radio disc jockeys",18000,NA,NA
+"News analysts, reporters, and journalists",79000,55.3,44.7
+"Public relations specialists",122000,59.1,40.9
+"Editors",105000,66.7,33.3
+"Technical writers",71000,54.4,45.6
+"Writers and authors",261000,63.7,36.3
+"Interpreters and translators",93000,73.4,26.6
+"Court reporters and simultaneous captioners",28000,NA,NA
+"Media and communication workers, all other",30000,NA,NA
+"Broadcast, sound, and lighting technicians",87000,11.2,88.8
+"Photographers",192000,49.3,50.7
+"Television, video, and film camera operators and editors",108000,25.3,74.7
+"Media and communication equipment workers, all other",1000,NA,NA
+"Chiropractors",59000,24.2,75.8
+"Dentists",167000,38.7,61.3
+"Dietitians and nutritionists",117000,89.6,10.4
+"Optometrists",37000,NA,NA
+"Pharmacists",352000,57.8,42.2
+"Emergency medicine physicians",24000,NA,NA
+"Radiologists",26000,NA,NA
+"Other physicians",921000,39.7,60.3
+"Surgeons",59000,27.7,72.3
+"Physician assistants",165000,64.4,35.6
+"Podiatrists",8000,NA,NA
+"Audiologists",17000,NA,NA
+"Occupational therapists",135000,84.9,15.1
+"Physical therapists",273000,66.9,33.1
+"Radiation therapists",15000,NA,NA
+"Recreational therapists",18000,NA,NA
+"Respiratory therapists",117000,71.4,28.6
+"Speech-language pathologists",187000,95.1,4.90000000000001
+"Exercise physiologists",6000,NA,NA
+"Therapists, all other",242000,87.1,12.9
+"Veterinarians",104000,64.2,35.8
+"Registered nurses",3201000,86.7,13.3
+"Nurse anesthetists",35000,NA,NA
+"Nurse midwives",8000,NA,NA
+"Nurse practitioners",237000,87.4,12.6
+"Acupuncturists",24000,NA,NA
+"Healthcare diagnosing or treating practitioners, all other",13000,NA,NA
+"Clinical laboratory technologists and technicians",369000,68.8,31.2
+"Dental hygienists",207000,95.1,4.90000000000001
+"Cardiovascular technologists and technicians",61000,64.2,35.8
+"Diagnostic medical sonographers",88000,85.5,14.5
+"Radiologic technologists and technicians",226000,72.4,27.6
+"Magnetic resonance imaging technologists",47000,NA,NA
+"Nuclear medicine technologists and medical dosimetrists",39000,NA,NA
+"Emergency medical technicians",145000,35.8,64.2
+"Paramedics",96000,31.1,68.9
+"Pharmacy technicians",342000,78.4,21.6
+"Psychiatric technicians",73000,73.5,26.5
+"Surgical technologists",113000,77.8,22.2
+"Veterinary technologists and technicians",129000,89.8,10.2
+"Dietetic technicians and ophthalmic medical technicians",66000,82.6,17.4
+"Licensed practical and licensed vocational nurses",533000,91.3,8.7
+"Medical records specialists",207000,88.8,11.2
+"Opticians, dispensing",50000,74.2,25.8
+"Miscellaneous health technologists and technicians",177000,64.3,35.7
+"Other healthcare practitioners and technical occupations",105000,73.2,26.8
+"Home health aides",570000,87,13
+"Personal care aides",1411000,80.4,19.6
+"Nursing assistants",1248000,88.9,11.1
+"Orderlies and psychiatric aides",55000,52.9,47.1
+"Occupational therapy assistants and aides",41000,NA,NA
+"Physical therapist assistants and aides",74000,70.7,29.3
+"Massage therapists",166000,83.5,16.5
+"Dental assistants",323000,92,8
+"Medical assistants",561000,91.1,8.90000000000001
+"Medical transcriptionists",45000,NA,NA
+"Pharmacy aides",35000,NA,NA
+"Veterinary assistants and laboratory animal caretakers",78000,84.1,15.9
+"Phlebotomists",114000,90.6,9.40000000000001
+"Other healthcare support workers",164000,75.7,24.3
+"First-line supervisors of correctional officers",38000,NA,NA
+"First-line supervisors of police and detectives",92000,15.8,84.2
+"First-line supervisors of firefighting and prevention workers",44000,NA,NA
+"First-line supervisors of security workers",75000,21.5,78.5
+"First-line supervisors of protective service workers, all other",5000,NA,NA
+"Firefighters",294000,5.1,94.9
+"Fire inspectors",30000,NA,NA
+"Bailiffs",21000,NA,NA
+"Correctional officers and jailers",297000,30.4,69.6
+"Detectives and criminal investigators",130000,27.3,72.7
+"Fish and game wardens",6000,NA,NA
+"Parking enforcement workers",15000,NA,NA
+"Police officers",753000,15.3,84.7
+"Animal control workers",6000,NA,NA
+"Private detectives and investigators",95000,42.3,57.7
+"Security guards and gambling surveillance officers",844000,26.8,73.2
+"Crossing guards and flaggers",51000,52.6,47.4
+"Transportation security screeners",46000,NA,NA
+"School bus monitors",28000,NA,NA
+"Other protective service workers",117000,38,62
+"Chefs and head cooks",402000,22.8,77.2
+"First-line supervisors of food preparation and serving workers",480000,61.2,38.8
+"Cooks",1905000,40.2,59.8
+"Food preparation workers",872000,58.3,41.7
+"Bartenders",362000,57.4,42.6
+"Fast food and counter workers",775000,65.7,34.3
+"Waiters and waitresses",1631000,68.2,31.8
+"Food servers, nonrestaurant",172000,73.9,26.1
+"Dining room and cafeteria attendants and bartender helpers",243000,46.8,53.2
+"Dishwashers",243000,23.5,76.5
+"Hosts and hostesses, restaurant, lounge, and coffee shop",282000,84.3,15.7
+"Food preparation and serving related workers, all other",2000,NA,NA
+"First-line supervisors of housekeeping and janitorial workers",338000,38.9,61.1
+"First-line supervisors of landscaping, lawn service, and groundskeeping workers",233000,10.3,89.7
+"Janitors and building cleaners",2113000,39.7,60.3
+"Maids and housekeeping cleaners",1357000,88.7,11.3
+"Pest control workers",119000,5,95
+"Landscaping and groundskeeping workers",1211000,6.2,93.8
+"Tree trimmers and pruners",98000,2.2,97.8
+"Other grounds maintenance workers",13000,NA,NA
+"Supervisors of personal care and service workers",250000,74.6,25.4
+"Animal trainers",54000,68.3,31.7
+"Animal caretakers",272000,81.6,18.4
+"Gambling services workers",66000,50.8,49.2
+"Ushers, lobby attendants, and ticket takers",29000,NA,NA
+"Other entertainment attendants and related workers",192000,45.6,54.4
+"Embalmers, crematory operators, and funeral attendants",14000,NA,NA
+"Morticians, undertakers, and funeral arrangers",30000,NA,NA
+"Barbers",103000,24.7,75.3
+"Hairdressers, hairstylists, and cosmetologists",713000,92.4,7.59999999999999
+"Manicurists and pedicurists",247000,83,17
+"Skincare specialists",90000,98.2,1.8
+"Other personal appearance workers",26000,NA,NA
+"Baggage porters, bellhops, and concierges",84000,28,72
+"Tour and travel guides",42000,NA,NA
+"Childcare workers",974000,94.6,5.40000000000001
+"Exercise trainers and group fitness instructors",223000,62.2,37.8
+"Recreation workers",139000,68.7,31.3
+"Residential advisors",26000,NA,NA
+"Personal care and service workers, all other",101000,72,28
+"First-line supervisors of retail sales workers",3058000,47,53
+"First-line supervisors of non-retail sales workers",1184000,32.9,67.1
+"Cashiers",2601000,72.5,27.5
+"Counter and rental clerks",81000,49,51
+"Parts salespersons",124000,19.1,80.9
+"Retail salespersons",2750000,48.5,51.5
+"Advertising sales agents",104000,49.3,50.7
+"Insurance sales agents",6e+05,50,50
+"Securities, commodities, and financial services sales agents",243000,29.3,70.7
+"Travel agents",56000,71.4,28.6
+"Sales representatives of services, except advertising, insurance, financial services, and travel",565000,29.9,70.1
+"Sales representatives, wholesale and manufacturing",1216000,30.1,69.9
+"Models, demonstrators, and product promoters",30000,NA,NA
+"Real estate brokers and sales agents",1170000,59.7,40.3
+"Sales engineers",41000,NA,NA
+"Telemarketers",33000,NA,NA
+"Door-to-door sales workers, news and street vendors, and related workers",104000,72.6,27.4
+"Sales and related workers, all other",410000,53.5,46.5
+"First-line supervisors of office and administrative support workers",1217000,71.3,28.7
+"Switchboard operators, including answering service",8000,NA,NA
+"Telephone operators",23000,NA,NA
+"Communications equipment operators, all other",5000,NA,NA
+"Bill and account collectors",97000,72.1,27.9
+"Billing and posting clerks",483000,86.7,13.3
+"Bookkeeping, accounting, and auditing clerks",1097000,84.7,15.3
+"Gambling cage workers",15000,NA,NA
+"Payroll and timekeeping clerks",153000,86.7,13.3
+"Procurement clerks",29000,NA,NA
+"Tellers",215000,76.1,23.9
+"Financial clerks, all other",92000,58.3,41.7
+"Brokerage clerks",9000,NA,NA
+"Correspondence clerks",7000,NA,NA
+"Court, municipal, and license clerks",77000,76.4,23.6
+"Credit authorizers, checkers, and clerks",41000,NA,NA
+"Customer service representatives",2512000,64.8,35.2
+"Eligibility interviewers, government programs",60000,87.1,12.9
+"File Clerks",161000,80.1,19.9
+"Hotel, motel, and resort desk clerks",119000,70.3,29.7
+"Interviewers, except eligibility and loan",203000,75.9,24.1
+"Library assistants, clerical",88000,84.2,15.8
+"Loan interviewers and clerks",144000,69.4,30.6
+"New accounts clerks",12000,NA,NA
+"Order clerks",112000,56.5,43.5
+"Human resources assistants, except payroll and timekeeping",38000,NA,NA
+"Receptionists and information clerks",1215000,90,10
+"Reservation and transportation ticket agents and travel clerks",93000,53.2,46.8
+"Information and record clerks, all other",107000,76,24
+"Cargo and freight agents",10000,NA,NA
+"Couriers and messengers",837000,24.9,75.1
+"Public safety telecommunicators",88000,74.3,25.7
+"Dispatchers, except police, fire, and ambulance",189000,47.5,52.5
+"Meter readers, utilities",33000,NA,NA
+"Postal service clerks",105000,58.8,41.2
+"Postal service mail carriers",273000,42.3,57.7
+"Postal service mail sorters, processors, and processing machine operators",82000,45.9,54.1
+"Production, planning, and expediting clerks",212000,50,50
+"Shipping, receiving, and inventory clerks",615000,36.9,63.1
+"Weighers, measurers, checkers, and samplers, recordkeeping",49000,NA,NA
+"Executive secretaries and executive administrative assistants",223000,96.4,3.59999999999999
+"Legal secretaries and administrative assistants",49000,NA,NA
+"Medical secretaries and administrative assistants",58000,95,5
+"Secretaries and administrative assistants, except legal, medical, and executive",2009000,92.5,7.5
+"Data entry keyers",220000,76.2,23.8
+"Word processors and typists",37000,NA,NA
+"Desktop publishers",1000,NA,NA
+"Insurance claims and policy processing clerks",257000,78.2,21.8
+"Mail clerks and mail machine operators, except postal service",53000,46.9,53.1
+"Office clerks, general",1249000,83.6,16.4
+"Office machine operators, except computer",27000,NA,NA
+"Proofreaders and copy markers",10000,NA,NA
+"Statistical assistants",45000,NA,NA
+"Office and administrative support workers, all other",639000,71.6,28.4
+"First-line supervisors of farming, fishing, and forestry workers",49000,NA,NA
+"Agricultural inspectors",10000,NA,NA
+"Animal breeders",12000,NA,NA
+"Graders and sorters, agricultural products",53000,71.2,28.8
+"Miscellaneous agricultural workers",835000,23.3,76.7
+"Fishing and hunting workers",31000,NA,NA
+"Forest and conservation workers",21000,NA,NA
+"Logging workers",51000,4,96
+"First-line supervisors of construction trades and extraction workers",650000,3.8,96.2
+"Boilermakers",21000,NA,NA
+"Brickmasons, blockmasons, and stonemasons",97000,2.2,97.8
+"Carpenters",1230000,3.1,96.9
+"Carpet, floor, and tile installers and finishers",156000,7.7,92.3
+"Cement masons, concrete finishers, and terrazzo workers",67000,0,100
+"Construction laborers",2165000,4.5,95.5
+"Construction equipment operators",360000,3,97
+"Drywall installers, ceiling tile installers, and tapers",155000,3.1,96.9
+"Electricians",845000,1.7,98.3
+"Glaziers",53000,7.6,92.4
+"Insulation workers",48000,NA,NA
+"Painters and paperhangers",556000,8.9,91.1
+"Pipelayers",37000,NA,NA
+"Plumbers, pipefitters, and steamfitters",587000,2.1,97.9
+"Plasterers and stucco masons",22000,NA,NA
+"Reinforcing iron and rebar workers",10000,NA,NA
+"Roofers",221000,2.9,97.1
+"Sheet metal workers",125000,3.9,96.1
+"Structural iron and steel workers",41000,NA,NA
+"Solar photovoltaic installers",23000,NA,NA
+"Helpers, construction trades",71000,3.5,96.5
+"Construction and building inspectors",103000,10,90
+"Elevator and escalator installers and repairers",38000,NA,NA
+"Fence erectors",41000,NA,NA
+"Hazardous materials removal workers",27000,NA,NA
+"Highway maintenance workers",99000,3.6,96.4
+"Rail-track laying and maintenance equipment operators",15000,NA,NA
+"Septic tank servicers and sewer pipe cleaners",11000,NA,NA
+"Miscellaneous construction and related workers",26000,NA,NA
+"Derrick, rotary drill, and service unit operators, oil and gas",21000,NA,NA
+"Excavating and loading machine and dragline operators, surface mining",4000,NA,NA
+"Earth drillers, except oil and gas",27000,NA,NA
+"Explosives workers, ordnance handling experts, and blasters",14000,NA,NA
+"Underground mining machine operators",33000,NA,NA
+"Roustabouts, oil and gas",3000,NA,NA
+"Other extraction workers",55000,0.5,99.5
+"First-line supervisors of mechanics, installers, and repairers",222000,6,94
+"Computer, automated teller, and office machine repairers",176000,15.4,84.6
+"Radio and telecommunications equipment installers and repairers",155000,4.5,95.5
+"Avionics technicians",5000,NA,NA
+"Electric motor, power tool, and related repairers",21000,NA,NA
+"Electrical and electronics installers and repairers, transportation equipment",1000,NA,NA
+"Electrical and electronics repairers, industrial and utility",13000,NA,NA
+"Electronic equipment installers and repairers, motor vehicles",9000,NA,NA
+"Audiovisual equipment installers and repairers",22000,NA,NA
+"Security and fire alarm systems installers",72000,4.5,95.5
+"Aircraft mechanics and service technicians",150000,3.2,96.8
+"Automotive body and related repairers",123000,2.4,97.6
+"Automotive glass installers and repairers",28000,NA,NA
+"Automotive service technicians and mechanics",864000,2.3,97.7
+"Bus and truck mechanics and diesel engine specialists",362000,1.2,98.8
+"Heavy vehicle and mobile equipment service technicians and mechanics",248000,1.2,98.8
+"Small engine mechanics",43000,NA,NA
+"Miscellaneous vehicle and mobile equipment mechanics, installers, and repairers",84000,2.8,97.2
+"Control and valve installers and repairers",20000,NA,NA
+"Heating, air conditioning, and refrigeration mechanics and installers",445000,1.5,98.5
+"Home appliance repairers",49000,NA,NA
+"Industrial and refractory machinery mechanics",429000,5.1,94.9
+"Maintenance and repair workers, general",614000,5.1,94.9
+"Maintenance workers, machinery",29000,NA,NA
+"Millwrights",48000,NA,NA
+"Electrical power-line installers and repairers",125000,0.7,99.3
+"Telecommunications line installers and repairers",134000,7,93
+"Precision instrument and equipment repairers",68000,12.9,87.1
+"Wind turbine service technicians",11000,NA,NA
+"Coin, vending, and amusement machine servicers and repairers",29000,NA,NA
+"Commercial divers",2000,NA,NA
+"Locksmiths and safe repairers",30000,NA,NA
+"Manufactured building and mobile home installers",1000,NA,NA
+"Riggers",6000,NA,NA
+"Helpers--installation, maintenance, and repair workers",19000,NA,NA
+"Other installation, maintenance, and repair workers",182000,10.6,89.4
+"First-line supervisors of production and operating workers",767000,19.5,80.5
+"Aircraft structure, surfaces, rigging, and systems assemblers",6000,NA,NA
+"Electrical, electronics, and electromechanical assemblers",110000,41.9,58.1
+"Engine and other machine assemblers",7000,NA,NA
+"Structural metal fabricators and fitters",13000,NA,NA
+"Other assemblers and fabricators",957000,34.1,65.9
+"Bakers",229000,64.8,35.2
+"Butchers and other meat, poultry, and fish processing workers",246000,19.4,80.6
+"Food and tobacco roasting, baking, and drying machine operators and tenders",9000,NA,NA
+"Food batchmakers",93000,48.7,51.3
+"Food cooking machine operators and tenders",8000,NA,NA
+"Food processing workers, all other",144000,43.9,56.1
+"Computer numerically controlled tool operators and programmers",90000,8.1,91.9
+"Forming machine setters, operators, and tenders, metal and plastic",25000,NA,NA
+"Cutting, punching, and press machine setters, operators, and tenders, metal and plastic",70000,26.4,73.6
+"Grinding, lapping, polishing, and buffing machine tool setters, operators, and tenders, metal and plastic",32000,NA,NA
+"Other machine tool setters, operators, and tenders, metal and plastic",8000,NA,NA
+"Machinists",323000,3.4,96.6
+"Metal furnace operators, tenders, pourers, and casters",17000,NA,NA
+"Model makers and patternmakers, metal and plastic",1000,NA,NA
+"Molders and molding machine setters, operators, and tenders, metal and plastic",29000,NA,NA
+"Tool and die makers",43000,NA,NA
+"Welding, soldering, and brazing workers",555000,3.5,96.5
+"Other metal workers and plastic workers",335000,22,78
+"Prepress technicians and workers",17000,NA,NA
+"Printing press operators",143000,15.2,84.8
+"Print binding and finishing workers",8000,NA,NA
+"Laundry and dry-cleaning workers",116000,67.1,32.9
+"Pressers, textile, garment, and related materials",17000,NA,NA
+"Sewing machine operators",120000,71.1,28.9
+"Shoe and leather workers",18000,NA,NA
+"Tailors, dressmakers, and sewers",58000,86.5,13.5
+"Textile machine setters, operators, and tenders",12000,NA,NA
+"Upholsterers",20000,NA,NA
+"Other textile, apparel, and furnishings workers",14000,NA,NA
+"Cabinetmakers and bench carpenters",67000,5.8,94.2
+"Furniture finishers",11000,NA,NA
+"Sawing machine setters, operators, and tenders, wood",26000,NA,NA
+"Woodworking machine setters, operators, and tenders, except sawing",16000,NA,NA
+"Other woodworkers",22000,NA,NA
+"Power plant operators, distributors, and dispatchers",32000,NA,NA
+"Stationary engineers and boiler operators",66000,7.9,92.1
+"Water and wastewater treatment plant and system operators",99000,9.6,90.4
+"Miscellaneous plant and system operators",37000,NA,NA
+"Chemical processing machine setters, operators, and tenders",72000,13.9,86.1
+"Crushing, grinding, polishing, mixing, and blending workers",76000,13.6,86.4
+"Cutting workers",53000,24.9,75.1
+"Extruding, forming, pressing, and compacting machine setters, operators, and tenders",25000,NA,NA
+"Furnace, kiln, oven, drier, and kettle operators and tenders",13000,NA,NA
+"Inspectors, testers, sorters, samplers, and weighers",829000,39.3,60.7
+"Jewelers and precious stone and metal workers",51000,52,48
+"Dental and ophthalmic laboratory technicians and medical appliance technicians",73000,49.5,50.5
+"Packaging and filling machine operators and tenders",253000,51.5,48.5
+"Painting workers",153000,7.7,92.3
+"Photographic process workers and processing machine operators",21000,NA,NA
+"Adhesive bonding machine operators and tenders",11000,NA,NA
+"Etchers and engravers",2000,NA,NA
+"Molders, shapers, and casters, except metal and plastic",21000,NA,NA
+"Paper goods machine setters, operators, and tenders",16000,NA,NA
+"Tire builders",8000,NA,NA
+"Helpers--production workers",53000,30.9,69.1
+"Other production equipment operators and tenders",6000,NA,NA
+"Other production workers",1178000,29.1,70.9
+"Supervisors of transportation and material moving workers",355000,24.3,75.7
+"Aircraft pilots and flight engineers",158000,5.3,94.7
+"Air traffic controllers and airfield operations specialists",31000,NA,NA
+"Flight attendants",105000,64.6,35.4
+"Ambulance drivers and attendants, except emergency medical technicians",7000,NA,NA
+"Bus drivers, school",276000,55.3,44.7
+"Bus drivers, transit and intercity",241000,41,59
+"Driver/sales workers and truck drivers",3487000,7.9,92.1
+"Shuttle drivers and chauffeurs",57000,9.3,90.7
+"Taxi drivers",337000,12,88
+"Motor vehicle operators, all other",163000,15.1,84.9
+"Locomotive engineers and operators",39000,NA,NA
+"Railroad conductors and yardmasters",39000,NA,NA
+"Other rail transportation workers",14000,NA,NA
+"Sailors and marine oilers",18000,NA,NA
+"Ship and boat captains and operators",26000,NA,NA
+"Ship engineers",3000,NA,NA
+"Parking attendants",71000,13.3,86.7
+"Transportation service attendants",89000,10.7,89.3
+"Transportation inspectors",36000,NA,NA
+"Passenger attendants",17000,NA,NA
+"Other transportation workers",30000,NA,NA
+"Crane and tower operators",56000,1.1,98.9
+"Conveyor, dredge, and hoist and winch operators",35000,NA,NA
+"Industrial truck and tractor operators",623000,9.1,90.9
+"Cleaners of vehicles and equipment",301000,17,83
+"Laborers and freight, stock, and material movers, hand",2161000,22.9,77.1
+"Machine feeders and offbearers",22000,NA,NA
+"Packers and packagers, hand",742000,52.1,47.9
+"Stockers and order fillers",1652000,37.1,62.9
+"Pumping station operators",16000,NA,NA
+"Refuse and recyclable material collectors",87000,12.1,87.9
+"Other material moving workers",66000,17.7,82.3

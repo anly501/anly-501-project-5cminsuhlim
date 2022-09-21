@@ -25,6 +25,11 @@ df <- df[-1,] %>%
         mutate(`Total Count` = as.numeric(`Total Count`) * 1000,
                Women = as.numeric(Women), Men = 100 - Women) %>%
         rename(`Women employed (%)` = Women, `Men employed (%)` = Men)
+# removing all-encompassing major titles
+df <- df %>% filter(!row_number() %in% c(1:4, 38, 68, 69, 88, 113, 141, 158, 
+                                         165, 178, 210, 257, 258, 273, 294, 
+                                         307, 316, 337, 338, 357, 412, 413, 
+                                         422, 460, 497, 498, 562))
 ## keeping NAs, since they're located in subcategories
 write.csv(df, "employment_(by_occupation_and_by_sex)_final.csv", row.names=F)
 
@@ -81,12 +86,18 @@ df <- read.xlsx('../../data/00-raw-data/wages_(by_occupation_may_2021).xlsx', 1,
 df <- df[, c(10, 11, 12, 13, 19, 20)]
 names(df) <- df[1,]
 df <- df[-1,]
-
-#Management, professional, and related occupations
-#Service occupations
-#Sales and office occupations
-#Natural resources, construction, and maintenance occupations
-#Production, transportation, and material moving occupations
+df <- df[df$O_GROUP=='detailed',] %>% 
+        select(-c(O_GROUP)) %>%
+        mutate(TOT_EMP = as.numeric(TOT_EMP), 
+               EMP_PRSE = as.numeric(EMP_PRSE),
+               A_MEAN = as.numeric(A_MEAN), 
+               MEAN_PRSE = as.numeric(MEAN_PRSE)) %>%
+        rename(Occupation = OCC_TITLE, `Total Employment` = TOT_EMP,
+               `Employment % Relative Standard Error` = EMP_PRSE,
+               `Mean Annual Wage` = A_MEAN, 
+               `Mean Annual Wage % Relative Standard Error` = MEAN_PRSE) %>%
+        drop_na() ## removing na since empty data in this case is useless
+write.csv(df, "wages_(by_occupation_may_2021)_final.csv", row.names=F)
 
 ## BLS EMPLOYMENT RATE DATA ##
 df <- read.csv('../../data/00-raw-data/employmentRate.csv')
@@ -152,7 +163,7 @@ df <- df[-1,] %>%
         mutate(Year = as.numeric(Year),
                `Share of state governors who are women` = as.numeric(`Share of state governors who are women`) * 100) %>%
         rename(`Female state governors (%)` = `Share of state governors who are women`)
-write.csv(df, "percent_us_women_governors_final.xlsx", row.names=F)
+write.csv(df, "percent_us_women_governors_final.csv", row.names=F)
 
 
 df <- read.xlsx('../../data/00-raw-data/percent_us_women_house_rep.xlsx', 1, header=F)
@@ -163,7 +174,7 @@ df <- df[-1,] %>%
                `Share of U.S. representatives who are women` = as.numeric(`Share of U.S. representatives who are women`) * 100) %>%
         rename(Year = `Starting date of congressional term`,
                `Female U.S. representatives (%)` = `Share of U.S. representatives who are women`)
-write.csv(df, "percent_us_women_house_rep_final.xlsx", row.names=F)
+write.csv(df, "percent_us_women_house_rep_final.csv", row.names=F)
 
 
 df <- read.xlsx('../../data/00-raw-data/percent_us_women_senators.xlsx', 1, header=F)
@@ -175,7 +186,7 @@ df <- df[-1,] %>%
         rename(Year = `Starting date of congressional term`,
                `Female U.S. senators (%)` = `Share of U.S. senators who are women`) %>%
         select(-`NA`)
-write.csv(df, "percent_us_women_senators_final.xlsx", row.names=F)
+write.csv(df, "percent_us_women_senators_final.csv", row.names=F)
 
 
 df <- read.xlsx('../../data/00-raw-data/percent_us_women_state_legislators.xlsx', 1, header=F)
@@ -185,7 +196,7 @@ df <- df[-1,] %>%
         mutate(Year = as.numeric(Year),
                `Share of state legislators who are women` = as.numeric(`Share of state legislators who are women`) * 100) %>%
         rename(`Female U.S. state legislators (%)` = `Share of state legislators who are women`)
-write.csv(df, "percent_us_women_state_legislators_final.xlsx", row.names=F)
+write.csv(df, "percent_us_women_state_legislators_final.csv", row.names=F)
 
 
 ## CB DIRECT DATA ##
@@ -199,13 +210,149 @@ df <- df[-1,] %>%
         rename(`Men with a college degree in the U.S. (%)` = Male,
                `Women with a college degree in the U.S. (%)` = Female) %>%
         select(-drop)
-write.csv(df, "percent_us_women_state_legislators_final.xlsx", row.names=F)
+write.csv(df, "percent_us_women_state_legislators_final.csv", row.names=F)
 
 
 df <- read.xlsx('../../data/00-raw-data/School_Completion_(by_Age_and_Sex)_from_1940_to_2021.xlsx', 1, header=F)
+df[7,1] <- "Year"
+df[7,2] <- "Total"
+df[7,3] <- "0-4 years"
+df[7,4] <- "5-8 years"
+df[7,5] <- "9-11 years"
+df[7,6] <- "12 years"
+df[7,7] <- "13-15 years"
+df[7,8] <- "16+ years"
+df <- df %>% select(c(X1:X8)) %>% filter(!row_number() %in% c(1:6))
+names(df) <- df[1,]
+df <- df[-1,]
+df1 <- df %>% filter(row_number() %in% c(268:401))
+df1_m <- df1 %>% filter(row_number() %in% c(2:67)) %>%
+        rename(`Total (25-34, M)` = Total, 
+               `0-4 years (25-34, M)` = `0-4 years`,
+               `5-8 years (25-34, M)` = `5-8 years`,
+               `9-11 years (25-34, M)` = `9-11 years`,
+               `12 years (25-34, M)` = `12 years`,
+               `13-15 years (25-34, M)` = `13-15 years`,
+               `16+ years (25-34, M)` = `16+ years`)
+df1_f <- df1 %>% filter(row_number() %in% c(69:134)) %>%
+        rename(`Total (25-34, F)` = Total, 
+               `0-4 years (25-34, F)` = `0-4 years`,
+               `5-8 years (25-34, F)` = `5-8 years`,
+               `9-11 years (25-34, F)` = `9-11 years`,
+               `12 years (25-34, F)` = `12 years`,
+               `13-15 years (25-34, F)` = `13-15 years`,
+               `16+ years (25-34, F)` = `16+ years`)
+df2 <- df %>% filter(row_number() %in% c(469:602))
+df2_m <- df2 %>% filter(row_number() %in% c(2:67)) %>%
+        rename(`Total (35-54, M)` = Total, 
+               `0-4 years (35-54, M)` = `0-4 years`,
+               `5-8 years (35-54, M)` = `5-8 years`,
+               `9-11 years (35-54, M)` = `9-11 years`,
+               `12 years (35-54, M)` = `12 years`,
+               `13-15 years (35-54, M)` = `13-15 years`,
+               `16+ years (35-54, M)` = `16+ years`)
+df2_f <- df2 %>% filter(row_number() %in% c(69:134)) %>%
+        rename(`Total (35-54, F)` = Total, 
+               `0-4 years (35-54, F)` = `0-4 years`,
+               `5-8 years (35-54, F)` = `5-8 years`,
+               `9-11 years (35-54, F)` = `9-11 years`,
+               `12 years (35-54, F)` = `12 years`,
+               `13-15 years (35-54, F)` = `13-15 years`,
+               `16+ years (35-54, F)` = `16+ years`)
+df3 <- df %>% filter(row_number() %in% c(670:803))
+df3_m <- df3 %>% filter(row_number() %in% c(2:67)) %>%
+        rename(`Total (55+, M)` = Total, 
+               `0-4 years (55+, M)` = `0-4 years`,
+               `5-8 years (55+, M)` = `5-8 years`,
+               `9-11 years (55+, M)` = `9-11 years`,
+               `12 years (55+, M)` = `12 years`,
+               `13-15 years (55+, M)` = `13-15 years`,
+               `16+ years (55+, M)` = `16+ years`)
+df3_f <- df3 %>% filter(row_number() %in% c(69:134)) %>%
+        rename(`Total (55+, F)` = Total, 
+               `0-4 years (55+, F)` = `0-4 years`,
+               `5-8 years (55+, F)` = `5-8 years`,
+               `9-11 years (55+, F)` = `9-11 years`,
+               `12 years (55+, F)` = `12 years`,
+               `13-15 years (55+, F)` = `13-15 years`,
+               `16+ years (55+, F)` = `16+ years`)
+df <- cbind(df1_m, df1_f[, 2:8], 
+            df2_m[, 2:8], df2_f[, 2:8], 
+            df3_m[, 2:8], df3_f[, 2:8]) %>% 
+        relocate(c(9, 16, 23, 30, 37), .after=2) %>%
+        relocate(c(14, 20, 26, 32, 38), .after=8) %>%
+        relocate(c(19, 24, 29, 34, 39), .after=14) %>%
+        relocate(c(24, 28, 32, 36, 40), .after=20) %>%
+        relocate(c(29, 32, 35, 38, 41), .after=26) %>%
+        relocate(c(34, 36, 38, 40, 42), .after=32) %>%
+        relocate(c(39:43), .after=38)
+df <- lapply(df, as.numeric)
+write.csv(df, "School_Completion_(by_Age_and_Sex)_from_1940_to_2021_final.csv", row.names=F)
 
 
 ## NCES DIRECT DATA ##
 df <- read.xlsx('../../data/00-raw-data/degrees_(by_sex_and_by_field).xls', 1, header=F)
-df <- read.xlsx('../../data/00-raw-data/degrees_(by_field_males).xls', 1, header=F)
-df <- read.xlsx('../../data/00-raw-data/degrees_(by_field_females).xls', 1, header=F)
+df[3,2] <- "Occupations"
+df[3,3] <- "Bachelor's Total"
+df[3,4] <- "Bachelor's Men"
+df[3,5] <- "Bachelor's Women"
+df[3,6] <- "Master's Total"
+df[3,7] <- "Master's Men"
+df[3,8] <- "Master's Women"
+df[3,9] <- "Doctor's Total"
+df[3,10] <- "Doctor's Men"
+df[3,11] <- "Doctor's Women"
+# removing all-encompassing major titles
+df <- df %>% select(-X1) %>%
+        filter(!row_number() %in% c(1, 2, 4, 6, 7, 64, 65, 87, 98, 138,
+                                    223, 314, 326, 327, 351, 365, 394, 
+                                    492, 493, 547, 548, 607, 617, 629,
+                                    642, 676, 730, 932, 961, 982, 987,
+                                    992, 1008, 1020, 1053, 1066, 1081, 
+                                    1125, 1133, 1138, 1166, 1179, 1180,
+                                    1212, 1221, 1239, 1249, 1314:1317))
+names(df) <- df[1,]
+df <- df[-1,] %>% mutate(`Bachelor's Total` = as.numeric(`Bachelor's Total`),
+                         `Bachelor's Men` = as.numeric(`Bachelor's Men`),
+                         `Bachelor's Women` = as.numeric(`Bachelor's Women`),
+                         `Master's Total` = as.numeric(`Master's Total`),
+                         `Master's Men` = as.numeric(`Master's Men`),
+                         `Master's Women` = as.numeric(`Master's Women`),
+                         `Doctor's Total` = as.numeric(`Doctor's Total`),
+                         `Doctor's Men` = as.numeric(`Doctor's Men`),
+                         `Doctor's Women` = as.numeric(`Doctor's Women`))
+df$Occupations <- str_trim(df$Occupations)
+write.csv(df, "degrees_(by_sex_and_by_field)_final.csv", row.names=F)
+
+
+df1 <- read.xlsx('../../data/00-raw-data/degrees_(by_field_males).xls', 1, header=F)
+df1[5,1] <- "Occupations"
+df1[5,2] <- "Total (M)"
+df1 <- df1 %>% select(c(X1, X2)) %>%
+        filter(row_number() %in% c(5:40))
+names(df1) <- df1[1,]
+df1 <- df1[-1,]
+df1$Occupations <- gsub("\\s+", " ", str_trim(df1$Occupations))
+df1$Occupations[2] <- substr(df1$Occupations[2], 1, nchar(df1$Occupations[2]) - 3)
+df1$Occupations[6] <- substr(df1$Occupations[6], 1, nchar(df1$Occupations[6]) - 3)
+df1$Occupations[12] <- substr(df1$Occupations[12], 1, nchar(df1$Occupations[12]) - 3)
+
+df2 <- read.xlsx('../../data/00-raw-data/degrees_(by_field_females).xls', 1, header=F)
+df2[5,1] <- "Occupations"
+df2[5,2] <- "Total (F)"
+df2 <- df2 %>% select(c(X1, X2)) %>%
+        filter(row_number() %in% c(5:40))
+names(df2) <- df2[1,]
+df2 <- df2[-1,]
+df2$Occupations <- gsub("\\s+", " ", str_trim(df2$Occupations))
+df2$Occupations[2] <- substr(df2$Occupations[2], 1, nchar(df2$Occupations[2]) - 3)
+df2$Occupations[6] <- substr(df2$Occupations[6], 1, nchar(df2$Occupations[6]) - 3)
+df2$Occupations[12] <- substr(df2$Occupations[12], 1, nchar(df2$Occupations[12]) - 3)
+
+df <- cbind(df1, df2[,2]) %>%
+        rename(`Total (F)` = `df2[, 2]`) %>% 
+        mutate(`Total (M)` = as.numeric(`Total (M)`),
+               `Total (F)` = as.numeric(`Total (F)`))
+write.csv(df, "degrees_(by_field_and_sex)_final.csv", row.names=F)
+
+
