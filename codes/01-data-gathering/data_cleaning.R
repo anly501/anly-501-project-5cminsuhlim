@@ -356,3 +356,7 @@ df <- cbind(df1, df2[,2]) %>%
 write.csv(df, "degrees_(by_field_and_sex)_final.csv", row.names=F)
 
 
+## BIG 5 API DATA ##
+df <- read.csv('../../data/00-raw-data/big_five.csv', header=T)
+df <- df %>% filter(country == 'USA') %>% arrange(sex)
+write.csv(df, "big_five_final.csv", row.names=F)
