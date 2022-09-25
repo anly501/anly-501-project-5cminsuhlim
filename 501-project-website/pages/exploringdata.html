@@ -75,6 +75,233 @@
     <section id="exploringdata">
         <div class="container">
             <h1 class="text-center">Exploring Data</h1>
+            <div class="row">
+                <div>
+                    <p>
+                        Initial exploratory data analysis has been conducted below. The data <a href="./datagathering.html">gathered</a> and <a href="./datacleaning.html">cleaned</a> previously have been categorized, and code for each category can be found under each section.
+                    </p>
+                </div>
+
+                <h2>Big Five Personality Data</h2>
+                <div class="col-lg-8">
+                    Prior to diving into the details of the data, it's important to understand what the Big Five Personality traits are. <strong>Openness</strong> relates to imagination, insight, creativity, and curiousity. <strong>Conscientiousness</strong> relates to thoughtfulness, self-control, attention to detail, and orderliness. <strong>Extraversion</strong> relates to sociability, assertiveness, and excitability. <strong>Agreeableness</strong> relates to prosocial behaviors, such as empathy, altruism, and affection. <strong>Neuroticism</strong> relates to anxiety, low stress tolerance, and emotional instability.<sup>1</sup>
+                </div>
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/big_five_comic.png">
+                    <figcaption class="figure-caption text-center">
+                        Verywell / Joshua Seong
+                    </figcaption>
+                </div>
+
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/big_five_ss.png">
+                </div>
+                <div class="col-lg-8">
+                    <p> 
+                        On the left is the summary statistics output. Based on the case_id count, we can see that there is Big Five Personality data for 212,625 individuals from the U.S. Based on the age column, we can see that the youngest and oldest individuals who have taken this assessment are 10 and 99 years old, but the general age of these individuals hovers from around 18 to 29 years old. Since sex is labeled numerically in this data, with 1 = Men and 2 = Women, the mean sex of 1.6 shows that there are more women than men in this dataset. Additionally, it should be noted that the scoring of each personality category is on a scale of 0 to 1, where 0 is low association and 1 is high association with a particular category. 
+                    </p>
+                </div>
+                
+                <div class="col-lg-4">
+                    <p> 
+                        Observing the graphical and numerical correlation matrices on the right, we can see that there is a weak positive correlation with age and conscientiousness. There is also a weak positive correlation with sex and agreeableness. Among the traits themselves, there is a weak positive correlation between agreeableness and conscientiousness, as well as a moderate negative correlation among neuroticism, extraversion, and conscientiousness.
+                    </p>
+                </div>
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/big_five_corr.png">
+                    <img class="img" src="../images/exploringdata/big_five_corr_mat.png">
+                </div>
+
+                <h2>NCES Data</h2>
+                <div class="col-lg-8">
+                    <p> 
+                        Observing the Bachelor's, Master's, and Doctor's degrees earned in 2018-2019, the bar graph on the right shows once again that women pursuit higher education at a greater frequency than men.
+                    </p>
+                </div>
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/NCES_degrees_by_sex.png">
+                </div>
+
+                <div>
+                    <p> 
+                        The image below shows the distribution of Bachelor's degrees given to men and women across various fields of study in 2019-2020 with the fields of study arranged in descending order according to female representation (except the top most bar, which is the total representation across all fields). We can see from the bar graph that there is a noticeable contrast in the fields of study men and women pursuit. For example, women seem to make up the majority in the social sciences, liberal arts, and humanities (except for fields such as Biology), while men seem to make up the majority in STEM and manual labor fields (except for fields such as Theology and Philosophy).
+                    </p>
+                </div>
+                <div class="col">
+                    <img class="center-block" src="../images/exploringdata/NCES_bachelors_by_sex.png">
+                </div>
+                
+                <h2>BLS Data</h2>
+                <div class="col-lg-8">
+                    <p> 
+                        Observing bar graph on the right, we can see that for people above 25 years old in 2021 the median weekly earnings (USD) increased at their level of educational attainment increased.
+                    </p>
+                </div>
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/BLS_earnings_by_edu.png">
+                </div>
+
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/BLS_unemp_by_edu.png">
+                </div>
+                <div class="col-lg-8">
+                    <p> 
+                        The inverse observation can be seen with the unemployment rate, which shows a lower unemployment rate for those achieving higher levels of education.
+                    </p>
+                </div>
+                
+                <div class="col-lg-8">
+                    <p> 
+                        Additionally, the figure on the right shows the most polarized (i.e. one sex having double or more employment in) occupations for people above 16 years old in 2021. Based on the listed occupations, we can see that fields dominated by men tend to be physical / manual labor or dealing with objects, while fields dominated by women tend to relate to service and interacting with people.
+                    </p>
+                </div>
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/BLS_occ_by_sex.png">
+                </div>
+
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/BLS_emp_by_age.png">
+                </div>
+                <div class="col-lg-8">
+                    <p> 
+                        The line graph on the left shows employment rates for men and women across various age groups in the U.S. from 1948 to 2022. From this figure, we can see that over the span of nearly eight decades, the employment rate of men has been slowly declining while women's employment rate has been drastically rising. However, other than the 16-24 age bracket, there still is quite noticeable disparities in male and female employment.
+                    </p>
+                </div>
+
+                <div class="col-lg-8">
+                    <p> 
+                        The bar graph on the right shows the number of workers (in thousands) in various fields by sex in 2021. This is further categorized based on those who work &lt;35 hours and those who work 35+ hours. When observing just the number of people at work, we can once again see that women tend to dominate fields that engage with people, while men tend to dominate fields that involve manual labor and handling objects. This trend is consistent even across those working &lt;35 hours and those who work 35+ hours, with the only exception being Management/Professional occupations.
+                    </p>
+                </div>
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/BLS_count_by_sex.png">
+                </div>
+
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/BLS_hours_by_sex.png">
+                </div>
+                <div class="col-lg-8">
+                    <p> 
+                        The bar graph on the left shows the number of hours worked in various fields by sex in 2021 and is further specified to only full-time workers. In both cases, men tend to work anywhere from 0.8 to 4.1 more hours than women.
+                    </p>
+                </div>
+
+                <div class="col-lg-8">
+                    <p> 
+                        The bar graph on the right shows the mean annual wage (USD) in various fields in May 2021. From this graph, we can see that the top three highest paying jobs as of May 2021 were:
+                        <ol type="1">
+                            <li>Management</li>
+                            <li>Legal</li>
+                            <li>Computer and Mathematical</li>
+                        </ol>
+                        Similarly, the three lowest paying jobs were:
+                        <ol type="1">
+                            <li>Food Preparation and Serving Related</li>
+                            <li>Healthcare Support</li>
+                            <li>Personal Care and Service</li>
+                        </ol>
+                        Upon closer inspection, we can see that STEM and business-related made up higher paying jobs, while the lower paying end consisted of service and manual labor jobs.
+                    </p>
+                </div>
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/BLS_wage_by_field.png">
+                </div>
+
+                <h2>CAWP Data</h2>
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/CAWP_women_gov.png">
+                </div>
+                <div class="col-lg-8">
+                    <p> 
+                        The line graphs on the left shows various forms of female representation in the U.S. government from 1965 to 2021. We can see from the graphs that female representation in the U.S. government has been steadily increasing over the past six decades, but it should also be noted that women only make up 18% of state governors, 27.3% of U.S. representatives, 26% of senators, and 30.8% of state legislators.
+                    </p>
+                </div>
+
+                <h2>CB Data</h2>
+                <div class="col-lg-8">
+                    <p> 
+                        The line graph on the right shows the percentage of college degrees holders in the U.S. within their sex from 1940 to 2021. We can see from the graph that from 1940 to around 2010 there was a greater proportion of college degree holders among men than among women. However, after 2014, we can see the inflection point in which women have now become a greater proportion of women have attained college degrees than men.
+                    </p>
+                </div>
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/CB_deg_by_sex.png">
+                </div>
+
+                <div>
+                    <p>
+                        The following line graphs show varying ranges of education people (in thousands) have completed in the U.S. based on sex and age groups (25-34, 35-54, 55+) from 1940 to 2021. 
+                    </p>
+                </div>
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/CB_edu_by_sex_age04.png">
+                </div>
+                <div class="col-lg-8">
+                    <p> 
+                        Among 25-35 and 35-54 year olds, there has been a relatively consistent downwards trend in the number of people obtaining 0-4 years of education. Among 55+ year olds, there was an increase in the number of people obtaining 0-4 years of education, peaking around 1970 but sees a downwards trend thereafter.
+                    </p>
+                </div>
+                <div class="col-lg-8">
+                    <p> 
+                        Among 25-35 and 35-54 year olds, there has been a relatively consistent downwards trend in the number of people obtaining 5-8 years of education. Among 55+ year olds, there was an increase in the number of people obtaining 0-4 years of education, peaking around 1960 for men and 1980 for women but sees a downwards trend thereafter.
+                    </p>
+                </div>
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/CB_edu_by_sex_age58.png">
+                </div>
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/CB_edu_by_sex_age911.png">
+                </div>
+                <div class="col-lg-8">
+                    <p> 
+                        Among 25-35 year olds, there has been a relatively consistent downwards trend in the number of women obtaining 9-11 years of education, while men saw a peak around 1990 before returning on a downwards trajectory. Among 35-54 year olds, both men and women obtaining 9-11 years of education increased, peaking around 1960 before returning to a downwards trend; however, the number of men obtaining 9-11 years of education saw an increase from around 1990 to 2010 before declining again. Among 55+ year olds, there was an increase in the number of people obtaining 9-11 years of education, peaking around 1990 and declining thereafter.
+                    </p>
+                </div>
+                <div class="col-lg-8">
+                    <p> 
+                        Among all age groups, the number of people obtaining 12 years of education has seen a relatively consistent increasing trend. However, among 25-34 year olds, there was a dip from around 1990 to 2005 for men and from around 1990 to 2015 for women before returning upwards; similarly, among 35-54 year olds, there was a dip from around 2010 for men and 2005 for women.
+                    </p>
+                </div>
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/CB_edu_by_sex_age12.png">
+                </div>
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/CB_edu_by_sex_age1315.png">
+                </div>
+                <div class="col-lg-8">
+                    <p> 
+                        Among all age groups, the number of people obtaining 13-15 years of education has seen a relatively consistent increasing trend. However, among 35-54 year olds, there was a dip from around 2005 for both men and women.
+                    </p>
+                </div>
+                <div class="col-lg-8">
+                    <p> 
+                        Among all age groups, the number of people obtaining 16+ years of education has seen a relatively consistent increasing trend.
+                    </p>
+                </div>
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/CB_edu_by_sex_age16.png">
+                </div>
+
+                <h2>Tweets</h2>
+                <div class="col">
+                    <img class="img" src="../images/exploringdata/tweets_wordcloud.png">
+                </div>
+                <div class="col-lg-8">
+                    <p> 
+                        Based on the Twitter API call for multiple keywords associated with both the women's and men's rights movements, we generated the wordcloud on the left. Unsurprisingly, the two most noticeable words and "men" and "woman". Other noticeable words are "feminist," "wives", "bill", "pay", and "rights." There is one noticeable figure Abu Taymiyyah MJ who is an online personality in the men's rights movement.
+                    </p>
+                </div>
+
+                <div class="col-lg-8">
+                    <p>
+                        <strong>Notes:</strong>
+                    </p>
+                    <ol type="1">
+                        <li>
+                            Cherry, Kendra. "What Are the Big 5 Personality Traits?" <i>Verywell Mind</i>, Verywell Mind, 4 Aug 2022, <a href="https://www.verywellmind.com/the-big-five-personality-dimensions-2795422#citation-1" target="_blank">URL</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
         </div>
     </section>
 

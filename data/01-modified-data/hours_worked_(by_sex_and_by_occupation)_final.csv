@@ -1,7 +1,91 @@
-"Category","No. people at work","No. men at work","No. women at work","No. people who worked < 35hrs","No. men who worked < 35hrs","No. women who worked < 35hrs","No. people who worked 35+ hrs","No. men who worked 35+ hrs","No. women who worked 35+ hrs","Average hrs worked among all workers","Average hrs worked among all men","Average hrs worked among all women","Average hrs worked among full-time workers","Average hrs worked among full-time men","Average hrs worked among full-time women"
-"Cumulative Counts",146758000,78210000,68548000,32673000,13445000,19228000,114085000,64765000,49320000,38.7,40.6,36.6,42.1,43,41
-"Management, professional, and related occupations",62239000,30183000,32056000,10651000,3950000,6701000,51588000,26233000,25355000,40.3,42,38.6,42.6,43.7,41.5
-"Service occupations",23398000,9972000,13426000,8646000,2918000,5728000,14752000,7054000,7698000,34.8,37.1,33,41.1,42.1,40.2
-"Sales and office occupations",29135000,11269000,17866000,7661000,2281000,5380000,21474000,8988000,12485000,37.2,39.5,35.7,41.4,42.9,40.4
-"Natural resources, construction, and maintenance occupations(1)",13467000,12728000,739000,2053000,1868000,186000,11414000,10860000,554000,40.5,40.7,37.7,42.1,42.1,41.3
-"Production, transportation, and material moving occupations",18519000,14057000,4462000,3662000,2429000,1234000,14857000,11629000,3228000,39.6,40.6,36.6,42.5,43,40.6
+"Category","sex","Measure","Value"
+"Total","M","No. people at work",78210000
+"Management, professional, and related occupations","M","No. people at work",30183000
+"Service occupations","M","No. people at work",9972000
+"Sales and office occupations","M","No. people at work",11269000
+"Natural resources, construction, and maintenance occupations","M","No. people at work",12728000
+"Production, transportation, and material moving occupations","M","No. people at work",14057000
+"Total","F","No. people at work",68548000
+"Management, professional, and related occupations","F","No. people at work",32056000
+"Service occupations","F","No. people at work",13426000
+"Sales and office occupations","F","No. people at work",17866000
+"Natural resources, construction, and maintenance occupations","F","No. people at work",739000
+"Production, transportation, and material moving occupations","F","No. people at work",4462000
+"Total","B","No. people at work",146758000
+"Management, professional, and related occupations","B","No. people at work",62239000
+"Service occupations","B","No. people at work",23398000
+"Sales and office occupations","B","No. people at work",29135000
+"Natural resources, construction, and maintenance occupations","B","No. people at work",13467000
+"Production, transportation, and material moving occupations","B","No. people at work",18519000
+"Total","M","No. people who worked < 35hrs",13445000
+"Management, professional, and related occupations","M","No. people who worked < 35hrs",3950000
+"Service occupations","M","No. people who worked < 35hrs",2918000
+"Sales and office occupations","M","No. people who worked < 35hrs",2281000
+"Natural resources, construction, and maintenance occupations","M","No. people who worked < 35hrs",1868000
+"Production, transportation, and material moving occupations","M","No. people who worked < 35hrs",2429000
+"Total","F","No. people who worked < 35hrs",19228000
+"Management, professional, and related occupations","F","No. people who worked < 35hrs",6701000
+"Service occupations","F","No. people who worked < 35hrs",5728000
+"Sales and office occupations","F","No. people who worked < 35hrs",5380000
+"Natural resources, construction, and maintenance occupations","F","No. people who worked < 35hrs",186000
+"Production, transportation, and material moving occupations","F","No. people who worked < 35hrs",1234000
+"Total","B","No. people who worked < 35hrs",32673000
+"Management, professional, and related occupations","B","No. people who worked < 35hrs",10651000
+"Service occupations","B","No. people who worked < 35hrs",8646000
+"Sales and office occupations","B","No. people who worked < 35hrs",7661000
+"Natural resources, construction, and maintenance occupations","B","No. people who worked < 35hrs",2053000
+"Production, transportation, and material moving occupations","B","No. people who worked < 35hrs",3662000
+"Total","M","No. people who worked 35+ hrs",64765000
+"Management, professional, and related occupations","M","No. people who worked 35+ hrs",26233000
+"Service occupations","M","No. people who worked 35+ hrs",7054000
+"Sales and office occupations","M","No. people who worked 35+ hrs",8988000
+"Natural resources, construction, and maintenance occupations","M","No. people who worked 35+ hrs",10860000
+"Production, transportation, and material moving occupations","M","No. people who worked 35+ hrs",11629000
+"Total","F","No. people who worked 35+ hrs",49320000
+"Management, professional, and related occupations","F","No. people who worked 35+ hrs",25355000
+"Service occupations","F","No. people who worked 35+ hrs",7698000
+"Sales and office occupations","F","No. people who worked 35+ hrs",12485000
+"Natural resources, construction, and maintenance occupations","F","No. people who worked 35+ hrs",554000
+"Production, transportation, and material moving occupations","F","No. people who worked 35+ hrs",3228000
+"Total","B","No. people who worked 35+ hrs",114085000
+"Management, professional, and related occupations","B","No. people who worked 35+ hrs",51588000
+"Service occupations","B","No. people who worked 35+ hrs",14752000
+"Sales and office occupations","B","No. people who worked 35+ hrs",21474000
+"Natural resources, construction, and maintenance occupations","B","No. people who worked 35+ hrs",11414000
+"Production, transportation, and material moving occupations","B","No. people who worked 35+ hrs",14857000
+"Total","M","Average hrs worked among all workers",40.6
+"Management, professional, and related occupations","M","Average hrs worked among all workers",42
+"Service occupations","M","Average hrs worked among all workers",37.1
+"Sales and office occupations","M","Average hrs worked among all workers",39.5
+"Natural resources, construction, and maintenance occupations","M","Average hrs worked among all workers",40.7
+"Production, transportation, and material moving occupations","M","Average hrs worked among all workers",40.6
+"Total","F","Average hrs worked among all workers",36.6
+"Management, professional, and related occupations","F","Average hrs worked among all workers",38.6
+"Service occupations","F","Average hrs worked among all workers",33
+"Sales and office occupations","F","Average hrs worked among all workers",35.7
+"Natural resources, construction, and maintenance occupations","F","Average hrs worked among all workers",37.7
+"Production, transportation, and material moving occupations","F","Average hrs worked among all workers",36.6
+"Total","B","Average hrs worked among all workers",38.7
+"Management, professional, and related occupations","B","Average hrs worked among all workers",40.3
+"Service occupations","B","Average hrs worked among all workers",34.8
+"Sales and office occupations","B","Average hrs worked among all workers",37.2
+"Natural resources, construction, and maintenance occupations","B","Average hrs worked among all workers",40.5
+"Production, transportation, and material moving occupations","B","Average hrs worked among all workers",39.6
+"Total","M","Average hrs worked among full-time workers",43
+"Management, professional, and related occupations","M","Average hrs worked among full-time workers",43.7
+"Service occupations","M","Average hrs worked among full-time workers",42.1
+"Sales and office occupations","M","Average hrs worked among full-time workers",42.9
+"Natural resources, construction, and maintenance occupations","M","Average hrs worked among full-time workers",42.1
+"Production, transportation, and material moving occupations","M","Average hrs worked among full-time workers",43
+"Total","F","Average hrs worked among full-time workers",41
+"Management, professional, and related occupations","F","Average hrs worked among full-time workers",41.5
+"Service occupations","F","Average hrs worked among full-time workers",40.2
+"Sales and office occupations","F","Average hrs worked among full-time workers",40.4
+"Natural resources, construction, and maintenance occupations","F","Average hrs worked among full-time workers",41.3
+"Production, transportation, and material moving occupations","F","Average hrs worked among full-time workers",40.6
+"Total","B","Average hrs worked among full-time workers",42.1
+"Management, professional, and related occupations","B","Average hrs worked among full-time workers",42.6
+"Service occupations","B","Average hrs worked among full-time workers",41.1
+"Sales and office occupations","B","Average hrs worked among full-time workers",41.4
+"Natural resources, construction, and maintenance occupations","B","Average hrs worked among full-time workers",42.1
+"Production, transportation, and material moving occupations","B","Average hrs worked among full-time workers",42.5
