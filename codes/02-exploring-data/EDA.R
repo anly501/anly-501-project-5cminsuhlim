@@ -1,7 +1,8 @@
 library(tidyverse)
 library(ggplot2)
-library(wordcloud2)
 library(scales)
+library(wordcloud2)
+library(tm)
 
 ## NCES DATA
 df <- read.csv('../../data/01-modified-data/degrees_(by_sex_and_by_field)_final.csv')
@@ -212,27 +213,10 @@ ggplot(filter(df, grepl("16", Measure)), aes(x=Year, y=Value, group=sex, color=s
 
 
 ## TWITTER DATA ##
-library(wordcloud2)
-library(tm)
 df <- read.csv('../../data/01-modified-data/Tweets_final.csv')
-txt <- rep(df$Word, df$Count)
-txt <- gsub("[^[:alnum:][:blank:]\"']", "", txt)
 
-tweet.corpus <- Corpus(VectorSource(txt))
-
-tweet.corpus <- tweet.corpus %>%
-        tm_map(removeNumbers) %>% 
-        tm_map(removePunctuation) %>% 
-        tm_map(stripWhitespace) %>%
-        tm_map(content_transformer(tolower)) %>%
-        tm_map(removeWords, stopwords("english")) %>% 
-        tm_map(removeWords, stopwords("SMART")) 
-
-tdm <- TermDocumentMatrix(tweet.corpus) %>% 
-        as.matrix()
-
-words <- sort(rowSums(tdm), decreasing = TRUE) 
-df <- data.frame(word = names(words), freq = words) 
+# rename columns, select only word and freq columns
+df <- df %>% rename(word = Word, freq = Count) %>% select(3:4)
 df$word <- iconv(df$word, "UTF-8", "ascii", sub = '')
 
 wordcloud2(df, size = 1.5, color= 'random-dark', rotateRatio = 0)

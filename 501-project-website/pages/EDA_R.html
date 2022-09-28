@@ -14593,7 +14593,6 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-python"><pre><span></span><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
 <span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
-<span class="n">library</span><span class="p">(</span><span class="n">wordcloud2</span><span class="p">)</span>
 <span class="n">library</span><span class="p">(</span><span class="n">scales</span><span class="p">)</span>
 <span class="n">library</span><span class="p">(</span><span class="n">wordcloud2</span><span class="p">)</span>
 <span class="n">library</span><span class="p">(</span><span class="n">tm</span><span class="p">)</span>
@@ -14927,24 +14926,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-python"><pre><span></span><span class="n">df</span> <span class="o">&lt;-</span> <span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s1">&#39;../../data/01-modified-data/Tweets_final.csv&#39;</span><span class="p">)</span>
-<span class="n">txt</span> <span class="o">&lt;-</span> <span class="n">rep</span><span class="p">(</span><span class="n">df</span><span class="err">$</span><span class="n">Word</span><span class="p">,</span> <span class="n">df</span><span class="err">$</span><span class="n">Count</span><span class="p">)</span>
-<span class="n">txt</span> <span class="o">&lt;-</span> <span class="n">gsub</span><span class="p">(</span><span class="s2">&quot;[^[:alnum:][:blank:]</span><span class="se">\&quot;</span><span class="s2">&#39;]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">txt</span><span class="p">)</span>
 
-<span class="n">tweet</span><span class="o">.</span><span class="n">corpus</span> <span class="o">&lt;-</span> <span class="n">Corpus</span><span class="p">(</span><span class="n">VectorSource</span><span class="p">(</span><span class="n">txt</span><span class="p">))</span>
-
-<span class="n">tweet</span><span class="o">.</span><span class="n">corpus</span> <span class="o">&lt;-</span> <span class="n">tweet</span><span class="o">.</span><span class="n">corpus</span> <span class="o">%&gt;%</span>
-        <span class="n">tm_map</span><span class="p">(</span><span class="n">removeNumbers</span><span class="p">)</span> <span class="o">%&gt;%</span> 
-        <span class="n">tm_map</span><span class="p">(</span><span class="n">removePunctuation</span><span class="p">)</span> <span class="o">%&gt;%</span> 
-        <span class="n">tm_map</span><span class="p">(</span><span class="n">stripWhitespace</span><span class="p">)</span> <span class="o">%&gt;%</span>
-        <span class="n">tm_map</span><span class="p">(</span><span class="n">content_transformer</span><span class="p">(</span><span class="n">tolower</span><span class="p">))</span> <span class="o">%&gt;%</span>
-        <span class="n">tm_map</span><span class="p">(</span><span class="n">removeWords</span><span class="p">,</span> <span class="n">stopwords</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">))</span> <span class="o">%&gt;%</span> 
-        <span class="n">tm_map</span><span class="p">(</span><span class="n">removeWords</span><span class="p">,</span> <span class="n">stopwords</span><span class="p">(</span><span class="s2">&quot;SMART&quot;</span><span class="p">))</span> 
-
-<span class="n">tdm</span> <span class="o">&lt;-</span> <span class="n">TermDocumentMatrix</span><span class="p">(</span><span class="n">tweet</span><span class="o">.</span><span class="n">corpus</span><span class="p">)</span> <span class="o">%&gt;%</span> 
-        <span class="k">as</span><span class="o">.</span><span class="n">matrix</span><span class="p">()</span>
-
-<span class="n">words</span> <span class="o">&lt;-</span> <span class="n">sort</span><span class="p">(</span><span class="n">rowSums</span><span class="p">(</span><span class="n">tdm</span><span class="p">),</span> <span class="n">decreasing</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span> 
-<span class="n">df</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">word</span> <span class="o">=</span> <span class="n">names</span><span class="p">(</span><span class="n">words</span><span class="p">),</span> <span class="n">freq</span> <span class="o">=</span> <span class="n">words</span><span class="p">)</span> 
+<span class="c1"># rename columns, select only word and freq columns</span>
+<span class="n">df</span> <span class="o">&lt;-</span> <span class="n">df</span> <span class="o">%&gt;%</span> <span class="n">rename</span><span class="p">(</span><span class="n">word</span> <span class="o">=</span> <span class="n">Word</span><span class="p">,</span> <span class="n">freq</span> <span class="o">=</span> <span class="n">Count</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="n">select</span><span class="p">(</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">df</span><span class="err">$</span><span class="n">word</span> <span class="o">&lt;-</span> <span class="n">iconv</span><span class="p">(</span><span class="n">df</span><span class="err">$</span><span class="n">word</span><span class="p">,</span> <span class="s2">&quot;UTF-8&quot;</span><span class="p">,</span> <span class="s2">&quot;ascii&quot;</span><span class="p">,</span> <span class="n">sub</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 
 <span class="n">wordcloud2</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span> <span class="s1">&#39;random-dark&#39;</span><span class="p">,</span> <span class="n">rotateRatio</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>

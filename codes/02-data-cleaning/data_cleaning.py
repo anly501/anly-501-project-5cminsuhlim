@@ -10,7 +10,7 @@ import nltk
 from sklearn.feature_extraction.text import CountVectorizer
 
 # %%
-raw_tweets = pd.read_json('../01-data-gathering/tweets.json')
+raw_tweets = pd.read_json('../../data/00-raw-data/tweets.json')
 
 # %%
 n = len(raw_tweets.keys()) - 1
@@ -79,6 +79,11 @@ tweets.columns = ['Word', 'Count']
 tweets.replace('', np.nan, inplace=True)
 tweets.dropna(inplace=True)
 tweets.sort_values('Count', ascending=False, inplace=True)
+tweets.reset_index(inplace=True)
+
+# remove incomplete / nonsense words
+to_drop = [21, 23, 32, 40, 43, 48, 71, 119, 171, 178 , 208, 213, 217, 257, 260]
+tweets.drop(to_drop,axis=0, inplace=True)
 
 # %%
 tweets.to_csv('./../../data/01-modified-data/Tweets_final.csv')
