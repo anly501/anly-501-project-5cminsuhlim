@@ -1,3 +1,10 @@
+# %% [markdown]
+# # Data Gathering - Python
+
+# %% [markdown]
+# ### Import libraries
+
+# %%
 import numpy as np
 import pandas as pd
 import os
@@ -8,9 +15,13 @@ import csv
 from tqdm import tqdm
 import tweepy
 from datetime import datetime, timedelta
+from logging import raiseExceptions 
 
+# %% [markdown]
+# ### Set up API keys and TwitterAPI Auth
+
+# %%
 input_path = '../01-data-gathering/twitterapiauth.txt'
-input_path = os.path.join(os.path.dirname(__file__), input_path)
 api = pd.read_csv(input_path, sep=" ", header=None)
 
 consumer_key        = api.loc[0,1]
@@ -21,67 +32,133 @@ bearer_token        = api.loc[4,1]
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
+api = tweepy.API(auth, wait_on_rate_limit=True) 
 
-api = tweepy.API()
-headers = {"Authorization": "Bearer {}".format(bearer_token)}
+# %% [markdown]
+# ### Define needed functions
 
+# %%
+# DEFINE FUNCTION TO SAVE TWEEPY SEARCH RESULTS
+#   searches=array with various tweepy search objects
+#   TODO: ADD "full and sparse" mode
+#          full = save all tweet data (100 tweeks ~ 1 MB  --> 100,000 ~ 1 GB)
+#          sparse = only save most important info
+def save_search_tweets_results(searches,info_str="",output_name="tweet-search.json"):
+    # if(str(type(input)) == "<class 'tweepy.models.SearchResults'>"):
+    if(str(type(searches)) == "<class 'list'>"):
+        #COMBINE ALL JSONS FOR VARIOUS TWEETS INTO ON BIG JSON CALL "out"
+        out={}
+        out["search_info"]=info_str
 
-# search_twitter function
-def search_twitter(max_results, query, tweet_fields, start_time, end_time, bearer_token):
-    url = "https://api.twitter.com/2/tweets/search/recent?max_results={}&query={}&start_time={}&end_time={}&{}".format(
-        max_results, query, start_time, end_time, tweet_fields
-    )
-    
-    response = requests.request("GET", url, headers=headers)
+        #LOOP OVER SEARCHES
+        tweet_ids=[]
+        k=0 #counter
+        for search in searches:
+            #LOOP OVER TWEETS IN SEARCH
+            for i in range(0,len(search)):
+                out[str(k)]=search[i]._json
+                tweet_id=search[i]._json["id_str"]
+                #CHECK FOR REDUNDANT TWEETS
+                if tweet_id in tweet_ids:
+                    print("WARNING: REPEATED TWEETS IN SAVED FILE; ID = ",tweet_id)
+                tweet_ids.append(search[i]._json["id_str"])
 
-    print(response.status_code)
+                k+=1
+            #pretty_print_json(out)
 
-    if response.status_code != 200:
-        raise Exception(response.status_code, response.text)
-    return response.json()
+        #DELETE FILE IF IT EXIST (START FRESH)
+        if os.path.exists(output_name):
+            os.remove(output_name)
+
+        #WRITE FILE
+        with open(output_name, 'w') as f:
+            json.dump(out, f)
+    else: 
+        raise RuntimeError("ERROR: Incorrect datatype")
 
 # pretty print function
 def pretty_print_json(input):
     print(json.dumps(input, indent=4, sort_keys=True))
-    
 
-max_results = 100
-tweet_fields = "tweet.fields=text,lang"
+# %% [markdown]
+# ### Set parameters
 
+# %%
 # search for commonly associated words with gender equality
 # e.g. wagegap, earningsgap, feminism, men's rights, women's rights, MGTOW
-query = "%23wagegap%20OR%20%23earningsgap%20OR%20%23feminism%20OR%20%23men%27srights%20OR%20%23women%27srights%20OR%20%23MGTOW%20"
+query = "wagegap OR earningsgap OR feminism OR mensrights OR womensrights OR MGTOW"
 
-# gather the 100 tweets each over the last week. x CANNOT exceed 6
-def collect(x=6):
-    l = []
-    dtformat = '%Y-%m-%dT%H:%M:%SZ'
-    time = datetime.utcnow()
-    for i in range(1, x + 1):
-        start_time = time - timedelta(days=i + 1)
-        end_time = time - timedelta(days=i)
-        start_time, end_time = start_time.strftime(dtformat), end_time.strftime(dtformat)
-        json_response = search_twitter(max_results=max_results, query=query, tweet_fields=tweet_fields, start_time=start_time, end_time=end_time, bearer_token=bearer_token)
-        dictJson = json.loads(json.dumps(json_response))
-        l.append(dictJson)
-    return l
+# NUMBER OF TWEETS TO SEARCH 
+number_of_tweets=3000
+# number_of_tweets=18000*2 
+# ideally use multiples of 100 for number_of_tweets
+# should be able to collect 18000 tweets every 15 minutes
+start_time = time.time()
+max_loop_time_hrs=5
+
+# %% [markdown]
+# ### Create API call and export data
+
+# %%
+# THIS WILL KEEP DOING SEARCHES FURTHER AND FURTHER BACK IN TIME
+# USING THE MAX_ID TO THE TIMELINE 
+num_tweets_collected=0
+searches=[]
+k=0
+#KEEP SEARCHING UNTIL DESIRED NUMBER OF TWEETS COLLECTED
+while num_tweets_collected<number_of_tweets or (time.time()-start_time)/60./60>max_loop_time_hrs: 
+    try: 
+        #FIRST SEARCH
+        if len(searches)==0:
+            search_results = api.search_tweets(query, lang="en", count=100)
+        #ADDITIONAL SEARCHES
+        else:
+            search_results = api.search_tweets(query, lang="en", count=100,max_id=max_id_next)
+
+        #UPDATE PARAMETERS
+        num_tweets_collected+=len(search_results)
+        max_id_next=int(search_results[-1]._json["id_str"])-1
+
+        #SAVE SEARCH RESULTS
+        searches.append(search_results)
+
+        #SAVE TEMPORARY CHECKPOINTS (DONT DO TOO OFTEN .. SLOWS CODE DOWN)
+        if(k%10==0):
+            print("SEARCH-"+str(k)+" COMPLETED;  TWEETS_COLLECTED=",num_tweets_collected,"; TIME (s) = ",time.time() - start_time)
+        if(k%25==0):
+            save_search_tweets_results(searches,output_name="tmp-snapshot.json")
+            
+        k+=1
+    except:
+        print("WARNING: twitter search failed")
+
+    #SLEEP 5 SECONDS BEFORE NEXT REQUEST 
+    if(number_of_tweets>18000):
+        time.sleep(5)
+    else:
+        time.sleep(0.2)
+        
+
+# REPORT BASIC SEARCH INFO
+print(num_tweets_collected,len(searches))
+print("search time (s) =", (time.time() - start_time)) #/60.)
+
+#TIMESTAMP SEARCH 
+now = datetime.now()
+dt_string = now.strftime("%Y-%m-%Y-H%H-M%M-S%S")
+
+#----------------------
+# SAVE RESULTS
+#----------------------
+info_str="query = "+query+"; number_of_tweets = "+str(number_of_tweets)+"; date = "+str(dt_string)
+out_name="tweets.json"
+save_search_tweets_results(searches,info_str=info_str,output_name=out_name)
+
+#CLEAN-UP TEMP FILES
+os.remove("tmp-snapshot.json")
+# import glob
+# list_to_delete=glob.glob("./*-tmp-snapshot.json")
+# for file in list_to_delete:
+#     os.remove(file)
 
 
-dictList = collect()
-
-tweets_list = []
-
-for tweets in dictList:
-    for tweet in tweets['data']:
-        if tweet['lang'] == 'en':
-            tweets_list.append(tweet['text'].split())
-
-words = [inner for outer in tweets_list for inner in outer]
-d = {}
-
-for word in words:
-    d[word] = d.get(word, 0) + 1
-
-# export to csv
-df = pd.DataFrame(d.items(), columns=['Word', 'Count'])
-pd.DataFrame.to_csv(df, "Tweets.csv")

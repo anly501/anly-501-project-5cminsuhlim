@@ -14602,7 +14602,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -14612,6 +14612,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
 <span class="kn">import</span> <span class="nn">tweepy</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">raiseExceptions</span> 
 </pre></div>
 
      </div>
@@ -14638,8 +14639,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="n">input_path</span> <span class="o">=</span> <span class="s1">&#39;../01-data-gathering/twitterapiauth.txt&#39;</span>
-<span class="n">input_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="n">input_path</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">input_path</span> <span class="o">=</span> <span class="s1">&#39;../01-data-gathering/twitterapiauth.txt&#39;</span>
 <span class="n">api</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
 <span class="n">consumer_key</span>        <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
@@ -14650,9 +14650,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 <span class="n">auth</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">OAuthHandler</span><span class="p">(</span><span class="n">consumer_key</span><span class="p">,</span> <span class="n">consumer_secret</span><span class="p">)</span>
 <span class="n">auth</span><span class="o">.</span><span class="n">set_access_token</span><span class="p">(</span><span class="n">access_token</span><span class="p">,</span> <span class="n">access_token_secret</span><span class="p">)</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">API</span><span class="p">()</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bearer_token</span><span class="p">)}</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">API</span><span class="p">(</span><span class="n">auth</span><span class="p">,</span> <span class="n">wait_on_rate_limit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
 </pre></div>
 
      </div>
@@ -14679,37 +14677,47 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># search_twitter function</span>
-<span class="k">def</span> <span class="nf">search_twitter</span><span class="p">(</span><span class="n">max_results</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">tweet_fields</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">,</span> <span class="n">bearer_token</span><span class="p">):</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://api.twitter.com/2/tweets/search/recent?max_results=</span><span class="si">{}</span><span class="s2">&amp;query=</span><span class="si">{}</span><span class="s2">&amp;start_time=</span><span class="si">{}</span><span class="s2">&amp;end_time=</span><span class="si">{}</span><span class="s2">&amp;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-        <span class="n">max_results</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">,</span> <span class="n">tweet_fields</span>
-    <span class="p">)</span>
-    
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># DEFINE FUNCTION TO SAVE TWEEPY SEARCH RESULTS</span>
+<span class="c1">#   searches=array with various tweepy search objects</span>
+<span class="c1">#   TODO: ADD &quot;full and sparse&quot; mode</span>
+<span class="c1">#          full = save all tweet data (100 tweeks ~ 1 MB  --&gt; 100,000 ~ 1 GB)</span>
+<span class="c1">#          sparse = only save most important info</span>
+<span class="k">def</span> <span class="nf">save_search_tweets_results</span><span class="p">(</span><span class="n">searches</span><span class="p">,</span><span class="n">info_str</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">output_name</span><span class="o">=</span><span class="s2">&quot;tweet-search.json&quot;</span><span class="p">):</span>
+    <span class="c1"># if(str(type(input)) == &quot;&lt;class &#39;tweepy.models.SearchResults&#39;&gt;&quot;):</span>
+    <span class="k">if</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">searches</span><span class="p">))</span> <span class="o">==</span> <span class="s2">&quot;&lt;class &#39;list&#39;&gt;&quot;</span><span class="p">):</span>
+        <span class="c1">#COMBINE ALL JSONS FOR VARIOUS TWEETS INTO ON BIG JSON CALL &quot;out&quot;</span>
+        <span class="n">out</span><span class="o">=</span><span class="p">{}</span>
+        <span class="n">out</span><span class="p">[</span><span class="s2">&quot;search_info&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">info_str</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+        <span class="c1">#LOOP OVER SEARCHES</span>
+        <span class="n">tweet_ids</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">k</span><span class="o">=</span><span class="mi">0</span> <span class="c1">#counter</span>
+        <span class="k">for</span> <span class="n">search</span> <span class="ow">in</span> <span class="n">searches</span><span class="p">:</span>
+            <span class="c1">#LOOP OVER TWEETS IN SEARCH</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">search</span><span class="p">)):</span>
+                <span class="n">out</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span><span class="o">=</span><span class="n">search</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">_json</span>
+                <span class="n">tweet_id</span><span class="o">=</span><span class="n">search</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">_json</span><span class="p">[</span><span class="s2">&quot;id_str&quot;</span><span class="p">]</span>
+                <span class="c1">#CHECK FOR REDUNDANT TWEETS</span>
+                <span class="k">if</span> <span class="n">tweet_id</span> <span class="ow">in</span> <span class="n">tweet_ids</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: REPEATED TWEETS IN SAVED FILE; ID = &quot;</span><span class="p">,</span><span class="n">tweet_id</span><span class="p">)</span>
+                <span class="n">tweet_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">search</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">_json</span><span class="p">[</span><span class="s2">&quot;id_str&quot;</span><span class="p">])</span>
 
-    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+                <span class="n">k</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="c1">#pretty_print_json(out)</span>
+
+        <span class="c1">#DELETE FILE IF IT EXIST (START FRESH)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">output_name</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">output_name</span><span class="p">)</span>
+
+        <span class="c1">#WRITE FILE</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;ERROR: Incorrect datatype&quot;</span><span class="p">)</span>
 
 <span class="c1"># pretty print function</span>
 <span class="k">def</span> <span class="nf">pretty_print_json</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-    
-<span class="c1"># gather the 100 tweets each over the last week. x CANNOT exceed 6</span>
-<span class="k">def</span> <span class="nf">collect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
-    <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">dtformat</span> <span class="o">=</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%SZ&#39;</span>
-    <span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
-        <span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span> <span class="o">=</span> <span class="n">start_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">dtformat</span><span class="p">),</span> <span class="n">end_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">dtformat</span><span class="p">)</span>
-        <span class="n">json_response</span> <span class="o">=</span> <span class="n">search_twitter</span><span class="p">(</span><span class="n">max_results</span><span class="o">=</span><span class="n">max_results</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">tweet_fields</span><span class="o">=</span><span class="n">tweet_fields</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="o">=</span><span class="n">end_time</span><span class="p">,</span> <span class="n">bearer_token</span><span class="o">=</span><span class="n">bearer_token</span><span class="p">)</span>
-        <span class="n">dictJson</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json_response</span><span class="p">))</span>
-        <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dictJson</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">l</span>
 </pre></div>
 
      </div>
@@ -14724,7 +14732,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Set-parameters-for-search_twitter()-and-collect()-functions">Set parameters for search_twitter() and collect() functions<a class="anchor-link" href="#Set-parameters-for-search_twitter()-and-collect()-functions">&#182;</a></h3>
+<h3 id="Set-parameters">Set parameters<a class="anchor-link" href="#Set-parameters">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14736,12 +14744,17 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="n">max_results</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">tweet_fields</span> <span class="o">=</span> <span class="s2">&quot;tweet.fields=text,lang&quot;</span>
-
-<span class="c1"># search for commonly associated words with gender equality</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># search for commonly associated words with gender equality</span>
 <span class="c1"># e.g. wagegap, earningsgap, feminism, men&#39;s rights, women&#39;s rights, MGTOW</span>
-<span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;%23wagegap%20OR</span><span class="si">%20%</span><span class="s2">23earningsgap%20OR</span><span class="si">%20%</span><span class="s2">23feminism%20OR</span><span class="si">%20%</span><span class="s2">23men</span><span class="si">%27s</span><span class="s2">rights%20OR</span><span class="si">%20%</span><span class="s2">23women</span><span class="si">%27s</span><span class="s2">rights%20OR</span><span class="si">%20%</span><span class="s2">23MGTOW%20&quot;</span>
+<span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;wagegap OR earningsgap OR feminism OR mensrights OR womensrights OR MGTOW&quot;</span>
+
+<span class="c1"># NUMBER OF TWEETS TO SEARCH </span>
+<span class="n">number_of_tweets</span><span class="o">=</span><span class="mi">3000</span>
+<span class="c1"># number_of_tweets=18000*2 </span>
+<span class="c1"># ideally use multiples of 100 for number_of_tweets</span>
+<span class="c1"># should be able to collect 18000 tweets every 15 minutes</span>
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">max_loop_time_hrs</span><span class="o">=</span><span class="mi">5</span>
 </pre></div>
 
      </div>
@@ -14768,24 +14781,66 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="n">dictList</span> <span class="o">=</span> <span class="n">collect</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># THIS WILL KEEP DOING SEARCHES FURTHER AND FURTHER BACK IN TIME</span>
+<span class="c1"># USING THE MAX_ID TO THE TIMELINE </span>
+<span class="n">num_tweets_collected</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">searches</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">k</span><span class="o">=</span><span class="mi">0</span>
+<span class="c1">#KEEP SEARCHING UNTIL DESIRED NUMBER OF TWEETS COLLECTED</span>
+<span class="k">while</span> <span class="n">num_tweets_collected</span><span class="o">&lt;</span><span class="n">number_of_tweets</span> <span class="ow">or</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start_time</span><span class="p">)</span><span class="o">/</span><span class="mf">60.</span><span class="o">/</span><span class="mi">60</span><span class="o">&gt;</span><span class="n">max_loop_time_hrs</span><span class="p">:</span> 
+    <span class="k">try</span><span class="p">:</span> 
+        <span class="c1">#FIRST SEARCH</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">searches</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">search_results</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">search_tweets</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+        <span class="c1">#ADDITIONAL SEARCHES</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">search_results</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">search_tweets</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">max_id</span><span class="o">=</span><span class="n">max_id_next</span><span class="p">)</span>
 
-<span class="n">tweets_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1">#UPDATE PARAMETERS</span>
+        <span class="n">num_tweets_collected</span><span class="o">+=</span><span class="nb">len</span><span class="p">(</span><span class="n">search_results</span><span class="p">)</span>
+        <span class="n">max_id_next</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">search_results</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">_json</span><span class="p">[</span><span class="s2">&quot;id_str&quot;</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span>
 
-<span class="k">for</span> <span class="n">tweets</span> <span class="ow">in</span> <span class="n">dictList</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="n">tweets</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]:</span>
-        <span class="k">if</span> <span class="n">tweet</span><span class="p">[</span><span class="s1">&#39;lang&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;en&#39;</span><span class="p">:</span>
-            <span class="n">tweets_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tweet</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+        <span class="c1">#SAVE SEARCH RESULTS</span>
+        <span class="n">searches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">search_results</span><span class="p">)</span>
 
-<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">inner</span> <span class="k">for</span> <span class="n">outer</span> <span class="ow">in</span> <span class="n">tweets_list</span> <span class="k">for</span> <span class="n">inner</span> <span class="ow">in</span> <span class="n">outer</span><span class="p">]</span>
-<span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1">#SAVE TEMPORARY CHECKPOINTS (DONT DO TOO OFTEN .. SLOWS CODE DOWN)</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">k</span><span class="o">%</span><span class="k">10</span>==0):
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SEARCH-&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; COMPLETED;  TWEETS_COLLECTED=&quot;</span><span class="p">,</span><span class="n">num_tweets_collected</span><span class="p">,</span><span class="s2">&quot;; TIME (s) = &quot;</span><span class="p">,</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">k</span><span class="o">%</span><span class="k">25</span>==0):
+            <span class="n">save_search_tweets_results</span><span class="p">(</span><span class="n">searches</span><span class="p">,</span><span class="n">output_name</span><span class="o">=</span><span class="s2">&quot;tmp-snapshot.json&quot;</span><span class="p">)</span>
+            
+        <span class="n">k</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: twitter search failed&quot;</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
-    <span class="n">d</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="c1">#SLEEP 5 SECONDS BEFORE NEXT REQUEST </span>
+    <span class="k">if</span><span class="p">(</span><span class="n">number_of_tweets</span><span class="o">&gt;</span><span class="mi">18000</span><span class="p">):</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+        
 
-<span class="c1"># export to csv</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Word&#39;</span><span class="p">,</span> <span class="s1">&#39;Count&#39;</span><span class="p">])</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;Tweets.csv&quot;</span><span class="p">)</span>
+<span class="c1"># REPORT BASIC SEARCH INFO</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">num_tweets_collected</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">searches</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;search time (s) =&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">))</span> <span class="c1">#/60.)</span>
+
+<span class="c1">#TIMESTAMP SEARCH </span>
+<span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">dt_string</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-%Y-H%H-M%M-S%S&quot;</span><span class="p">)</span>
+
+<span class="c1">#----------------------</span>
+<span class="c1"># SAVE RESULTS</span>
+<span class="c1">#----------------------</span>
+<span class="n">info_str</span><span class="o">=</span><span class="s2">&quot;query = &quot;</span><span class="o">+</span><span class="n">query</span><span class="o">+</span><span class="s2">&quot;; number_of_tweets = &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">number_of_tweets</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;; date = &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">dt_string</span><span class="p">)</span>
+<span class="n">out_name</span><span class="o">=</span><span class="s2">&quot;tweets.json&quot;</span>
+<span class="n">save_search_tweets_results</span><span class="p">(</span><span class="n">searches</span><span class="p">,</span><span class="n">info_str</span><span class="o">=</span><span class="n">info_str</span><span class="p">,</span><span class="n">output_name</span><span class="o">=</span><span class="n">out_name</span><span class="p">)</span>
+
+<span class="c1">#CLEAN-UP TEMP FILES</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;tmp-snapshot.json&quot;</span><span class="p">)</span>
+<span class="c1"># import glob</span>
+<span class="c1"># list_to_delete=glob.glob(&quot;./*-tmp-snapshot.json&quot;)</span>
+<span class="c1"># for file in list_to_delete:</span>
+<span class="c1">#     os.remove(file)</span>
 </pre></div>
 
      </div>
