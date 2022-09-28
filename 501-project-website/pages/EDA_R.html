@@ -14594,8 +14594,6 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class=" highlight hl-python"><pre><span></span><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
 <span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
 <span class="n">library</span><span class="p">(</span><span class="n">scales</span><span class="p">)</span>
-<span class="n">library</span><span class="p">(</span><span class="n">wordcloud2</span><span class="p">)</span>
-<span class="n">library</span><span class="p">(</span><span class="n">tm</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14899,39 +14897,6 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
         <span class="n">scale_color_manual</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">))</span> <span class="o">+</span>
         <span class="n">theme_classic</span><span class="p">()</span> <span class="o">+</span>
         <span class="n">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">Measure</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Tweets">Tweets<a class="anchor-link" href="#Tweets">&#182;</a></h1>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df</span> <span class="o">&lt;-</span> <span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s1">&#39;../../data/01-modified-data/Tweets_final.csv&#39;</span><span class="p">)</span>
-
-<span class="c1"># rename columns, select only word and freq columns</span>
-<span class="n">df</span> <span class="o">&lt;-</span> <span class="n">df</span> <span class="o">%&gt;%</span> <span class="n">rename</span><span class="p">(</span><span class="n">word</span> <span class="o">=</span> <span class="n">Word</span><span class="p">,</span> <span class="n">freq</span> <span class="o">=</span> <span class="n">Count</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="n">select</span><span class="p">(</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">df</span><span class="err">$</span><span class="n">word</span> <span class="o">&lt;-</span> <span class="n">iconv</span><span class="p">(</span><span class="n">df</span><span class="err">$</span><span class="n">word</span><span class="p">,</span> <span class="s2">&quot;UTF-8&quot;</span><span class="p">,</span> <span class="s2">&quot;ascii&quot;</span><span class="p">,</span> <span class="n">sub</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-
-<span class="n">wordcloud2</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span> <span class="s1">&#39;random-dark&#39;</span><span class="p">,</span> <span class="n">rotateRatio</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
      </div>

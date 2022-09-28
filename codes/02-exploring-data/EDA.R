@@ -1,8 +1,6 @@
 library(tidyverse)
 library(ggplot2)
 library(scales)
-library(wordcloud2)
-library(tm)
 
 ## NCES DATA
 df <- read.csv('../../data/01-modified-data/degrees_(by_sex_and_by_field)_final.csv')
@@ -210,13 +208,3 @@ ggplot(filter(df, grepl("16", Measure)), aes(x=Year, y=Value, group=sex, color=s
         scale_color_manual(values=c('red', 'blue')) +
         theme_classic() +
         facet_wrap(~Measure)
-
-
-## TWITTER DATA ##
-df <- read.csv('../../data/01-modified-data/Tweets_final.csv')
-
-# rename columns, select only word and freq columns
-df <- df %>% rename(word = Word, freq = Count) %>% select(3:4)
-df$word <- iconv(df$word, "UTF-8", "ascii", sub = '')
-
-wordcloud2(df, size = 1.5, color= 'random-dark', rotateRatio = 0)
