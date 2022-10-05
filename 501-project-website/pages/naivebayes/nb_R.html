@@ -14607,8 +14607,6 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <span class="n">library</span><span class="p">(</span><span class="n">e1071</span><span class="p">)</span>
 <span class="n">library</span><span class="p">(</span><span class="n">caTools</span><span class="p">)</span>
 <span class="n">library</span><span class="p">(</span><span class="n">caret</span><span class="p">)</span>
-<span class="n">library</span><span class="p">(</span><span class="n">naivebayes</span><span class="p">)</span>
-<span class="n">library</span><span class="p">(</span><span class="n">klaR</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14636,9 +14634,11 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-python"><pre><span></span><span class="n">df</span> <span class="o">&lt;-</span> <span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s1">&#39;../../data/01-modified-data/big_five_final.csv&#39;</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">&lt;-</span> <span class="n">df</span> <span class="o">%&gt;%</span> <span class="n">dplyr</span><span class="p">::</span><span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">c</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">case_id</span><span class="p">,</span> <span class="n">country</span><span class="p">))</span> <span class="o">%&gt;%</span>
+<span class="n">df</span> <span class="o">&lt;-</span> <span class="n">df</span> <span class="o">%&gt;%</span> <span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">c</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">case_id</span><span class="p">,</span> <span class="n">country</span><span class="p">))</span> <span class="o">%&gt;%</span>
         <span class="n">mutate</span><span class="p">(</span><span class="n">sex</span> <span class="o">=</span> <span class="n">factor</span><span class="p">(</span><span class="n">ifelse</span><span class="p">(</span><span class="n">sex</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">)))</span>
 <span class="n">df</span><span class="err">$</span><span class="n">sex</span> <span class="o">&lt;-</span> <span class="k">as</span><span class="o">.</span><span class="n">factor</span><span class="p">(</span><span class="n">df</span><span class="err">$</span><span class="n">sex</span><span class="p">)</span>
+<span class="n">df_m</span> <span class="o">&lt;-</span> <span class="n">df</span> <span class="o">%&gt;%</span> <span class="nb">filter</span><span class="p">(</span><span class="n">sex</span><span class="o">==</span><span class="s1">&#39;Male&#39;</span><span class="p">)</span>
+<span class="n">df_f</span> <span class="o">&lt;-</span> <span class="n">df</span> <span class="o">%&gt;%</span> <span class="nb">filter</span><span class="p">(</span><span class="n">sex</span><span class="o">==</span><span class="s1">&#39;Female&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14669,8 +14669,12 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 <span class="c1">## ref: https://www.learnbymarketing.com/tutorials/naive-bayes-in-r/</span>
 <span class="n">split</span> <span class="o">&lt;-</span> <span class="n">sample</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">SplitRatio</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-<span class="n">train</span> <span class="o">&lt;-</span> <span class="n">subset</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">split</span><span class="o">==</span><span class="s1">&#39;TRUE&#39;</span><span class="p">)</span>
-<span class="n">test</span> <span class="o">&lt;-</span> <span class="n">subset</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">split</span><span class="o">==</span><span class="s1">&#39;FALSE&#39;</span><span class="p">)</span>
+<span class="n">train_m</span> <span class="o">&lt;-</span> <span class="n">subset</span><span class="p">(</span><span class="n">df_m</span><span class="p">,</span> <span class="n">split</span><span class="o">==</span><span class="s1">&#39;TRUE&#39;</span><span class="p">)</span>
+<span class="n">test_m</span> <span class="o">&lt;-</span> <span class="n">subset</span><span class="p">(</span><span class="n">df_m</span><span class="p">,</span> <span class="n">split</span><span class="o">==</span><span class="s1">&#39;FALSE&#39;</span><span class="p">)</span>
+<span class="n">train_f</span> <span class="o">&lt;-</span> <span class="n">subset</span><span class="p">(</span><span class="n">df_f</span><span class="p">,</span> <span class="n">split</span><span class="o">==</span><span class="s1">&#39;TRUE&#39;</span><span class="p">)</span>
+<span class="n">test_f</span> <span class="o">&lt;-</span> <span class="n">subset</span><span class="p">(</span><span class="n">df_f</span><span class="p">,</span> <span class="n">split</span><span class="o">==</span><span class="s1">&#39;FALSE&#39;</span><span class="p">)</span>
+<span class="n">train</span> <span class="o">&lt;-</span> <span class="n">rbind</span><span class="p">(</span><span class="n">train_m</span><span class="p">,</span> <span class="n">train_f</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">&lt;-</span> <span class="n">rbind</span><span class="p">(</span><span class="n">test_m</span><span class="p">,</span> <span class="n">test_f</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14730,44 +14734,17 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class=" highlight hl-python"><pre><span></span><span class="c1">## ref: https://stackoverflow.com/questions/37897252/plot-confusion-matrix-in-r-using-ggplot</span>
 <span class="n">Target</span> <span class="o">&lt;-</span> <span class="n">factor</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">))</span>
 <span class="n">Prediction</span> <span class="o">&lt;-</span> <span class="n">factor</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="n">Y</span>      <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="mi">26241</span><span class="p">,</span> <span class="mi">14201</span><span class="p">,</span> <span class="mi">54263</span><span class="p">,</span> <span class="mi">7733</span><span class="p">)</span>
+<span class="n">Y</span>      <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="mi">18287</span><span class="p">,</span> <span class="mi">8375</span><span class="p">,</span> <span class="mi">39694</span><span class="p">,</span> <span class="mi">4519</span><span class="p">)</span>
 <span class="n">df</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">Target</span><span class="p">,</span> <span class="n">Prediction</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
 <span class="n">ggplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Target</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">Prediction</span><span class="p">))</span> <span class="o">+</span>
         <span class="n">geom_tile</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span> <span class="o">=</span> <span class="n">Y</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span><span class="p">)</span> <span class="o">+</span>
         <span class="n">geom_text</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="n">sprintf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%1.0f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">Y</span><span class="p">)),</span> <span class="n">vjust</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span>
-        <span class="n">scale_fill_gradient</span><span class="p">(</span><span class="n">low</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">)</span> <span class="o">+</span>
+        <span class="n">scale_fill_gradient</span><span class="p">(</span><span class="n">low</span> <span class="o">=</span> <span class="s2">&quot;lightblue&quot;</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="s2">&quot;salmon&quot;</span><span class="p">)</span> <span class="o">+</span>
         <span class="n">scale_x_discrete</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">&quot;Female&quot;</span><span class="p">,</span><span class="s2">&quot;Male&quot;</span><span class="p">))</span> <span class="o">+</span>
         <span class="n">scale_y_discrete</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">&quot;Female&quot;</span><span class="p">,</span><span class="s2">&quot;Male&quot;</span><span class="p">))</span> <span class="o">+</span>
+        <span class="n">labs</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Confusion Matrix&#39;</span><span class="p">)</span> <span class="o">+</span> 
         <span class="n">theme_bw</span><span class="p">()</span> <span class="o">+</span> 
-        <span class="n">theme</span><span class="p">(</span><span class="n">legend</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Marginal-probability-calculations-and-plots">Marginal probability calculations and plots<a class="anchor-link" href="#Marginal-probability-calculations-and-plots">&#182;</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="n">klar</span> <span class="o">&lt;-</span> <span class="n">NaiveBayes</span><span class="p">(</span><span class="n">sex</span> <span class="o">~</span> <span class="o">.</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">train</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">klar</span><span class="p">,</span> <span class="nb">vars</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="s2">&quot;agreeable_score&quot;</span><span class="p">,</span> <span class="s2">&quot;extraversion_score&quot;</span><span class="p">,</span> <span class="s2">&quot;openness_score&quot;</span><span class="p">,</span> <span class="s2">&quot;conscientiousness_score&quot;</span><span class="p">,</span> <span class="s2">&quot;neuroticism_score&quot;</span><span class="p">))</span>
+        <span class="n">theme</span><span class="p">(</span><span class="n">legend</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">plot</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">hjust</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">))</span>
 </pre></div>
 
      </div>
