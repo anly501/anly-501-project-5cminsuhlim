@@ -9,6 +9,38 @@ import seaborn_visualizer as sbv
 import seaborn as sns
 
 # %% [markdown]
+# # Wikicrawl EDA
+
+# %%
+#RELOAD FILE AND PRETEND THAT IS OUR STARTING POINT 
+df=pd.read_csv('../../data/00-raw-data/wiki-crawl-results.csv')  
+print(df.shape)
+
+#CONVERT FROM STRING LABELS TO INTEGERS 
+labels=[]; #y1=[]; y2=[]
+y1=[]
+for label in df["label"]:
+    if label not in labels:
+        labels.append(label)
+        print("index =",len(labels)-1,": label =",label)
+    for i in range(0,len(labels)):
+        if(label==labels[i]):
+            y1.append(i)
+y1=np.array(y1)
+
+# CONVERT DF TO LIST OF STRINGS 
+corpus=df["text"].to_list()
+y2=df["sentiment"].to_numpy()
+
+df = df.rename(columns={'label': 'Search Terms', 'sentiment': 'Sentiment Score'})
+sentiment_f = df[df['Search Terms'] == "Women's rights"]['Sentiment Score']
+sentiment_m = df[df['Search Terms'] == "Men's rights"]['Sentiment Score']
+
+# %%
+ax = sns.displot(df, x="Sentiment Score", hue='Search Terms', kind="kde", palette=['red', 'blue'])
+ax.fig.suptitle('Sentiment score density plots of Wikicrawl', x=0.4, y = 1.05, fontsize=15)
+
+# %% [markdown]
 # # Twitter EDA
 
 # %%

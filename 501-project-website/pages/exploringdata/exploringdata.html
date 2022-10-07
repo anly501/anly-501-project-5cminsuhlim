@@ -284,14 +284,24 @@
                     <img class="img" src="../../images/exploringdata/CB_edu_by_sex_age16.png">
                 </div>
 
-                <h2>Tweets</h2>
+                <h2>Wikicrawl</h2>
                 <div class="col">
-                    <img class="img" src="../../images/exploringdata/tweets_wordcloud.png">
+                    <img class="img" src="../../images/exploringdata/wikicrawl_sentiment.png">
                 </div>
+                <div class="col-lg-8">
+                    <p> 
+                        Based on the Wikicrawl, we created density plots based on the sentiment scores of the vectorized sentences. We can see that the resulting distributions for the search terms "Women's rights" and "Men's rights" are both bimodal around -0.75 and 1.0. It's also worth mentioning that the sentiment scores for "Women's rights" appears to be more polarized, as there is a large peak for negative sentiment at -0.75, then a large dip towards neutral sentiment at 0.0, and then another large peak at positive sentiment at 1.0. However, the sentiment scores for "Men's rights" appears to be a bit more consistent throughout when compared to the sentiment of "Women's rights", not varying too much across negative, neutral, and positive sentiment. This may suggest that "Women's rights" may be a more polarizing topic than "Men's rights."
+                    </p>
+                </div>
+
+                <h2>Tweets</h2>
                 <div class="col-lg-8">
                     <p> 
                         Based on the Twitter API call for multiple keywords associated with both the women's and men's rights movements, we generated the wordcloud on the left. Other than "worldwide," we can see that "mensrights" and "womenvsmen" are most noticeable. Interestingly, despite searching for tweets with 3 terms relating to women's rights and 3 terms relating to men's rights, it's clear that there are more hashtag relating to women's rights (e.g. "womensrightsarehumanrights", "womensrights", "womentalking"), issues (e.g. "votingrights", "saveroevswade", "votebluetoprotectwomen"), and involvements (e.g. "womenintech", "womeninscience", "womeninresearch").
                     </p>
+                </div>
+                <div class="col">
+                    <img class="img" src="../../images/exploringdata/tweets_wordcloud.png">
                 </div>
 
                 <div class="col-lg-8">
