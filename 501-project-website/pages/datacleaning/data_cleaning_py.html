@@ -14583,7 +14583,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14602,6 +14602,30 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>c:\Users\Eric\anaconda3\envs\ANLY501\lib\site-packages\scipy\__init__.py:146: UserWarning: A NumPy version &gt;=1.16.5 and &lt;1.23.0 is required for this version of SciPy (detected version 1.23.1
+  warnings.warn(f&#34;A NumPy version &gt;={np_minversion} and &lt;{np_maxversion}&#34;
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14806,6 +14830,146 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;./../../data/01-modified-data/Tweets_final.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Employment-and-Wages-(BLS)">Employment and Wages (BLS)<a class="anchor-link" href="#Employment-and-Wages-(BLS)">&#182;</a></h1>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;../../data/00-raw-data/wages_(by_occupation_may_2021).xlsx&#39;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;OCC_TITLE&#39;</span><span class="p">,</span> <span class="s1">&#39;O_GROUP&#39;</span><span class="p">,</span> <span class="s1">&#39;TOT_EMP&#39;</span><span class="p">,</span> <span class="s1">&#39;EMP_PRSE&#39;</span><span class="p">,</span> <span class="s1">&#39;A_MEAN&#39;</span><span class="p">,</span> <span class="s1">&#39;MEAN_PRSE&#39;</span><span class="p">]]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;X&#39;</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">majors</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;O_GROUP&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;major&#39;</span><span class="p">][</span><span class="s1">&#39;OCC_TITLE&#39;</span><span class="p">]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create string and numeric representations for major occupation titles</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">73</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">73</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">74</span><span class="p">:</span><span class="mi">131</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">74</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">74</span><span class="p">:</span><span class="mi">131</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">132</span><span class="p">:</span><span class="mi">167</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">132</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">132</span><span class="p">:</span><span class="mi">167</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">168</span><span class="p">:</span><span class="mi">228</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">168</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">168</span><span class="p">:</span><span class="mi">228</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">229</span><span class="p">:</span><span class="mi">307</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">229</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">229</span><span class="p">:</span><span class="mi">307</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">308</span><span class="p">:</span><span class="mi">333</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">308</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">308</span><span class="p">:</span><span class="mi">333</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">334</span><span class="p">:</span><span class="mi">348</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">334</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">334</span><span class="p">:</span><span class="mi">348</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">349</span><span class="p">:</span><span class="mi">445</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">349</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">349</span><span class="p">:</span><span class="mi">445</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">446</span><span class="p">:</span><span class="mi">507</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">446</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">446</span><span class="p">:</span><span class="mi">507</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">508</span><span class="p">:</span><span class="mi">609</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">508</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">508</span><span class="p">:</span><span class="mi">609</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">610</span><span class="p">:</span><span class="mi">636</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">610</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">610</span><span class="p">:</span><span class="mi">636</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">637</span><span class="p">:</span><span class="mi">679</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">637</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">637</span><span class="p">:</span><span class="mi">679</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">680</span><span class="p">:</span><span class="mi">712</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">680</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">680</span><span class="p">:</span><span class="mi">712</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">13</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">713</span><span class="p">:</span><span class="mi">730</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">713</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">713</span><span class="p">:</span><span class="mi">730</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">14</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">731</span><span class="p">:</span><span class="mi">790</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">731</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">731</span><span class="p">:</span><span class="mi">790</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">791</span><span class="p">:</span><span class="mi">833</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">791</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">791</span><span class="p">:</span><span class="mi">833</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">834</span><span class="p">:</span><span class="mi">942</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">834</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">834</span><span class="p">:</span><span class="mi">942</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">17</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">943</span><span class="p">:</span><span class="mi">966</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">943</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">943</span><span class="p">:</span><span class="mi">966</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">967</span><span class="p">:</span><span class="mi">1069</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">967</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">967</span><span class="p">:</span><span class="mi">1069</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">19</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1070</span><span class="p">:</span><span class="mi">1144</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">1070</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1070</span><span class="p">:</span><span class="mi">1144</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1145</span><span class="p">:</span><span class="mi">1311</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">1145</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1145</span><span class="p">:</span><span class="mi">1311</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">21</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1312</span><span class="p">:</span><span class="mi">1402</span><span class="p">,</span> <span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="p">[</span><span class="mi">1312</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1312</span><span class="p">:</span><span class="mi">1402</span><span class="p">,</span> <span class="s1">&#39;Target_Num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">22</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># remove rows containing &#39;*&#39;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="o">~</span><span class="n">x</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;\*&#39;</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)))]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;./../../data/01-modified-data/occupations_detailed_(employment_and_wage).csv&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
