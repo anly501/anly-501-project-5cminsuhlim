@@ -159,15 +159,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Classification with Decision Trees</h1>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
-<p>Decision Trees (DTs) are a non-parametric supervised learning method used for classification and regression. As the name suggests, DTs creates a tree-like structure consisting of decisions in the form of conditional (if) statements and their respective resulting consequences. DTs are conceptually similar to a flowchart, where each node of the tree represents a “Yes” or “No” test on a particular attribute, each branch represents the outcome of the test, and each leaf node represents a particular class to which a particular item would most likely belong.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./dt_classification_files/figure-html/dt_example.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Xoriant / “Decision Trees for Classification: A Machine Learning Algorithm”</figcaption><p></p>
-</figure>
-</div>
-<p>For example, the above image is an example of a very elementary DT to decide (or classify) whether or not a person is fit. At the very top node (the root node), we typically have a question that can split the data set as “efficiently” as possible (although the metric for efficiency will differ based on the criterion). In this case, we first ask if a person is less than 30 years old. If so, we then ask if this person eats a lot of pizzas. If the answer is yes, then we’d conclude that this person is unfit; if the answer is no, we’d conclude that this person is fit. However, if this person is older than 30 years old, we ask if this person exercises in the morning. If the answer is yes, then we conclude that the person is fit; otherwise, we conclude that the person is unfit.</p>
-<p>As per the example, simply asking a person’s age, frequency of pizza consumption, and exercise habits is probably insufficient to truly decide if a person is fit. This is a simplistic workflow, but the algorithms used by the DTs search for good tree rules that attempts to best classify the given dataset. However, finding the optimal tree is very difficult due to the infinite number of possible decision trees that can be constructed given the attributes of a data set. As such, DTs can be a good, computationally cheap starting point to find interesting trends within the data, which can later be further explored with more detailed and computationally expensive methods.</p>
 <p>For our analysis below, we will be using the Bureau of Labor Statistics’ wages by occupation data set. We will attempt to classify which job type (e.g.&nbsp;Managerial, Legal, Business) an occupation falls under given the occupation’s total employment, mean annual wage, employment percent standard relative error, and mean annual wage percent standard relative error.</p>
 <section id="imports" class="level3">
 <h3 class="anchored" data-anchor-id="imports">Imports</h3>
@@ -215,7 +206,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>As shown in the output below, our target class is heavily imbalanced. Since this imbalance can skew the way the data is split into training and test sets, we will later stratify the data so the proportion of values in the training and test sets also reflect this imbalance.</p>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Target'</span>].value_counts(ascending<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="29">
 <pre><code>Legal Occupations                                              15
 Building and Grounds Cleaning and Maintenance Occupations      18
 Farming, Fishing, and Forestry Occupations                     24
@@ -249,7 +240,7 @@ Name: Target, dtype: int64</code></pre>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sns.pairplot(df.iloc[:, <span class="dv">2</span>:<span class="dv">7</span>], hue<span class="op">=</span><span class="st">'Target'</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="dt_classification_files/figure-html/cell-7-output-1.png" width="1415" height="947"></p>
+<p><img src="dt_classification_files/figure-html/cell-7-output-1.png" width="1409" height="943"></p>
 </div>
 </div>
 </section>
@@ -276,25 +267,25 @@ Name: Target, dtype: int64</code></pre>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>random_classifier(Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>-----RANDOM CLASSIFIER-----
-count of prediction: dict_values([59, 57, 68, 69, 71, 68, 58, 54, 62, 63, 56, 58, 61, 62, 63, 67, 65, 60, 38, 46, 60, 68, 61])
-probability of prediction: [0.04232425 0.04088953 0.04878049 0.04949785 0.05093257 0.04878049
- 0.04160689 0.03873745 0.04447633 0.04519369 0.04017217 0.04160689
- 0.04375897 0.04447633 0.04519369 0.04806313 0.04662841 0.04304161
- 0.02725968 0.03299857 0.04304161 0.04878049 0.04375897]
-accuracy 0.03730272596843615
-precision, recall, fscore, (array([0.        , 0.06451613, 0.01851852, 0.        , 0.06349206,
-       0.06451613, 0.02173913, 0.01449275, 0.04411765, 0.03278689,
-       0.01492537, 0.        , 0.02631579, 0.01538462, 0.        ,
-       0.03278689, 0.03333333, 0.05357143, 0.01754386, 0.10169492,
-       0.04761905, 0.12676056, 0.05      ]), array([0.        , 0.05479452, 0.01724138, 0.        , 0.06557377,
-       0.05063291, 0.03846154, 0.06666667, 0.03092784, 0.03636364,
-       0.00980392, 0.        , 0.02325581, 0.03030303, 0.        ,
-       0.03333333, 0.04761905, 0.02752294, 0.04166667, 0.05825243,
-       0.04      , 0.05389222, 0.03296703]), array([0.        , 0.05925926, 0.01785714, 0.        , 0.06451613,
-       0.05673759, 0.02777778, 0.02380952, 0.03636364, 0.03448276,
-       0.01183432, 0.        , 0.02469136, 0.02040816, 0.        ,
-       0.03305785, 0.03921569, 0.03636364, 0.02469136, 0.07407407,
-       0.04347826, 0.07563025, 0.0397351 ]), array([  0,  73,  58,  36,  61,  79,  26,  15,  97,  55, 102,  27,  43,
+count of prediction: dict_values([70, 69, 70, 51, 51, 62, 67, 46, 53, 59, 45, 61, 76, 64, 50, 54, 77, 70, 55, 65, 67, 54, 58])
+probability of prediction: [0.05021521 0.04949785 0.05021521 0.03658537 0.03658537 0.04447633
+ 0.04806313 0.03299857 0.03802009 0.04232425 0.03228121 0.04375897
+ 0.05451937 0.04591105 0.03586801 0.03873745 0.05523673 0.05021521
+ 0.03945481 0.04662841 0.04806313 0.03873745 0.04160689]
+accuracy 0.04591104734576758
+precision, recall, fscore, (array([0.        , 0.16      , 0.01960784, 0.03703704, 0.04918033,
+       0.03703704, 0.        , 0.01960784, 0.10169492, 0.0625    ,
+       0.1       , 0.        , 0.02857143, 0.05454545, 0.        ,
+       0.02857143, 0.03947368, 0.05797101, 0.        , 0.09677419,
+       0.07692308, 0.02985075, 0.05172414]), array([0.        , 0.10958904, 0.01724138, 0.05555556, 0.04918033,
+       0.02531646, 0.        , 0.06666667, 0.06185567, 0.07272727,
+       0.06862745, 0.        , 0.04651163, 0.09090909, 0.        ,
+       0.03333333, 0.07142857, 0.03669725, 0.        , 0.05825243,
+       0.06666667, 0.01197605, 0.03296703]), array([0.        , 0.1300813 , 0.01834862, 0.04444444, 0.04918033,
+       0.03007519, 0.        , 0.03030303, 0.07692308, 0.06722689,
+       0.08139535, 0.        , 0.03539823, 0.06818182, 0.        ,
+       0.03076923, 0.05084746, 0.04494382, 0.        , 0.07272727,
+       0.07142857, 0.01709402, 0.04026846]), array([  0,  73,  58,  36,  61,  79,  26,  15,  97,  55, 102,  27,  43,
         33,  18,  60,  42, 109,  24, 103,  75, 167,  91], dtype=int64))</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
@@ -407,9 +398,9 @@ PRECISION: 1.0</code></pre>
 <pre><code>------TEST------</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ACCURACY: 0.4767025089605735
-RECALL: 0.4767025089605735
-PRECISION: 0.4934178697257239</code></pre>
+<pre><code>ACCURACY: 0.4659498207885305
+RECALL: 0.4659498207885305
+PRECISION: 0.48556607337969343</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="dt_classification_files/figure-html/cell-16-output-6.png" width="504" height="434"></p>
@@ -422,17 +413,16 @@ PRECISION: 0.4934178697257239</code></pre>
 <div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># VISUALIZE THE DECISION TREE</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> tree</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>regr <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">1234</span>)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> regr.fit(x_train, y_train)</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_tree(model, X, Y):</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">25</span>,<span class="dv">20</span>))</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    _ <span class="op">=</span> tree.plot_tree(model, </span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>                    feature_names<span class="op">=</span>X.columns,  </span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>                    class_names<span class="op">=</span>Y.name,</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>                    filled<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>regr <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">1234</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> regr.fit(x_train, y_train)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_tree(model, X, Y):</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">25</span>,<span class="dv">20</span>))</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    _ <span class="op">=</span> tree.plot_tree(model, </span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>                    feature_names<span class="op">=</span>X.columns,  </span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>                    class_names<span class="op">=</span>Y.name,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>                    filled<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>plot_tree(model, X, Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -555,68 +545,70 @@ hyperparam = 6
  error diff: 0.6686576721745503
 hyperparam = 7
  train error: 3.0473318270092693
- test error: 4.0157557409023275
- error diff: 0.9684239138930582
+ test error: 4.012171511511647
+ error diff: 0.9648396845023774
 hyperparam = 8
- train error: 2.5472962514226687
- test error: 3.8170143482817287
- error diff: 1.26971809685906
+ train error: 2.546010750675285
+ test error: 3.8306344199663163
+ error diff: 1.2846236692910313
 hyperparam = 9
  train error: 2.1046039820806786
- test error: 3.8920003491663993
- error diff: 1.7873963670857207
+ test error: 3.8681054865618596
+ error diff: 1.763501504481181
 hyperparam = 10
  train error: 1.6896946722256863
- test error: 3.8318041503645
- error diff: 2.1421094781388135
+ test error: 3.7816249388949665
+ error diff: 2.09193026666928
 hyperparam = 11
  train error: 1.3202008875427063
- test error: 3.615638811341665
- error diff: 2.295437923798959
+ test error: 3.591146577172011
+ error diff: 2.2709456896293045
 hyperparam = 12
  train error: 1.0147558546556172
- test error: 3.5459573112482663
- error diff: 2.5312014565926493
+ test error: 3.490043332753643
+ error diff: 2.475287478098026
 hyperparam = 13
- train error: 0.7196983997817928
- test error: 3.5123364471570855
- error diff: 2.7926380473752928
+ train error: 0.7201767256412845
+ test error: 3.5754188844330708
+ error diff: 2.8552421587917864
 hyperparam = 14
- train error: 0.45024630678174915
- test error: 3.4019617977414223
- error diff: 2.951715490959673
+ train error: 0.44905049213301973
+ test error: 3.3858327654833578
+ error diff: 2.936782273350338
 hyperparam = 15
- train error: 0.27806751634168975
- test error: 3.422634380228638
- error diff: 3.144566863886948
+ train error: 0.2771706553551427
+ test error: 3.397544774493871
+ error diff: 3.1203741191387286
 hyperparam = 16
  train error: 0.19418374036736086
- test error: 3.3050670283833834
- error diff: 3.1108832880160224
+ test error: 3.459188892182667
+ error diff: 3.265005151815306
 hyperparam = 17
  train error: 0.1409970983909259
- test error: 3.4498805256869773
- error diff: 3.3088834272960517
+ test error: 3.367443249701314
+ error diff: 3.2264461513103884
 hyperparam = 18
  train error: 0.07882126841768097
- test error: 3.431022785458269
- error diff: 3.352201517040588
+ test error: 3.251213944359106
+ error diff: 3.172392675941425
 hyperparam = 19
- train error: 0.0563865432026867
- test error: 3.2714797747055813
- error diff: 3.2150932315028946
+ train error: 0.052623997825791545
+ test error: 3.486021505376344
+ error diff: 3.4333975075505525
 hyperparam = 20
- train error: 0.011958146487294475
- test error: 3.30884109916368
- error diff: 3.2968829526763854
+ train error: 0.014768310911808675
+ test error: 3.3324970131421745
+ error diff: 3.3177287022303656
 hyperparam = 21
  train error: 0.0017937219730941704
- test error: 3.315412186379928
- error diff: 3.313618464406834
-hyperparam = 22
+ test error: 3.2759856630824373
+ error diff: 3.274191941109343</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>hyperparam = 22
  train error: 0.0
- test error: 3.240143369175627
- error diff: 3.240143369175627</code></pre>
+ test error: 3.204301075268817
+ error diff: 3.204301075268817</code></pre>
 </div>
 </div>
 </section>
@@ -626,19 +618,18 @@ hyperparam = 22
 <section id="train-optimal-model" class="level3">
 <h3 class="anchored" data-anchor-id="train-optimal-model">Train Optimal Model</h3>
 <div class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#### TRAIN A SKLEARN DECISION TREE MODEL ON x_train,y_train </span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> tree</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> tree.DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">4</span>)</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> model.fit(x_train, y_train)</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>yp_train<span class="op">=</span>model.predict(x_train)</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>yp_test<span class="op">=</span>model.predict(x_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#### TRAIN A SKLEARN DECISION TREE MODEL ON x_train,y_train </span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> tree.DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> model.fit(x_train, y_train)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>yp_train<span class="op">=</span>model.predict(x_train)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>yp_test<span class="op">=</span>model.predict(x_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"------TRAINING------"</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>confusion_plot(y_train,yp_train)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"------TEST------"</span>)</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>confusion_plot(y_test,yp_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"------TRAINING------"</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>confusion_plot(y_train,yp_train)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"------TEST------"</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>confusion_plot(y_test,yp_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>------TRAINING------</code></pre>
 </div>
@@ -657,8 +648,10 @@ Precision is ill-defined and being set to 0.0 in labels with no predicted sample
 <p><img src="dt_classification_files/figure-html/cell-24-output-4.png" width="504" height="428"></p>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>------TEST------
-ACCURACY: 0.27598566308243727
+<pre><code>------TEST------</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ACCURACY: 0.27598566308243727
 RECALL: 0.27598566308243727
 PRECISION: 0.27796544925072136</code></pre>
 </div>
@@ -669,10 +662,19 @@ Precision is ill-defined and being set to 0.0 in labels with no predicted sample
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="dt_classification_files/figure-html/cell-24-output-7.png" width="504" height="428"></p>
+<p><img src="dt_classification_files/figure-html/cell-24-output-8.png" width="504" height="428"></p>
 </div>
 </div>
-<p>The confusion matrices above show a large decrease in the accuracy, recall, and precision scores for both the training and test sets compared to the metrics from our original model with default parameters; however, we are now no longer overfitting. While accuracy, recall, and precision scores less than 0.3 seem quite small, our optimized model outperforms the random classifier by 6-7 times, which is quite a large improvement from classifying completely randomly. Nonetheless, the model can definitely see some improvements. Most notably, having more predictor variables with which the classifier could work may help fine-tune the classifier even more. Additionally, obtaining more data to create a balanced target class may also help with the classifier’s performance.</p>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>regr <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">1234</span>, max_depth<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> regr.fit(x_train, y_train)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>plot_tree(model, X, Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="dt_classification_files/figure-html/cell-25-output-1.png" width="1884" height="1469"></p>
+</div>
+</div>
+<p>The confusion matrices above show a large decrease in the accuracy, recall, and precision scores for both the training and test sets compared to the metrics from our original model with default parameters; however, we are now no longer overfitting. The accuracy, recall, and precision scores are around 0.3.</p>
 </section>
 </section>
 </section>

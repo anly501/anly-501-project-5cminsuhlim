@@ -1,6 +1,6 @@
 /* spacing for sections */
 #about, #introduction, #datagathering, #datacleaning, #exploringdata, #clustering, #armandnetworking, #decisiontrees,
-#naivebayes, #svm, #conclusions {
+#naivebayes, #svm, #randomforests, #conclusions {
   font-family: "Castoro";
   font-size: 20px;
   margin-top: 4em;

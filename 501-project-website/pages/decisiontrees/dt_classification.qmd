@@ -21,14 +21,6 @@ execute:
 
 ## Methods
 
-Decision Trees (DTs) are a non-parametric supervised learning method used for classification and regression. As the name suggests, DTs creates a tree-like structure consisting of decisions in the form of conditional (if) statements and their respective resulting consequences. DTs are conceptually similar to a flowchart, where each node of the tree represents a "Yes" or "No" test on a particular attribute, each branch represents the outcome of the test, and each leaf node represents a particular class to which a particular item would most likely belong.
-
-![Xoriant / "Decision Trees for Classification: A Machine Learning Algorithm"](./dt_classification_files/figure-html/dt_example.png)
-
-For example, the above image is an example of a very elementary DT to decide (or classify) whether or not a person is fit. At the very top node (the root node), we typically have a question that can split the data set as "efficiently" as possible (although the metric for efficiency will differ based on the criterion). In this case, we first ask if a person is less than 30 years old. If so, we then ask if this person eats a lot of pizzas. If the answer is yes, then we'd conclude that this person is unfit; if the answer is no, we'd conclude that this person is fit. However, if this person is older than 30 years old, we ask if this person exercises in the morning. If the answer is yes, then we conclude that the person is fit; otherwise, we conclude that the person is unfit. 
-
-As per the example, simply asking a person's age, frequency of pizza consumption, and exercise habits is probably insufficient to truly decide if a person is fit. This is a simplistic workflow, but the algorithms used by the DTs search for good tree rules that attempts to best classify the given dataset. However, finding the optimal tree is very difficult due to the infinite number of possible decision trees that can be constructed given the attributes of a data set. As such, DTs can be a good, computationally cheap starting point to find interesting trends within the data, which can later be further explored with more detailed and computationally expensive methods. 
-
 For our analysis below, we will be using the Bureau of Labor Statistics' wages by occupation data set. We will attempt to classify which job type (e.g. Managerial, Legal, Business) an occupation falls under given the occupation's total employment, mean annual wage, employment percent standard relative error, and mean annual wage percent standard relative error.
 
 ### Imports
@@ -201,7 +193,6 @@ As shown in the correlation matrices above for both the training and test data s
 ```{python}
 # VISUALIZE THE DECISION TREE
 from sklearn.tree import DecisionTreeRegressor
-from sklearn import tree
 
 regr = DecisionTreeRegressor(random_state=1234)
 model = regr.fit(x_train, y_train)
@@ -312,7 +303,6 @@ for i in range(1,23):
 
 ```{python}
 #### TRAIN A SKLEARN DECISION TREE MODEL ON x_train,y_train 
-from sklearn import tree
 model = tree.DecisionTreeClassifier(max_depth=4)
 model = model.fit(x_train, y_train)
 
@@ -327,4 +317,11 @@ print("------TEST------")
 confusion_plot(y_test,yp_test)
 ```
 
-The confusion matrices above show a large decrease in the accuracy, recall, and precision scores for both the training and test sets compared to the metrics from our original model with default parameters; however, we are now no longer overfitting. While accuracy, recall, and precision scores less than 0.3 seem quite small, our optimized model outperforms the random classifier by 6-7 times, which is quite a large improvement from classifying completely randomly. Nonetheless, the model can definitely see some improvements. Most notably, having more predictor variables with which the classifier could work may help fine-tune the classifier even more. Additionally, obtaining more data to create a balanced target class may also help with the classifier's performance.
+```{python}
+regr = DecisionTreeRegressor(random_state=1234, max_depth=4)
+model = regr.fit(x_train, y_train)
+
+plot_tree(model, X, Y)
+```
+
+The confusion matrices above show a large decrease in the accuracy, recall, and precision scores for both the training and test sets compared to the metrics from our original model with default parameters; however, we are now no longer overfitting. The accuracy, recall, and precision scores are around 0.3.

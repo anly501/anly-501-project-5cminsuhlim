@@ -64,6 +64,9 @@
                         <a class="nav-link" href="../svm/svm.html">SVM</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="../randomforests/randomforests.html">Random Forests</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="../conclusions.html">Conclusions</a>
                     </li>
                 </ul>
@@ -76,8 +79,54 @@
         <div class="container">
             <h1 class="text-center">Decision Trees</h1>
             <div class="row">
-                <h2><a class="nav-link" target="_blank" href="./dt_classification.html">Decision Tree Classification in Python</a></h2>
-                <h2><a class="nav-link" target="_blank" href="./dt_regression.html">Decision Tree Regression in Python</a></h2>
+                <h2>Methods</h2>
+                <div>
+                    <p>
+                        Decision Trees (DTs) are a non-parametric supervised learning method used for classification and regression. As the name suggests, DTs creates a tree-like structure consisting of decisions in the form of conditional (if) statements and their respective resulting consequences. DTs are conceptually similar to a flowchart, where each node of the tree represents a “Yes” or “No” test on a particular attribute, each branch represents the outcome of the test, and each leaf node represents a particular class to which a particular item would most likely belong.
+                    </p>
+
+                    <div class="col">
+                        <img class="center-block" src="../../images/decisiontrees/dt_example.png">
+                        <figcaption class="figure-caption text-center">
+                            Xoriant / “Decision Trees for Classification: A Machine Learning Algorithm”
+                        </figcaption>
+                    </div>
+
+                    <p>
+                        For example, the above image is an example of a very elementary DT to decide (or classify) whether or not a person is fit. At the very top node (the root node), we typically have a question that can split the data set as “efficiently” as possible (although the metric for efficiency will differ based on the criterion). In this case, we first ask if a person is less than 30 years old. If so, we then ask if this person eats a lot of pizzas. If the answer is yes, then we’d conclude that this person is unfit; if the answer is no, we’d conclude that this person is fit. However, if this person is older than 30 years old, we ask if this person exercises in the morning. If the answer is yes, then we conclude that the person is fit; otherwise, we conclude that the person is unfit.
+                    </p>
+
+                    <p>
+                        As per the example, simply asking a person’s age, frequency of pizza consumption, and exercise habits is probably insufficient to truly decide if a person is fit. This is a simplistic workflow, but the algorithms used by the DTs search for good tree rules that attempts to best classify the given dataset. However, finding the optimal tree is very difficult due to the infinite number of possible decision trees that can be constructed given the attributes of a data set. As such, DTs can be a good, computationally cheap starting point to find interesting trends within the data, which can later be further explored with more detailed and computationally expensive methods.
+                    </p>
+
+                    <p>
+                        Below are two applications of DTs. The first link is the application of DT classification to determine a job type based on its employment and wage metrics. The second link is the application of DT regression to determine the average number of hours worked by an employee based on employee sex, job type, and the number of employees who worked 35+ hours per week.
+                    </p>
+
+                </div>
+
+                <div>
+                    <li>
+                        <a target="_blank" href="./dt_classification.html">Decision Tree Classification in Python</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="./dt_regression.html">Decision Tree Regression in Python</a>
+                    </li>
+                </div>
+
+                <p></p> 
+
+                <h2>Conclusions</h2>
+                <div>
+                    <p>
+                        Based on the DT classification results, we can see that our optimized model outperforms the random classifier by about 7 times (accuracy=0.04 vs. accuracy=0.28), which is quite a large improvement from classifying completely randomly. Nonetheless, the model can definitely see some improvements. Most notably, DTs do not perform well on unbalanced data sets. As such, obtaining more data to create a balanced data set may improve the classifier's performance. Additionally, having more predictor variables with which the classifier could work may generally help fine-tune the classifier further.
+                    </p>
+                    
+                    <p>
+                        For the DT regression, it appears that the model isn't performing very well; however, it's even difficult to try and truly quantify the extent to which the model is poorly classifying the average number of hours worked by an employee based on employee sex, job type, and the number of employees who worked 35+ hours per week. The most glaring issue with the model at hand stems at the extremely small sample size, that is further divided into training and test sets. Having more predictor variables and a generally larger sample size with which the regressor could work may help fine-tune the regressor even more and create some a foundation from which we can begin to more accurately interpret the performance of the model.
+                    </p>
+                </div>
             </div>
             
         </div>
