@@ -324,4 +324,4 @@ model = regr.fit(x_train, y_train)
 plot_tree(model, X, Y)
 ```
 
-The confusion matrices above show a large decrease in the accuracy, recall, and precision scores for both the training and test sets compared to the metrics from our original model with default parameters; however, we are now no longer overfitting. The accuracy, recall, and precision scores are around 0.3.
+The confusion matrices above show a large decrease in the accuracy, recall, and precision scores for both the training and test sets compared to the metrics from our original model with default parameters; however, we are now no longer overfitting. The accuracy, recall, and precision scores are around 0.3. These trends are also reflected in the new DT. With reducing the depth of the tree, we inevitably reduce the accuracy, recall, and precision scores of the model; however, we also reduce overfitting and increase generalizability. 

@@ -1,0 +1,346 @@
+---
+jupyter: python3
+pdf-engine: lualatex
+format:
+  html:
+    theme : yeti
+    toc: true
+    code-fold: false #enable code dropdown for html outptu  
+    toc-title: Contents
+    #bibliography: references.bib
+  pdf:
+    toc: true
+    number-sections: true
+    #bibliography: references.bib
+    fig-pos: 't' #try to get figures to al
+execute:
+    echo: True  #True=show code in output, false=don't
+---
+
+# Classification with Random Forests
+
+## Methods
+
+For our analysis below, we will be using the Bureau of Labor Statistics' wages by occupation data set. We will attempt to classify which job type (e.g. Managerial, Legal, Business) an occupation falls under given the occupation's total employment, mean annual wage, employment percent standard relative error, and mean annual wage percent standard relative error.
+
+### Imports
+
+```{python}
+import sklearn
+from sklearn import datasets
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+```
+
+### Load Data
+
+```{python}
+df = pd.read_csv('../../data/01-modified-data/occupations_detailed_(employment_and_wage).csv')
+
+## drop unneeded column created from read_csv
+df = df.iloc[:, 1:]
+```
+
+### Separate Predictor and Response Variables
+
+```{python}
+# Y="Target" COLUMN and X="everything else"
+X = df.iloc[:, 2:6]
+Y = df.iloc[:, 7]
+```
+
+### Normalization
+
+Since our predictors (X) consist of employment rates and mean annual wages, we first normalize our data to bring all the predictor values into a space that is unitless. This transformation of data brings everything to a similar scale, which makes it easier for the DT algorithm to "learn" the data. 
+
+```{python}
+X=0.1+(X-np.min(X,axis=0))/(np.max(X,axis=0)-np.min(X,axis=0))
+```
+
+## Class Distribution
+
+### Numerical EDA
+
+As shown in the output below, our target class is heavily imbalanced. Since this imbalance can skew the way the data is split into training and test sets, we will later stratify the data so the proportion of values in the training and test sets also reflect this imbalance.
+
+```{python}
+df['Target'].value_counts(ascending=True)
+```
+
+### Multivariable Pair Plot
+
+As mentioned before, the distributions of the target class is heavily imbalanced. Again, we can see this visually represented in the density plots in the correlation multivariable pair plot below. 
+
+```{python}
+sns.pairplot(df.iloc[:, 2:7], hue='Target')
+plt.show()
+```
+
+## Baseline: Random Classifier
+
+In order to have some baseline to compare our DT's performance, we defined a random classifier below.
+
+### Define Random Classifier Function
+
+```{python}
+from collections import Counter
+from sklearn.metrics import precision_recall_fscore_support
+def random_classifier(y_data):
+    ypred=[];
+    max_label=np.max(y_data); #print(max_label)
+    for i in range(0,len(y_data)):
+        ypred.append(int(np.floor((max_label+1)*np.random.uniform(0,1))))
+
+    print("-----RANDOM CLASSIFIER-----")
+    print("count of prediction:",Counter(ypred).values()) # counts the elements' frequency
+    print("probability of prediction:",np.fromiter(Counter(ypred).values(), dtype=float)/len(y_data)) # counts the elements' frequency
+    print("accuracy",accuracy_score(y_data, ypred))
+    print("precision, recall, fscore,",precision_recall_fscore_support(y_data, ypred))
+random_classifier(Y)
+```
+
+Based on the output above, we can see that accuracy of the random classifier is 0.04, which is around what we'd expect from randomly taking guesses for 22 target classes. We can also see that the precision, recall, and f-scores from the random classifier are all below 0.1. 
+
+## Feature Selection
+
+### Correlation
+
+The correlation output below shows a strong positive correlation (> 0.8) between employment percent relative standard error (EMP_PRSE) and mean annual salary percent relative standard error (MEAN_PRSE). Since we need to maintain independence among the predictor variables, I will drop employment percent relative standard error (EMP_PRSE) to prevent the model from overcounting similar features.
+
+```{python}
+corr = X.corr()
+print(corr)	
+```
+
+### Correlation Matrix Heatmap
+
+The correlation matrix heatmap below reflects the previous correlation output. Again, there is a strong positive correlation between employment percent relative standard error (EMP_PRSE) and mean annual salary percent relative standard error (MEAN_PRSE).
+
+```{python}
+sns.set_theme(style="white")
+f, ax = plt.subplots(figsize=(11, 9))  # Set up the matplotlib figure
+cmap = sns.diverging_palette(230, 20, as_cmap=True) 	# Generate a custom diverging colormap
+# Draw the heatmap with the mask and correct aspect ratio
+sns.heatmap(corr,  cmap=cmap, vmin=-1, vmax=1, center=0,
+        square=True, linewidths=.5, cbar_kws={"shrink": .5})
+plt.show();
+```
+
+### Remove Correlated Features
+
+```{python}
+X.drop(columns=['EMP_PRSE'], inplace=True)
+```
+
+### Split Data
+
+```{python}
+# PARTITION THE DATASET INTO TRAINING AND TEST SETS
+from sklearn.model_selection import train_test_split
+test_ratio=0.2
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=test_ratio, random_state=0, stratify=Y)
+```
+
+## Training the Model w/ Default Parameters
+
+```{python}
+# TRAIN A SKLEARN RANDOM FOREST MODEL ON x_train,y_train 
+from sklearn.ensemble import RandomForestClassifier
+model = RandomForestClassifier()
+model = model.fit(x_train, y_train)
+```
+
+### Check the Results
+
+```{python}
+# USE THE MODEL TO MAKE PREDICTIONS FOR THE TRAINING AND TEST SET 
+yp_train = model.predict(x_train)
+yp_test = model.predict(x_test)
+```
+
+```{python}
+# GENERATES A CONFUSION MATRIX PLOT AND PRINTS MODEL PERFORMANCE METRICS
+def confusion_plot(y_data, y_pred):    
+    cm = confusion_matrix(y_data, y_pred)
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+    disp.plot()
+    
+    print('ACCURACY:', accuracy_score(y_data, y_pred))
+    print('RECALL:', recall_score(y_data, y_pred, average='weighted'))
+    print('PRECISION:', precision_score(y_data, y_pred, average='weighted'))
+    
+    plt.show()
+
+
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+```
+
+```{python}
+print("------TRAINING------")
+confusion_plot(y_train,yp_train)
+print("------TEST------")
+confusion_plot(y_test,yp_test)
+```
+
+As shown in the correlation matrices above for both the training and test data sets, we can see that the RF resulted in a perfect fit for the training set but a much less adequate fit for the test set. Such a drastic difference in the accuracy, recall, and precision scores between the training and test sets suggest significant overfitting of the model (which is a notable characteristic of RFs). 
+
+### Visualize the Tree
+
+```{python}
+from sklearn.ensemble import RandomForestRegressor
+from sklearn import tree
+
+regr = RandomForestRegressor(random_state=1234, criterion='absolute_error')
+model = regr.fit(x_train, y_train)
+```
+
+```{python}
+# VISUALIZE A SINGLE TREE
+from sklearn import tree
+
+regr = RandomForestRegressor(random_state=1234)
+model = regr.fit(x_train, y_train)
+
+tree.plot_tree(model.estimators_[0], 
+            feature_names=X.columns,  
+            filled=True)
+```
+
+## Model Tuning
+
+As mentioned previously, the model with default parameters resulted in a heavily overfit RF. In order to find a more well-rounded model, we will perform model tuning.
+
+### Hyperparameter Tuning
+
+First, we loop over possible hyperparameter values, ranging from 1 to 50, keeping track of the training and test sets' accuracy and recall scores for each hyperparameter value. We then create plots for accuracy and recall scores for the training and test sets to identify which number of layers for the RF would result in an optimal model. 
+
+```{python}
+# LOOP OVER POSSIBLE HYPER-PARAMETERS VALUES
+test_results=[]
+train_results=[]
+
+for num_layer in range(1,51):
+    model = RandomForestClassifier(max_depth=num_layer)
+    model = model.fit(x_train, y_train)
+
+    yp_train=model.predict(x_train)
+    yp_test=model.predict(x_test)
+
+    # print(y_pred.shape)
+    test_results.append([num_layer,accuracy_score(y_test, yp_test),recall_score(y_test, yp_test, average='weighted')])
+    train_results.append([num_layer,accuracy_score(y_train, yp_train),recall_score(y_train, yp_train, average='weighted')])
+```
+
+```{python}
+layers = [el[0] for el in test_results]
+          
+test_acc = [el[1] for el in test_results]
+test_rec = [el[2] for el in test_results]
+
+train_acc = [el[1] for el in train_results]
+train_rec = [el[2] for el in train_results]
+```
+
+### Find Optimal Hyperparameter (Visual)
+
+Based on the plots below, we can narrow down the best hyperparameter value for our model as somewhere between 2-4, since both accuracy and recall scores begin to diverge more and more dramatically beginning from max_depth=5. 
+
+```{python}
+# GENERATE PLOTS TO IDENTIFY OPTIMAL HYPERPARAMETER
+def gen_plots(x, train, test):
+    plt.plot(x,train, c='b')
+    plt.scatter(x,train,c='b')
+    plt.plot(x,test,c='r')
+    plt.scatter(x,test,c='r')
+    plt.xlabel("Number of layers in decision tree (max_depth)")
+    plt.show();
+
+plt.ylabel("ACCURACY: Training (blue) and Test (red)")
+gen_plots(layers, train_acc, test_acc)
+plt.ylabel("RECALL: Training (blue) and Test (red)")
+gen_plots(layers, train_rec, test_rec)
+```
+
+### Find Optimal Hyperparameter (GridSearch)
+
+In addition to the max_depth parameter, we also need to find the optimal number of actual DTs that compose the RF, represented by the n_estimators parameter. To do this, we will do a grid search for max_depth values from 1 to 20 and number of DTs ranging from 1 to 1000 at various intervals.
+
+```{python}
+# ref: https://medium.datadriveninvestor.com/random-forest-regression-9871bc9a25eb
+
+from sklearn.model_selection import cross_val_score, GridSearchCV
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.preprocessing import MinMaxScaler
+def rfr_model(X, y):
+# Perform Grid-Search
+    gsc = GridSearchCV(
+        estimator=RandomForestRegressor(),
+        param_grid={
+            'max_depth': range(1,21),
+            'n_estimators': (1, 10, 50, 100, 500, 1000),
+        },
+        cv=5, scoring='neg_mean_squared_error', verbose=0, n_jobs=-1)
+    
+    grid_result = gsc.fit(X, y)
+    best_params = grid_result.best_params_
+    print('Best Parameters:', best_params)
+    
+    rfr = RandomForestRegressor(max_depth=best_params["max_depth"], n_estimators=best_params["n_estimators"], random_state=0, verbose=False)
+    # Perform K-Fold CV
+    scores = cross_val_score(rfr, X, y, cv=10, scoring='neg_mean_absolute_error')
+    return scores
+```
+
+We can see from the output below that the optimal parameters are max_depth=3 and n_estimators=10. Notably, the max_depth parameter matches our prior visual exploration of optimal hyperparameter values.
+
+```{python}
+rfr_model(X, Y)
+```
+
+### Train Optimal Model
+
+```{python}
+#### TRAIN A SKLEARN DECISION TREE MODEL ON x_train,y_train 
+model = RandomForestClassifier(max_depth=3, n_estimators=10)
+model = model.fit(x_train, y_train)
+
+yp_train=model.predict(x_train)
+yp_test=model.predict(x_test)
+```
+
+```{python}
+print("------TRAINING------")
+confusion_plot(y_train,yp_train)
+print("------TEST------")
+confusion_plot(y_test,yp_test)
+```
+
+```{python}
+model.estimators_
+```
+
+```{python}
+# VISUALIZE 5 TREES
+regr = RandomForestRegressor(random_state=1234, max_depth=3, n_estimators=10)
+model = regr.fit(x_train, y_train)
+
+## ref: https://stackoverflow.com/questions/40155128/plot-trees-for-a-random-forest-in-python-with-scikit-learn
+def plot_tree(model, X, Y):
+    row=2
+    col=5
+    fig = plt.figure(figsize=(10,8))
+    for index in range(0, 10):
+        fig.add_subplot(row, col, index + 1)
+        a = tree.plot_tree(model.estimators_[index], 
+                    feature_names=X.columns,  
+                    filled=True)
+        
+plot_tree(model, X, Y)
+```
+
+The confusion matrices above show a large decrease in the accuracy, recall, and precision scores for both the training and test sets compared to the metrics from our original model with default parameters; however, we are now no longer overfitting. The accuracy and recall scores are around 0.25, and precision is around 0.2. These trends are also reflected in the RF. With reducing the depth of the tree, we inevitably reduce the accuracy, recall, and precision scores of the model; however, we also reduce overfitting and increase generalizability. 
