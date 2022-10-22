@@ -171,8 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'../../../data/01-modified-data/hours_worked_(by_sex_and_by_occupation)_final.csv'</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">## drop unneeded rows</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">'sex'</span>] <span class="op">!=</span> <span class="st">'B'</span>]</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#df = df[df['Category'] != 'Total']</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">'sex'</span>] <span class="op">!=</span> <span class="st">'B'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert from long to wide</span></span>
@@ -370,30 +369,30 @@ Dataset has 0 variance; skipping density estimate.
 C:\Users\Eric\AppData\Roaming\Python\Python39\site-packages\seaborn\distributions.py:306: UserWarning:
 
 Dataset has 0 variance; skipping density estimate.
-
-C:\Users\Eric\AppData\Roaming\Python\Python39\site-packages\seaborn\distributions.py:306: UserWarning:
-
-Dataset has 0 variance; skipping density estimate.
-
-C:\Users\Eric\AppData\Roaming\Python\Python39\site-packages\seaborn\distributions.py:306: UserWarning:
-
-Dataset has 0 variance; skipping density estimate.
-
-C:\Users\Eric\AppData\Roaming\Python\Python39\site-packages\seaborn\distributions.py:306: UserWarning:
-
-Dataset has 0 variance; skipping density estimate.
-
-C:\Users\Eric\AppData\Roaming\Python\Python39\site-packages\seaborn\distributions.py:306: UserWarning:
-
-Dataset has 0 variance; skipping density estimate.
-
-C:\Users\Eric\AppData\Roaming\Python\Python39\site-packages\seaborn\distributions.py:306: UserWarning:
-
-Dataset has 0 variance; skipping density estimate.
 </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>C:\Users\Eric\AppData\Roaming\Python\Python39\site-packages\seaborn\distributions.py:306: UserWarning:
+
+Dataset has 0 variance; skipping density estimate.
+
+C:\Users\Eric\AppData\Roaming\Python\Python39\site-packages\seaborn\distributions.py:306: UserWarning:
+
+Dataset has 0 variance; skipping density estimate.
+
+C:\Users\Eric\AppData\Roaming\Python\Python39\site-packages\seaborn\distributions.py:306: UserWarning:
+
+Dataset has 0 variance; skipping density estimate.
+
+C:\Users\Eric\AppData\Roaming\Python\Python39\site-packages\seaborn\distributions.py:306: UserWarning:
+
+Dataset has 0 variance; skipping density estimate.
+
+C:\Users\Eric\AppData\Roaming\Python\Python39\site-packages\seaborn\distributions.py:306: UserWarning:
+
+Dataset has 0 variance; skipping density estimate.
+
+C:\Users\Eric\AppData\Roaming\Python\Python39\site-packages\seaborn\distributions.py:306: UserWarning:
 
 Dataset has 0 variance; skipping density estimate.
 
@@ -573,36 +572,36 @@ hyperparam = 2
  error diff: 0.27530864197530863
 hyperparam = 3
  train error: 0.0189300411522634
- test error: 0.262962962962963
- error diff: 0.2440329218106996
+ test error: 0.2444444444444445
+ error diff: 0.2255144032921811
 hyperparam = 4
  train error: 0.0012345679012345883
- test error: 0.2444444444444445
- error diff: 0.2432098765432099
+ test error: 0.262962962962963
+ error diff: 0.2617283950617284
 hyperparam = 5
+ train error: 0.0
+ test error: 0.262962962962963
+ error diff: 0.262962962962963
+hyperparam = 6
  train error: 0.0
  test error: 0.2444444444444445
  error diff: 0.2444444444444445
-hyperparam = 6
- train error: 0.0
- test error: 0.262962962962963
- error diff: 0.262962962962963
 hyperparam = 7
  train error: 0.0
- test error: 0.262962962962963
- error diff: 0.262962962962963
+ test error: 0.2444444444444445
+ error diff: 0.2444444444444445
 hyperparam = 8
  train error: 0.0
- test error: 0.262962962962963
- error diff: 0.262962962962963
+ test error: 0.2444444444444445
+ error diff: 0.2444444444444445
 hyperparam = 9
  train error: 0.0
  test error: 0.2444444444444445
  error diff: 0.2444444444444445
 hyperparam = 10
  train error: 0.0
- test error: 0.262962962962963
- error diff: 0.262962962962963</code></pre>
+ test error: 0.2444444444444445
+ error diff: 0.2444444444444445</code></pre>
 </div>
 </div>
 </section>
@@ -644,7 +643,7 @@ hyperparam = 10
 <span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">" test error:"</span> ,err2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> train error: 0.08765432098765434
- test error: 0.2777777777777778</code></pre>
+ test error: 0.362962962962963</code></pre>
 </div>
 </div>
 </section>
@@ -669,15 +668,16 @@ hyperparam = 10
 <h3 class="anchored" data-anchor-id="plot-tree">Plot Tree</h3>
 <div class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> tree</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_tree(model, X, Y):</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">25</span>,<span class="dv">40</span>))</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_tree(model):</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">25</span>,<span class="dv">20</span>))</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    _ <span class="op">=</span> tree.plot_tree(model, </span>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                    feature_names<span class="op">=</span>X.columns,  </span>
 <span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                    class_names<span class="op">=</span>Y.name,</span>
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                    filled<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>plot_tree(model,X,Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>plot_tree(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="dt_regression_files/figure-html/cell-20-output-1.png" width="1885" height="2918"></p>
+<p><img src="dt_regression_files/figure-html/cell-20-output-1.png" width="1879" height="1469"></p>
 </div>
 </div>
 </section>

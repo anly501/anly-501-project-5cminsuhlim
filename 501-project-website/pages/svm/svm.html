@@ -80,21 +80,41 @@
             <h1 class="text-center">SVM</h1>
             <div class="row">
                 <h2>Methods</h2>
-
                 <div>
                     <p>
+                        Support Vector Machines (SVMs) are supervised learning models that are used to analyze data for classification and regression. Given a plane of data points, the SVM aims to separate the data points via some linear or nonlinear boundary. Theoretically, there is an infinite number of these decision boundaries (also known as hyperplanes) with which to split the data; thus, the SVM learns which data points belong to which class to generate a good decision boundary that can best classify the given data.
                     </p>
                 </div>
 
+                <div class="col">
+                    <img class="center-block" src="../../images/svm/svm_example.png">
+                    <figcaption class="figure-caption text-center">
+                        James Hickman
+                    </figcaption>
+                </div>
+
+                <p>
+                    For example, the above image is an example of the SVM's classification process. From the dataset, the SVM lays out the data points onto a plane and iterates through different decision boundaries and learns the relationships among the data points during the process. Eventually, the SVM generates a good decision boundary to "split" the data points into different categories. 
+                    Although the above image is a linear example, SVMs can also conduct similar processes for nonlinear data and is a more powerful tool to address nonlinear classification tasks.
+                </p>
+
                 <div>
                     <li>
-                        <a target="_blank" href="./dt_classification.html">Decision Tree Classification in Python</a>
+                        <a target="_blank" href="./svm_classification.html">SVM Classification in Python</a>
                     </li>
                 </div>
 
                 <p></p> 
 
                 <h2>Conclusions</h2>
+                <div>
+                    <p>
+                        Based on the SVM classification results, we can see that our optimized model outperforms the random classifier by about 8 times (accuracy=0.5 vs. accuracy=0.83), which is quite a large improvement from classifying completely randomly. The results from text classification using the SVM linear kernel resulted in a relatively similar result to our <a target="_blank" href="../naivebayes/naivebayes.html">naive bayes</a>  classification results (accuracy=0.83 vs. accuracy=0.82). Although SVMs generally outperform naive bayes classifiers because of its ability to generalize well in higher dimensional spaces, the similar performance metrics probably arise from our optimal model being linear. However, it is still surprising how close the accuracies of the two models are, since the naive bayes algorithm assumes independence, while SVMs considers interactions between feature points.
+                    </p>
+                    <p>
+                        Nonetheless, the model can definitely see some improvements. For example, obtaining more data to create a balanced data set may improve the classifier's performance. Additionally, having more predictor variables with which the classifier could work may generally help fine-tune the classifier further.
+                    </p>
+                </div>
             </div>
         </div>
     </section>

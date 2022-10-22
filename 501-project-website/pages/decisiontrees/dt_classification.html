@@ -206,7 +206,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>As shown in the output below, our target class is heavily imbalanced. Since this imbalance can skew the way the data is split into training and test sets, we will later stratify the data so the proportion of values in the training and test sets also reflect this imbalance.</p>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Target'</span>].value_counts(ascending<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="29">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>Legal Occupations                                              15
 Building and Grounds Cleaning and Maintenance Occupations      18
 Farming, Fishing, and Forestry Occupations                     24
@@ -240,7 +240,7 @@ Name: Target, dtype: int64</code></pre>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sns.pairplot(df.iloc[:, <span class="dv">2</span>:<span class="dv">7</span>], hue<span class="op">=</span><span class="st">'Target'</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="dt_classification_files/figure-html/cell-7-output-1.png" width="1409" height="943"></p>
+<p><img src="dt_classification_files/figure-html/cell-7-output-1.png" width="1415" height="947"></p>
 </div>
 </div>
 </section>
@@ -267,25 +267,25 @@ Name: Target, dtype: int64</code></pre>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>random_classifier(Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>-----RANDOM CLASSIFIER-----
-count of prediction: dict_values([70, 69, 70, 51, 51, 62, 67, 46, 53, 59, 45, 61, 76, 64, 50, 54, 77, 70, 55, 65, 67, 54, 58])
-probability of prediction: [0.05021521 0.04949785 0.05021521 0.03658537 0.03658537 0.04447633
- 0.04806313 0.03299857 0.03802009 0.04232425 0.03228121 0.04375897
- 0.05451937 0.04591105 0.03586801 0.03873745 0.05523673 0.05021521
- 0.03945481 0.04662841 0.04806313 0.03873745 0.04160689]
-accuracy 0.04591104734576758
-precision, recall, fscore, (array([0.        , 0.16      , 0.01960784, 0.03703704, 0.04918033,
-       0.03703704, 0.        , 0.01960784, 0.10169492, 0.0625    ,
-       0.1       , 0.        , 0.02857143, 0.05454545, 0.        ,
-       0.02857143, 0.03947368, 0.05797101, 0.        , 0.09677419,
-       0.07692308, 0.02985075, 0.05172414]), array([0.        , 0.10958904, 0.01724138, 0.05555556, 0.04918033,
-       0.02531646, 0.        , 0.06666667, 0.06185567, 0.07272727,
-       0.06862745, 0.        , 0.04651163, 0.09090909, 0.        ,
-       0.03333333, 0.07142857, 0.03669725, 0.        , 0.05825243,
-       0.06666667, 0.01197605, 0.03296703]), array([0.        , 0.1300813 , 0.01834862, 0.04444444, 0.04918033,
-       0.03007519, 0.        , 0.03030303, 0.07692308, 0.06722689,
-       0.08139535, 0.        , 0.03539823, 0.06818182, 0.        ,
-       0.03076923, 0.05084746, 0.04494382, 0.        , 0.07272727,
-       0.07142857, 0.01709402, 0.04026846]), array([  0,  73,  58,  36,  61,  79,  26,  15,  97,  55, 102,  27,  43,
+count of prediction: dict_values([58, 70, 65, 65, 67, 66, 50, 53, 51, 64, 69, 66, 46, 58, 60, 66, 60, 58, 63, 58, 69, 65, 47])
+probability of prediction: [0.04160689 0.05021521 0.04662841 0.04662841 0.04806313 0.04734577
+ 0.03586801 0.03802009 0.03658537 0.04591105 0.04949785 0.04734577
+ 0.03299857 0.04160689 0.04304161 0.04734577 0.04304161 0.04160689
+ 0.04519369 0.04160689 0.04949785 0.04662841 0.03371593]
+accuracy 0.03873744619799139
+precision, recall, fscore, (array([0.        , 0.06060606, 0.01538462, 0.02985075, 0.06      ,
+       0.09803922, 0.0212766 , 0.        , 0.03076923, 0.03333333,
+       0.05797101, 0.        , 0.046875  , 0.01538462, 0.        ,
+       0.        , 0.01515152, 0.06896552, 0.01886792, 0.15517241,
+       0.02857143, 0.09090909, 0.06521739]), array([0.        , 0.05479452, 0.01724138, 0.05555556, 0.04918033,
+       0.06329114, 0.03846154, 0.        , 0.02061856, 0.03636364,
+       0.03921569, 0.        , 0.06976744, 0.03030303, 0.        ,
+       0.        , 0.02380952, 0.03669725, 0.04166667, 0.08737864,
+       0.02666667, 0.03592814, 0.03296703]), array([0.        , 0.05755396, 0.01626016, 0.03883495, 0.05405405,
+       0.07692308, 0.02739726, 0.        , 0.02469136, 0.03478261,
+       0.04678363, 0.        , 0.05607477, 0.02040816, 0.        ,
+       0.        , 0.01851852, 0.04790419, 0.02597403, 0.11180124,
+       0.02758621, 0.05150215, 0.04379562]), array([  0,  73,  58,  36,  61,  79,  26,  15,  97,  55, 102,  27,  43,
         33,  18,  60,  42, 109,  24, 103,  75, 167,  91], dtype=int64))</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
@@ -398,9 +398,9 @@ PRECISION: 1.0</code></pre>
 <pre><code>------TEST------</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ACCURACY: 0.4659498207885305
-RECALL: 0.4659498207885305
-PRECISION: 0.48556607337969343</code></pre>
+<pre><code>ACCURACY: 0.4910394265232975
+RECALL: 0.4910394265232975
+PRECISION: 0.5066581285746371</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="dt_classification_files/figure-html/cell-16-output-6.png" width="504" height="434"></p>
@@ -545,70 +545,70 @@ hyperparam = 6
  error diff: 0.6686576721745503
 hyperparam = 7
  train error: 3.0473318270092693
- test error: 4.012171511511647
- error diff: 0.9648396845023774
+ test error: 4.108945705060034
+ error diff: 1.0616138780507645
 hyperparam = 8
- train error: 2.546010750675285
- test error: 3.8306344199663163
- error diff: 1.2846236692910313
+ train error: 2.5460107506752845
+ test error: 3.774481492845647
+ error diff: 1.2284707421703627
 hyperparam = 9
- train error: 2.1046039820806786
- test error: 3.8681054865618596
- error diff: 1.763501504481181
+ train error: 2.1022123527832193
+ test error: 3.906337266729123
+ error diff: 1.8041249139459037
 hyperparam = 10
  train error: 1.6896946722256863
- test error: 3.7816249388949665
- error diff: 2.09193026666928
+ test error: 3.767288021332243
+ error diff: 2.0775933491065564
 hyperparam = 11
  train error: 1.3202008875427063
- test error: 3.591146577172011
- error diff: 2.2709456896293045
+ test error: 3.5851728615208764
+ error diff: 2.26497197397817
 hyperparam = 12
  train error: 1.0147558546556172
- test error: 3.490043332753643
- error diff: 2.475287478098026
+ test error: 3.5282751129209062
+ error diff: 2.5135192582652888
 hyperparam = 13
  train error: 0.7201767256412845
- test error: 3.5754188844330708
- error diff: 2.8552421587917864
+ test error: 3.5718346550423896
+ error diff: 2.851657929401105
 hyperparam = 14
- train error: 0.44905049213301973
- test error: 3.3858327654833578
- error diff: 2.936782273350338
+ train error: 0.4490504921330198
+ test error: 3.412714485913465
+ error diff: 2.963663993780445
 hyperparam = 15
  train error: 0.2771706553551427
- test error: 3.397544774493871
- error diff: 3.1203741191387286
+ test error: 3.29838109468503
+ error diff: 3.0212104393298875
 hyperparam = 16
  train error: 0.19418374036736086
- test error: 3.459188892182667
- error diff: 3.265005151815306
+ test error: 3.4699415803547096
+ error diff: 3.2757578399873486
 hyperparam = 17
  train error: 0.1409970983909259
- test error: 3.367443249701314
- error diff: 3.2264461513103884
+ test error: 3.3208482676224613
+ error diff: 3.1798511692315357
 hyperparam = 18
- train error: 0.07882126841768097
- test error: 3.251213944359106
- error diff: 3.172392675941425
+ train error: 0.08286995515695068
+ test error: 3.2885752688172043
+ error diff: 3.205705313660254
 hyperparam = 19
- train error: 0.052623997825791545
- test error: 3.486021505376344
- error diff: 3.4333975075505525
+ train error: 0.0563865432026867
+ test error: 3.4542754736303123
+ error diff: 3.3978889304276256
 hyperparam = 20
- train error: 0.014768310911808675
- test error: 3.3324970131421745
- error diff: 3.3177287022303656
-hyperparam = 21
- train error: 0.0017937219730941704
- test error: 3.2759856630824373
- error diff: 3.274191941109343</code></pre>
+ train error: 0.011958146487294475
+ test error: 3.27299880525687
+ error diff: 3.2610406587695753</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>hyperparam = 22
+<pre><code>hyperparam = 21
+ train error: 0.0017937219730941704
+ test error: 3.4408602150537635
+ error diff: 3.439066493080669
+hyperparam = 22
  train error: 0.0
- test error: 3.204301075268817
- error diff: 3.204301075268817</code></pre>
+ test error: 3.1684587813620073
+ error diff: 3.1684587813620073</code></pre>
 </div>
 </div>
 </section>
@@ -636,7 +636,7 @@ hyperparam = 21
 <div class="cell-output cell-output-stdout">
 <pre><code>ACCURACY: 0.2860986547085202
 RECALL: 0.2860986547085202
-PRECISION: 0.28933495874433535</code></pre>
+PRECISION: 0.28649374159874635</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>C:\Users\Eric\AppData\Roaming\Python\Python39\site-packages\sklearn\metrics\_classification.py:1248: UndefinedMetricWarning:
@@ -674,7 +674,7 @@ Precision is ill-defined and being set to 0.0 in labels with no predicted sample
 <p><img src="dt_classification_files/figure-html/cell-25-output-1.png" width="1884" height="1469"></p>
 </div>
 </div>
-<p>The confusion matrices above show a large decrease in the accuracy, recall, and precision scores for both the training and test sets compared to the metrics from our original model with default parameters; however, we are now no longer overfitting. The accuracy, recall, and precision scores are around 0.3.</p>
+<p>The confusion matrices above show a large decrease in the accuracy, recall, and precision scores for both the training and test sets compared to the metrics from our original model with default parameters; however, we are now no longer overfitting. The accuracy, recall, and precision scores are around 0.3. These trends are also reflected in the new DT. With reducing the depth of the tree, we inevitably reduce the accuracy, recall, and precision scores of the model; however, we also reduce overfitting and increase generalizability.</p>
 </section>
 </section>
 </section>

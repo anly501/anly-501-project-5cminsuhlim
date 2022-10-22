@@ -40,7 +40,7 @@ from sklearn.metrics import recall_score
 ### Load Data
 
 ```{python}
-df = pd.read_csv('../../data/01-modified-data/occupations_detailed_(employment_and_wage).csv')
+df = pd.read_csv('../../../data/01-modified-data/occupations_detailed_(employment_and_wage).csv')
 
 ## drop unneeded column created from read_csv
 df = df.iloc[:, 1:]
@@ -195,20 +195,21 @@ As shown in the correlation matrices above for both the training and test data s
 from sklearn.ensemble import RandomForestRegressor
 from sklearn import tree
 
-regr = RandomForestRegressor(random_state=1234, criterion='absolute_error')
+regr = RandomForestRegressor(random_state=1234)
 model = regr.fit(x_train, y_train)
 ```
 
 ```{python}
 # VISUALIZE A SINGLE TREE
-from sklearn import tree
-
-regr = RandomForestRegressor(random_state=1234)
-model = regr.fit(x_train, y_train)
-
-tree.plot_tree(model.estimators_[0], 
+def plot_tree(model, X, Y):
+    fig = plt.figure(figsize=(25,20))
+    _ = tree.plot_tree(model.estimators_[0], 
             feature_names=X.columns,  
             filled=True)
+
+plot_tree(model, X, Y)
+
+plt.show();
 ```
 
 ## Model Tuning
@@ -281,32 +282,26 @@ def rfr_model(X, y):
     gsc = GridSearchCV(
         estimator=RandomForestRegressor(),
         param_grid={
-            'max_depth': range(1,21),
-            'n_estimators': (1, 10, 50, 100, 500, 1000),
+            'max_depth': range(1,5),
+            'n_estimators': range(1,101),
         },
         cv=5, scoring='neg_mean_squared_error', verbose=0, n_jobs=-1)
     
     grid_result = gsc.fit(X, y)
     best_params = grid_result.best_params_
-    print('Best Parameters:', best_params)
-    
-    rfr = RandomForestRegressor(max_depth=best_params["max_depth"], n_estimators=best_params["n_estimators"], random_state=0, verbose=False)
-    # Perform K-Fold CV
-    scores = cross_val_score(rfr, X, y, cv=10, scoring='neg_mean_absolute_error')
-    return scores
+    return best_params
 ```
 
 We can see from the output below that the optimal parameters are max_depth=3 and n_estimators=10. Notably, the max_depth parameter matches our prior visual exploration of optimal hyperparameter values.
 
 ```{python}
-rfr_model(X, Y)
+best_params = rfr_model(X, Y)
 ```
 
 ### Train Optimal Model
 
 ```{python}
-#### TRAIN A SKLEARN DECISION TREE MODEL ON x_train,y_train 
-model = RandomForestClassifier(max_depth=3, n_estimators=10)
+model = RandomForestClassifier(max_depth=4, n_estimators=50)
 model = model.fit(x_train, y_train)
 
 yp_train=model.predict(x_train)
@@ -321,26 +316,21 @@ confusion_plot(y_test,yp_test)
 ```
 
 ```{python}
-model.estimators_
-```
-
-```{python}
 # VISUALIZE 5 TREES
-regr = RandomForestRegressor(random_state=1234, max_depth=3, n_estimators=10)
+regr = RandomForestRegressor(random_state=1234, max_depth=4, n_estimators=50)
 model = regr.fit(x_train, y_train)
 
 ## ref: https://stackoverflow.com/questions/40155128/plot-trees-for-a-random-forest-in-python-with-scikit-learn
 def plot_tree(model, X, Y):
-    row=2
-    col=5
-    fig = plt.figure(figsize=(10,8))
-    for index in range(0, 10):
-        fig.add_subplot(row, col, index + 1)
-        a = tree.plot_tree(model.estimators_[index], 
-                    feature_names=X.columns,  
-                    filled=True)
+    fig, axes = plt.subplots(nrows = 1,ncols = 5,figsize = (10,2), dpi=900)
+    for index in range(0, 5):
+        tree.plot_tree(model.estimators_[index],
+                    feature_names=X.columns, 
+                    filled = True,
+                    ax = axes[index]);
+        axes[index].set_title('Estimator: ' + str(index), fontsize = 11)
         
 plot_tree(model, X, Y)
 ```
 
-The confusion matrices above show a large decrease in the accuracy, recall, and precision scores for both the training and test sets compared to the metrics from our original model with default parameters; however, we are now no longer overfitting. The accuracy and recall scores are around 0.25, and precision is around 0.2. These trends are also reflected in the RF. With reducing the depth of the tree, we inevitably reduce the accuracy, recall, and precision scores of the model; however, we also reduce overfitting and increase generalizability. 
+The confusion matrices above show a large decrease in the accuracy, recall, and precision scores for both the training and test sets compared to the metrics from our original model with default parameters; however, we are now no longer overfitting. The accuracy and recall scores are around 0.31, and precision is around 0.26. These trends are also reflected in the RF. With reducing the depth of the tree, we inevitably reduce the accuracy, recall, and precision scores of the model; however, we also reduce overfitting and increase generalizability. 

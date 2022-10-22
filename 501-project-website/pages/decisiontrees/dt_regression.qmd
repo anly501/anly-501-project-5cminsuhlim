@@ -42,7 +42,6 @@ df = pd.read_csv('../../../data/01-modified-data/hours_worked_(by_sex_and_by_occ
 
 ## drop unneeded rows
 df = df[df['sex'] != 'B']
-#df = df[df['Category'] != 'Total']
 ```
 
 ```{python}
@@ -237,19 +236,22 @@ plt.plot(y_train,y_train ,"-", color='r')
 
 plt.xlabel("y_data")
 plt.ylabel("y_pred (blue=test)(black=Train)")
+
+plt.show();
 ```
 
 ### Plot Tree
 
 ```{python}
 from sklearn import tree
-def plot_tree(model, X, Y):
-    fig = plt.figure(figsize=(25,40))
+def plot_tree(model):
+    fig = plt.figure(figsize=(25,20))
     _ = tree.plot_tree(model, 
                     feature_names=X.columns,  
                     class_names=Y.name,
                     filled=True)
-plot_tree(model,X,Y)
+    plt.show()
+plot_tree(model)
 ```
 
 ### Linear Regression
