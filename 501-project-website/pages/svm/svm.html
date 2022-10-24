@@ -98,6 +98,10 @@
                     Although the above image is a linear example, SVMs can also conduct similar processes for nonlinear data and is a more powerful tool to address nonlinear classification tasks.
                 </p>
 
+                <p>
+                    Below is a classification application of SVMs, which attempts to classify the vectorized text data from various Wikipedia pages for searches that related to the keywords "Women's rights" and "Men's rights" to either of the aforementioned search terms.
+                </p>
+
                 <div>
                     <li>
                         <a target="_blank" href="./svm_classification.html">SVM Classification in Python</a>
@@ -109,7 +113,7 @@
                 <h2>Conclusions</h2>
                 <div>
                     <p>
-                        Based on the SVM classification results, we can see that our optimized model outperforms the random classifier by about 8 times (accuracy=0.5 vs. accuracy=0.83), which is quite a large improvement from classifying completely randomly. The results from text classification using the SVM linear kernel resulted in a relatively similar result to our <a target="_blank" href="../naivebayes/naivebayes.html">naive bayes</a>  classification results (accuracy=0.83 vs. accuracy=0.82). Although SVMs generally outperform naive bayes classifiers because of its ability to generalize well in higher dimensional spaces, the similar performance metrics probably arise from our optimal model being linear. However, it is still surprising how close the accuracies of the two models are, since the naive bayes algorithm assumes independence, while SVMs considers interactions between feature points.
+                        Our SVM model, given vectorized text data from various Wikipedia pages for searches that related to the keywords "Women's rights" and "Men's rights," was able to classify such texts to either of the aforementioned search terms with an accuracy of 0.83. Based on the SVM classification results, we can see that our optimized model outperforms the random classifier by about 8 times (accuracy=0.5 vs. accuracy=0.83), which is quite a large improvement from classifying completely randomly. The results from text classification using the SVM linear kernel resulted in a relatively similar result to our <a target="_blank" href="../naivebayes/naivebayes.html">naive bayes</a> classification results (accuracy=0.83 vs. accuracy=0.82). Although SVMs generally outperform naive bayes classifiers because of its ability to generalize well in higher dimensional spaces, the similar performance metrics probably arise from our optimal model being linear. However, it is still surprising how close the accuracies of the two models are, since the naive bayes algorithm assumes independence, while SVMs considers interactions between feature points.
                     </p>
                     <p>
                         Nonetheless, the model can definitely see some improvements. For example, obtaining more data to create a balanced data set may improve the classifier's performance. Additionally, having more predictor variables with which the classifier could work may generally help fine-tune the classifier further.
