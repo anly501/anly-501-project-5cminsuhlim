@@ -75,7 +75,7 @@ y2=df["sentiment"].to_numpy()
 # INITIALIZE COUNT VECTORIZER
 # minDF = 0.01 means "ignore terms that appear in less than 1% of the documents". 
 # minDF = 5 means "ignore terms that appear in less than 5 documents".
-vectorizer=CountVectorizer(min_df=0.001)   
+vectorizer=CountVectorizer(min_df=0.001,max_features=10000,stop_words="english")   
 
 # RUN COUNT VECTORIZER ON OUR COURPUS 
 Xs  =  vectorizer.fit_transform(corpus)   
@@ -84,6 +84,31 @@ X=np.array(Xs.todense())
 #CONVERT TO ONE-HOT VECTORS
 maxs=np.max(X,axis=0)
 X=np.ceil(X/maxs)
+vocab0 = vectorizer.vocabulary_
+```
+
+After vectorizing our text data, we reorder our dataframe to sort the words in decreasing order based on its frequency and do some additional quality of life formatting changes.
+```{python}
+#swap keys and values (value --> ley)
+vocab1 = dict([(value, key) for key, value in vocab0.items()])
+
+#RE-ORDER COLUMN SO IT IS SORTED FROM HIGH FREQ TERMS TO LOW 
+# https://stackoverflow.com/questions/60758625/sort-pandas-dataframe-by-sum-of-columns
+df2=pd.DataFrame(X)
+s = df2.sum(axis=0)
+df2=df2[s.sort_values(ascending=False).index[:]]
+
+# REMAP DICTIONARY TO CORRESPOND TO NEW COLUMN NUMBERS
+print()
+i1=0
+vocab2={}
+for i2 in list(df2.columns):
+    # print(i2)
+    vocab2[i1]=vocab1[int(i2)]
+    i1+=1
+
+df2.columns = range(df2.columns.size)
+x=df2.to_numpy()
 ```
 
 ## Class Distribution
@@ -94,7 +119,7 @@ As shown in the output below, our target class is heavily imbalanced. Since this
 
 ```{python}
 # DOUBLE CHECK 
-print("X shape:", X.shape)
+print("x shape:", x.shape)
 print("y1 shape:", y1.shape)
 print(np.unique(y1, return_counts=True))
 ```
@@ -126,13 +151,215 @@ Based on the output above, we can see that accuracy of the random classifier is 
 
 ## Feature Selection (cont.)
 
-### Split Data
+First, we split the text data. We split by index here so we have the same rows being used every time we run the code below. This is to remove noise created by full randomization with data splitting, which changes up what rows are used each time.
+
+### Split Data (number of features)
+
+```{python}
+import random
+N=X.shape[0]
+l = [*range(N)]     # indices
+cut = int(0.8 * N) #80% of the list
+random.shuffle(l)   # randomize
+train_index = l[:cut] # first 80% of shuffled list
+test_index = l[cut:] # last 20% of shuffled list
+
+print(train_index[0:10])
+print(test_index[0:10])
+```
+
+### Helper Functions
+
+```{python}
+##UTILITY FUNCTION TO INITIALIZE RELEVANT ARRAYS
+def initialize_arrays():
+    global num_features,train_accuracies
+    global test_accuracies,train_time,eval_time
+    num_features=[]
+    train_accuracies=[]
+    test_accuracies=[]
+    train_time=[]
+    eval_time=[]
+```
+
+```{python}
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
+import time
+
+def train_SVC_model(X,Y,kernel='linear',i_print=False):
+
+    if(i_print):
+        print(X.shape,Y.shape)
+        print(type(X),type(Y))
+
+    #SPLIT
+    x_train=X[train_index]
+    y_train=Y[train_index].flatten()
+
+    x_test=X[test_index]
+    y_test=Y[test_index].flatten()
+
+    # INITIALIZE MODEL 
+    model = SVC(kernel=kernel)
+
+    # TRAIN MODEL 
+    start = time.process_time()
+    model.fit(x_train,y_train)
+    time_train=time.process_time() - start
+
+    # LABEL PREDICTIONS FOR TRAINING AND TEST SET 
+    start = time.process_time()
+    yp_train = model.predict(x_train)
+    yp_test = model.predict(x_test)
+    time_eval=time.process_time() - start
+
+    acc_train= accuracy_score(y_train, yp_train)*100
+    acc_test= accuracy_score(y_test, yp_test)*100
+
+    if(i_print):
+        print(acc_train,acc_test,time_train,time_eval)
+
+    return (acc_train,acc_test,time_train,time_eval)
+```
+
+```{python}
+# DEFINE SEARCH FUNCTION
+def partial_grid_search(num_runs, min_index, max_index):
+    for i in range(1, num_runs+1):
+        # SUBSET FEATURES 
+        upper_index=min_index+i*int((max_index-min_index)/num_runs)
+        xtmp=x[:,0:upper_index]
+
+        #TRAIN 
+        (acc_train,acc_test,time_train,time_eval)=train_SVC_model(xtmp,y1,i_print=False)
+
+        if(i%5==0):
+            print(i,upper_index,xtmp.shape[1],acc_train,acc_test)
+            
+        #RECORD 
+        num_features.append(xtmp.shape[1])
+        train_accuracies.append(acc_train)
+        test_accuracies.append(acc_test)
+        train_time.append(time_train)
+        eval_time.append(time_eval)
+```
+
+```{python}
+#UTILITY FUNCTION TO PLOT RESULTS
+def plot_results():
+
+    #PLOT-1
+    plt.plot(num_features,train_accuracies,'-or')
+    plt.plot(num_features,test_accuracies,'-ob')
+    plt.xlabel('Number of features')
+    plt.ylabel('ACCURACY: Training (blue) and Test (red)')
+    plt.show();
+
+    # #PLOT-2
+    plt.plot(num_features,train_time,'-or')
+    plt.plot(num_features,eval_time,'-ob')
+    plt.xlabel('Number of features')
+    plt.ylabel('Runtime: training time (red) and evaluation time(blue)')
+    plt.show();
+
+    # #PLOT-3
+    plt.plot(np.array(test_accuracies),train_time,'-or')
+    plt.plot(np.array(test_accuracies),eval_time,'-ob')
+    plt.xlabel('test_accuracies')
+    plt.ylabel('Runtime: training time (red) and evaluation time (blue)')
+    plt.show();
+
+    # #PLOT-3
+    plt.plot(num_features,np.array(train_accuracies)-np.array(test_accuracies),'-or')
+    plt.xlabel('Number of features')
+    plt.ylabel('train_accuracies-test_accuracies')
+    plt.show();
+```
+
+Next, we perform feature selection for the various SVM kernels, using the default SVM parameters (which will be optimized later on as well). The main metrics for determining the optimal number of features that will be used for analysis are the training and test accuracies and runtimes for varying number of features.
+
+### Linear Kernel Feature Selection
+```{python}
+#linear
+(acc_train,acc_test,time_train,time_eval)=train_SVC_model(x,y1,'linear',i_print=True)
+
+initialize_arrays()
+
+# DENSE SEARCH (SMALL NUMBER OF FEATURES (FAST))
+partial_grid_search(num_runs=100, min_index=0, max_index=1000)
+
+# SPARSE SEARCH (LARGE NUMBER OF FEATURES (SLOWER))
+partial_grid_search(num_runs=20, min_index=1000, max_index=10000)
+
+plot_results()
+```
+
+Based on the plots above, the optimal number of features for the linear kernel seems to be around 3000. This range of features is where the test set accuracy seems to plateau, and it is also the point directly before runtime begins to increase significantly. 
+
+### Gaussian Kernel Feature Selection
+```{python}
+#gaussian
+(acc_train,acc_test,time_train,time_eval)=train_SVC_model(x,y1,'rbf',i_print=True)
+
+initialize_arrays()
+
+# DENSE SEARCH (SMALL NUMBER OF FEATURES (FAST))
+partial_grid_search(num_runs=100, min_index=0, max_index=1000)
+
+# SPARSE SEARCH (LARGE NUMBER OF FEATURES (SLOWER))
+partial_grid_search(num_runs=20, min_index=1000, max_index=10000)
+
+plot_results()
+```
+
+Based on the plots above, the optimal number of features for the gaussian kernel seems to be around 3000. This range of features is where the test set accuracy seems to plateau, and it is also the point directly before runtime begins to increase significantly. 
+
+
+### Sigmoid Kernel Feature Selection
+```{python}
+#sigmoid
+(acc_train,acc_test,time_train,time_eval)=train_SVC_model(x,y1,'sigmoid',i_print=True)
+
+initialize_arrays()
+
+# DENSE SEARCH (SMALL NUMBER OF FEATURES (FAST))
+partial_grid_search(num_runs=100, min_index=0, max_index=1000)
+
+# SPARSE SEARCH (LARGE NUMBER OF FEATURES (SLOWER))
+partial_grid_search(num_runs=20, min_index=1000, max_index=10000)
+
+plot_results()
+```
+
+Based on the plots above, the optimal number of features for the sigmoid kernel seems to be around 3000. This range of features is where the test set accuracy seems to plateau, and it is also the point directly before runtime begins to increase significantly. 
+
+
+### Polynomial Kernel Feature Selection
+```{python}
+#polynomial
+(acc_train,acc_test,time_train,time_eval)=train_SVC_model(x,y1,'poly',i_print=True)
+
+initialize_arrays()
+
+# DENSE SEARCH (SMALL NUMBER OF FEATURES (FAST))
+partial_grid_search(num_runs=100, min_index=0, max_index=1000)
+
+# SPARSE SEARCH (LARGE NUMBER OF FEATURES (SLOWER))
+partial_grid_search(num_runs=20, min_index=1000, max_index=10000)
+
+plot_results()
+```
+
+Based on the plots above, the optimal number of features for the polynomial kernel seems to be around 3000. This range of features is where the test set accuracy seems to plateau, and it is also the point directly before runtime begins to increase significantly. 
+
+### Split Data (model selection)
 
 ```{python}
 # PARTITION THE DATASET INTO TRAINING AND TEST SETS
 from sklearn.model_selection import train_test_split
 test_ratio=0.2
-x_train, x_test, y_train, y_test = train_test_split(X, y1, test_size=test_ratio, random_state=0, stratify=y1)
+x_train, x_test, y_train, y_test = train_test_split(X[:, :3000], y1, test_size=test_ratio, random_state=0, stratify=y1)
 y_train=y_train.flatten()
 y_test=y_test.flatten()
 ```
@@ -189,7 +416,7 @@ print("------TEST (Linear)------")
 confusion_plot(y_test,yp_test)
 ```
 
-The linear kernel resulted in training accuracy, recall, and precision scores of 0.97 and test accuracy, recall, and precision scores of 0.83. This suggests a noticeable degree of overfitting.
+The linear kernel resulted in training accuracy, recall, and precision scores of 0.97 and test accuracy, recall, and precision scores of 0.70. This suggests a noticeable degree of overfitting.
 
 ### Train Gaussian Kernel
 
@@ -216,7 +443,7 @@ print("------TEST (Gaussian)------")
 confusion_plot(y_test,yp_test)
 ```
 
-The Gaussian kernel resulted in training accuracy, recall, and precision scores of around 0.97 and test accuracy, recall, and precision scores of around 0.77. This suggests a higher degree of overfitting than the linear kernel with worse accuracy.
+The Gaussian kernel resulted in training accuracy, recall, and precision scores of around 0.97 and test accuracy and recall scores of around 0.69 and precision score of around 0.63. This suggests a higher degree of overfitting than the linear kernel with worse accuracy.
 
 ### Train Sigmoid Kernel
 
@@ -243,7 +470,7 @@ print("------TEST (Sigmoid)------")
 confusion_plot(y_test,yp_test)
 ```
 
-The Sigmoid kernel resulted in training accuracy, recall, and precision scores of around 0.95 and test accuracy and recall scores of about 0.82, and a precision score of around 0.86. This suggests a noticeable degree of overfitting but better performance than the previous Gaussian kernel.
+The Sigmoid kernel resulted in training accuracy, recall, and precision scores of around 0.86 and test accuracy and recall scores of about 0.71, and a precision score of around 0.7. This suggests a noticeable degree of overfitting but better performance than the previous Gaussian kernel.
 
 ### Polynomial Kernel Hyperparameter Tuning
 
@@ -310,7 +537,7 @@ print("------TEST (Polynomial; degree=1)------")
 confusion_plot(y_test,yp_test)
 ```
 
-The Polynomial kernel resulted in training accuracy, recall, and precision scores of around 0.97 and test accuracy and recall scores of about 0.82, and a precision score of around 0.84. This suggests a noticeable degree of overfitting and a relatively similar performance to the Sigmoid kernel.
+The Polynomial kernel resulted in training accuracy, recall, and precision scores of around 0.95 and test accuracy, recall, and precision scores of about 0.74. This suggests a noticeable degree of overfitting and a relatively similar performance to the Sigmoid kernel.
 
 ### Comparing Models
 
@@ -335,17 +562,14 @@ ax.set_xticklabels(df['Kernels'])
 
 ### Hyperparameter Tuning
 
-To validate our previous claim regarding the optimal model, we also conduct a grid search for optimal parameters. Again, we can see that the linear kernel is optimal. 
-
-NOTE: Some parameters conflict with certain kernels, resulting in large parameter mismatch error messages. Please click on the "Train Optimal Model" to skip these error messages.
+Now, to find the best margin (C) for the linear kernel, we perform a grid search. 
 
 ```{python}
 from sklearn.model_selection import GridSearchCV
   
 # defining parameter range
-param_grid = {'C': [0.1, 1, 10, 100, 1000], 
-              'gamma': [1, 0.1, 0.01, 0.001, 0.0001],
-              'kernel': ['linear', 'rbf', 'sigmoid', 'polynomial']} 
+param_grid = {'C': [2**-7, 2**-6, 2**-5, 2**-4, 2**-3, 2**-2, 2**-1, 1, 2**1, 2**2, 2**3, 2**4, 2**5, 2**6, 2**7], 
+              'kernel': ['linear']} 
   
 grid = GridSearchCV(SVC(), param_grid, refit = True)
   
@@ -363,7 +587,7 @@ print(grid.best_params_)
 ### Train Optimal Model
 
 ```{python}
-model = SVC(kernel='linear', C=0.1, gamma=1)
+model = SVC(kernel=grid.best_params_['kernel'], C=grid.best_params_['C'])
 model = model.fit(x_train, y_train)
 
 yp_train = model.predict(x_train)
@@ -377,4 +601,4 @@ print("------TEST------")
 confusion_plot(y_test,yp_test)
 ```
 
-The confusion matrices for all four kernal types show much better performance for accuracy, recall, and precision scores for both the training and test sets compared to the performance of the baseline random classifier. Among these kernels, we also determined that the linear kernel outperformed the other three in terms of accuracy, recall, and precision scores for both the training and test sets; however, based on the results from the above confusion matrix, it still appears that the "optimal" hyperparameters still result in a noticeable degree of overfitting.
+The confusion matrices for all four kernal types show marginally better performance for accuracy, recall, and precision scores for both the training and test sets compared to the performance of the baseline random classifier. Among these kernels, we also determined that the linear kernel outperformed the other three in terms of accuracy, recall, and precision scores for both the training and test sets; however, based on the results from the above confusion matrix, it still appears that the "optimal" hyperparameters still result in a noticeable degree of overfitting.
