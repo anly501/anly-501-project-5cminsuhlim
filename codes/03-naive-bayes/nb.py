@@ -163,4 +163,44 @@ ax.yaxis.set_ticklabels(["Men's Rights", "Women's Rights"])
 ## Display the visual
 plt.show()
 
+# %% [markdown]
+# ### Feature Importance
+
+# %%
+from sklearn.inspection import permutation_importance
+
+imps = permutation_importance(model, x_test, y_test)
+means = imps.importances_mean
+
+# %%
+vocab0 = vectorizer.vocabulary_
+vocab1 = dict([(value, key) for key, value in vocab0.items()])
+d={'words': vocab1.values(), 'importance': means}
+df2=pd.DataFrame(d)
+df2.sort_values('importance', ascending=False, inplace=True)
+
+# %%
+most_important = df2.head(n=5)
+least_important = df2.tail(n=5)
+
+# %%
+fig = plt.figure()
+ax = fig.add_axes([0,0,1,1])
+ax.bar(most_important['words'], most_important['importance'])
+ax.set_ylabel('Feature Importance')
+ax.set_title('Feature Importance of the 5 Most Important Words')
+ax.set_xlabel('Word')
+plt.show()
+
+
+# %%
+
+fig = plt.figure()
+ax = fig.add_axes([0,0,1,1])
+ax.bar(least_important['words'], least_important['importance'])
+ax.set_ylabel('Feature Importance')
+ax.set_title('Feature Importance of the 5 Least Important Words')
+ax.set_xlabel('Word')
+plt.show()
+
 
