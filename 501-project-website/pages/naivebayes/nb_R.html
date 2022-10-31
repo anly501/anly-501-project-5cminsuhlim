@@ -14607,6 +14607,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <span class="n">library</span><span class="p">(</span><span class="n">e1071</span><span class="p">)</span>
 <span class="n">library</span><span class="p">(</span><span class="n">caTools</span><span class="p">)</span>
 <span class="n">library</span><span class="p">(</span><span class="n">caret</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">naivebayes</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14745,6 +14746,35 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
         <span class="n">labs</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Confusion Matrix&#39;</span><span class="p">)</span> <span class="o">+</span> 
         <span class="n">theme_bw</span><span class="p">()</span> <span class="o">+</span> 
         <span class="n">theme</span><span class="p">(</span><span class="n">legend</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">plot</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">hjust</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Graphically-represent-marginal-probabilities">Graphically represent marginal probabilities<a class="anchor-link" href="#Graphically-represent-marginal-probabilities">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="n">big5</span> <span class="o">&lt;-</span> <span class="n">naive_bayes</span><span class="p">(</span><span class="k">as</span><span class="o">.</span><span class="n">factor</span><span class="p">(</span><span class="n">sex</span><span class="p">)</span> <span class="o">~.</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">big5</span><span class="p">,</span> <span class="nb">vars</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="s2">&quot;agreeable_score&quot;</span><span class="p">,</span><span class="s2">&quot;extraversion_score&quot;</span><span class="p">,</span><span class="s2">&quot;openness_score&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;conscientiousness_score&quot;</span><span class="p">,</span><span class="s2">&quot;neuroticism_score&quot;</span><span class="p">))</span>
 </pre></div>
 
      </div>

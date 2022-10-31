@@ -3,6 +3,7 @@ library(tidyverse)
 library(e1071)
 library(caTools)
 library(caret)
+library(naivebayes)
 
 df <- read.csv('../../data/01-modified-data/big_five_final.csv')
 df <- df %>% select(-c(age, case_id, country)) %>%
@@ -41,3 +42,7 @@ ggplot(df, aes(x = Target, y = Prediction)) +
         labs(title = 'Confusion Matrix') + 
         theme_bw() + 
         theme(legend.position = "none", plot.title = element_text(hjust = 0.5))
+
+big5 <- naive_bayes(as.factor(sex) ~., data=train)
+plot(big5, vars = c("agreeable_score","extraversion_score","openness_score",
+                    "conscientiousness_score","neuroticism_score"))

@@ -103,7 +103,7 @@
                     <img class="img" src="../../images/naivebayes/confusionMatrixStats.png">
                 </div>
                 <div class="col-lg-8">
-                    Upon using the Naive Bayes model on the aforementioned training and test data sets, the output on the left was determined. The Naive Bayes model resulted in an extremely low p-value, which suggests that this is a reliable method for predicting an individual's sex based on their Big Five Personality scores. However, an accuracy of 0.6782 suggests that the model itself is not extremely strong. Since there are only two classifier groups (i.e. Male or Female), random guesses would result in an accuracy of 0.5. As such, our model is only 17-18% better than if the model were to just guess an individual's randomly. This makes the model not great, but not completely useless; rather, these results suggest that this model shouldn't be the sole determinant for predicting an individual's sex from their Big Five Personality scores.
+                    Upon using the Naive Bayes model on the aforementioned training and test data sets, the output on the left was determined. The Naive Bayes model resulted in an extremely low p-value, which suggests that this is a reliable method for predicting an individual's sex based on their Big Five Personality scores. However, an accuracy of 0.6782 suggests that the model itself is not extremely strong. 
                 </div>
 
                 <div class="col-lg-8">
@@ -112,6 +112,27 @@
                 <div class="col">
                     <img class="img" src="../../images/naivebayes/confusionMatrixPlot.png">
                 </div>
+
+                <div>
+                    <p>
+                        Marginal probabilities of the predictor variables (agreeable_score, extraversion_score, openness_score, conscientiousness_score, and neuroticism_score) based on class are also visualized below:
+                    </p>
+                </div>
+                <div class="col">
+                    <img class="img" src="../../images/naivebayes/big5marginal1.png">
+                    <img class="img" src="../../images/naivebayes/big5marginal2.png">
+                    <img class="img" src="../../images/naivebayes/big5marginal3.png">
+                    <img class="img" src="../../images/naivebayes/big5marginal4.png">
+                    <img class="img" src="../../images/naivebayes/big5marginal5.png">
+                </div>
+
+                <p></p>
+                
+                <div>
+                    The model itself isn't very strong. Since there are only two classifier groups (i.e. Male or Female), random guesses would result in an accuracy of 0.5. As such, our model is only 17-18% better than if the model were to just guess an individual's randomly. This makes the model not great, but not completely useless; rather, these results suggest that this model shouldn't be the sole determinant for predicting an individual's sex from their Big Five Personality scores.
+                </div>
+
+                <p></p>
 
                 <h2>Naive Bayes in Python (Wikipedia)</h2>
                 <div>
@@ -124,7 +145,7 @@
                     <img class="img" src="../../images/naivebayes/confusionMatrixStats_py.png">
                 </div>
                 <div class="col-lg-8">
-                    Similar analysis was conducted using the sentences gathered from various Wikipedia pages for searches that related to the keywords "Women's rights" and "Men's rights." By using Naive Bayes classification on this data set, we attempted to classify the vectorized text data to either of the aforementioned search terms. In the output on the left, we can see that the trained Naive Bayes classifier had an accuracy of 0.82 on the test set. Again, since there are only two classifier groups (i.e. the two search terms), random guesses would result in an accuracy of 0.5. As such, our model performs a little over 30% better than if the model were to just guess randomly based on given words in a sentence. This suggests that the model performs decently well in determining which sentences generally are associated with either "Women's rights" or "Men's rights."
+                    Similar analysis was conducted using the sentences gathered from various Wikipedia pages for searches that related to the keywords "Women's rights" and "Men's rights." By using Naive Bayes classification on this data set, we attempted to classify the vectorized text data to either of the aforementioned search terms. In the output on the left, we can see that the trained Naive Bayes classifier had an accuracy of 0.82 on the test set.
                 </div>
 
                 <div>
@@ -133,8 +154,27 @@
                     </p>
                 </div>
                 <div class="col">
-                    <img class="float-left" src="../../images/naivebayes/confusionMatrixPlot_py.png">
-                    <img class="float-right" src="../../images/naivebayes/confusionMatrixPlotPercent_py.png">
+                    <img class="img" src="../../images/naivebayes/confusionMatrixPlot_py.png">
+                    <img class="img" src="../../images/naivebayes/confusionMatrixPlotPercent_py.png">
+                </div>
+
+                <p></p>
+
+                <div>
+                    <p>
+                        Additionally, we've identified below the 5 most and least important words in the model.
+                    </p>
+                </div>
+
+                <div class="col">
+                    <img class="img" src="../../images/naivebayes/featureimportance1.png">
+                    <img class="img" src="../../images/naivebayes/featureimportance2.png">
+                </div>
+
+                <p></p>
+
+                <div>
+                    Again, since there are only two classifier groups (i.e. the two search terms), random guesses would result in an accuracy of 0.5. As such, our model performs a little over 30% better than if the model were to just guess randomly based on given words in a sentence. This suggests that the model performs decently well in determining which sentences generally are associated with either "Women's rights" or "Men's rights."
                 </div>
             </div>
         </div>
