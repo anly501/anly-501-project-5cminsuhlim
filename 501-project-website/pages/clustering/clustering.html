@@ -78,18 +78,36 @@
     <section id="clustering">
         <div class="container">
             <h1 class="text-center">Clustering</h1>
-        </div>
 
-        <div class="row">
-            <h2>Introduction</h2>
+            <div class="row">
+                <h2>Introduction</h2>
+                <div>
+                    <p>
+                        The data set that will be used for clustering analysis is from the Bureau of Labor Statistics. This data set is a combined data set of employment and wages based on occupation (that was used in the <a href="../decisiontrees/decisiontrees.html">Decision Tree</a> and <a href="../randomforests/randomforests.html">Random Forest</a> classification sections) and employment based on occupation by sex. Our goal is to see how different occupations group up (or "cluster") based on different features. Specifically, the features that we will use is the total employment, average annual mean, and the sex proportions in each occupation (i.e. what percentage of the total employees in a specific occupation is men or women). For the specific code that achieved this data set, please refer to the <a href="../datacleaning/datacleaning.html">data cleaning section</a>.
+                    </p>
+                </div> 
+    
+                <h2>Theory</h2>
+                <div>
+                    <p>
+                        Clustering is an example of an unsupervised machine learning algorithm attempts to discover if the data forms "clusters," and as the name suggests, clustering attempts to group similar data points in a data set together. This is especially handy when there are no known relationships in the data; however, even if the data already has corresponding labels, using the algorithm may reveal new clusters, which suggests that there may be unknown groups in the data that aren't captured in the pre-existing labels (which will be especially relevant for our data set, since it already has associated labels).
+                    </p>
 
-            <h2>Theory</h2>
-
-            <h2>Methods</h2>
-
-            <h2>Results</h2>
-
-            <h2>Conclusions</h2>
+                    <p>
+                        There are multiple clustering methods. The first is K-means clustering, which attempts to split the data into "K" clusters around a centroid (or the center of a cluster). The K-means algorithm focuses on minimizing the differences within a cluster while maximizing the differences between clusters. Another algorithm is Density-Based Spatial Clustering of Applications with Noise (DBSCAN), which clusters based on how closely together points are located (hence "density"). As such, this algorithm groups highly dense (closely packed) points together separate from outliers that lie in sparsely dense areas. Lastly, hierarchical clustering works by grouping the data points to produce nested clusters, represented as trees. This method can either take a top-down (Division) or bottom-up (Agglomerative) approach. The former starts with one big cluster of all the data points, which is broken down into smaller and smaller clusters, while the latter does the opposite (i.e. start with individual data points and build up into clusters).
+                    </p>
+                    
+                    <p>
+                        The aforementioned algorithms all mention grouping the data points into clusters. Naturally, this leads us onto our next point of finding out what actually is the optimal number of clusters. The first is the Elbow Method, which finds the corresponding inertias for a varying number of clusters. As the number of clusters increase, the inertia also decreases, so it is our job to decide the best cluster-to-inertia trade-off point (i.e. attempt to minimize both inertia and the number of clusters). An alternative is the Silhouette Method, which shows how distant a cluster is from other clusters. The silhouette coefficients range from -1 to 1, with -1 indicating bad clustering (i.e. a data point may have been assigned to the wrong cluster), 0 indicating clusters being very close to each other, and 1 indicating clusters that are far from each other.
+                    </p>
+                </div>
+    
+                <h2>Methods</h2>
+    
+                <h2>Results</h2>
+    
+                <h2>Conclusions</h2>
+            </div>
         </div>
     </section>
 
