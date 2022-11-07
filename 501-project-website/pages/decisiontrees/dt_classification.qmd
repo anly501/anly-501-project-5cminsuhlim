@@ -5,7 +5,7 @@ format:
   html:
     theme : yeti
     toc: true
-    code-fold: false #enable code dropdown for html outptu  
+    code-fold: true #enable code dropdown for html outptu  
     toc-title: Contents
     #bibliography: references.bib
   pdf:
