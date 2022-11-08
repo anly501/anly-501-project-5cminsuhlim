@@ -105,9 +105,22 @@
                 <h2><a target="_blank" href="./clustering_methods.html" target="_blank">Methods</a></h2>
     
                 <h2>Results</h2>
-    
+                <div>
+                    <p>
+                        Based on the final results for the three methods, the optimal number of clusters for DBSCAN, K-Means, and Hierarchical were 2, 3, and 4, respectively. Based on the silhouette coefficients across the three clustering algorithms, K-Means performed the best with the highest silhouette coefficient of 0.466, followed by Hierarchical with a coefficient of 0.435, and then DBSCAN with a coefficient of 0.340. In terms of setting up the models and the respective visualizations, K-Means was by far the most straightforward, followed by Hierarchical, and then DBSCAN. Interestingly, despite the ease of set up, this is the exact order of the silhouette coefficients as well.
+                    </p>
+
+                    <p>
+                        None of the algorithms were able to completely accurately create optimal cluster predictions that coincided with the "Target" values we had in the data set; nonetheless, this reveals some new insights regarding our data. Firstly, the clustering results, especially the results from K-Means and Hierarchical clustering, seems to suggest that there are largely 3 or 4 major industries that  most occupations fall under. Secondly, based on the results from DBSCAN, it seems that most jobs, when clustered based on total employment, annual mean wages, and female participation, cluster together.
+                    </p>
+                </div>
+
                 <h2>Conclusions</h2>
-                
+                <div>
+                    <p>
+                        The data with which the clustering was conducted is heavily imbalanced. Occupation categories (labeled as "Target" in the data set) ranged from having a single occupation in a larger category all the way up to 35 occupations. Hence, model improvements definitely could be seen if we had a more balanced data set. Nonetheless, our clustering results reveal some new insights regarding our data. Upon closer inspection of our original data set (from the "Numerical EDA" section in the <a target="_blank" href="./clustering_methods.html" target="_blank">Methods</a> section) in tandem with our clustering results, these industries seem to be Service, Labor, Engineering, and Management.
+                    </p>
+                </div>
             </div>
         </div>
     </section>

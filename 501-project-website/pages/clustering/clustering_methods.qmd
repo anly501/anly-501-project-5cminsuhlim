@@ -44,6 +44,9 @@ df = df.iloc[:, 1:]
 ```{python}
 ## reorder columns
 df = df[['TOT_EMP', 'A_MEAN', 'Women (%)', 'Men (%)', 'Target', 'Target_Num', 'OCC_TITLE']]
+
+## rename columns
+df = df.rename(columns={'TOT_EMP':'Total Employment', 'A_MEAN':'Mean Annual Wage'})
 ```
 
 ## Feature Selection
