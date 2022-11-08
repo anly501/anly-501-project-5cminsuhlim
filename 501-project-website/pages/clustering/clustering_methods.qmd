@@ -51,7 +51,13 @@ df = df.rename(columns={'TOT_EMP':'Total Employment', 'A_MEAN':'Mean Annual Wage
 
 ## Feature Selection
 
-We perform some pre-processing to ensure the best clustering results. First, we isolate the features in our data set, whic are Total Employment, Average Annual Wage, % of Women in the occupation, and % of Men in the occupation.
+As we can see, we have a heavily imbalanced data set.
+
+```{python}
+df['Target'].value_counts(ascending=True)
+```
+
+We perform some pre-processing to ensure the best clustering results. First, we isolate the features in our data set, which are Total Employment, Average Annual Wage, % of Women in the occupation, and % of Men in the occupation.
 
 ```{python}
 X = df.iloc[:, 0:4]
