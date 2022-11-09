@@ -35,7 +35,7 @@ import matplotlib.pyplot as plt
 ## Data Selection
 
 ```{python}
-df = pd.read_csv('../../data/01-modified-data/occupations_detailed_(employment_by_sex_and_wage).csv')
+df = pd.read_csv('../../../data/01-modified-data/occupations_detailed_(employment_by_sex_and_wage).csv')
 
 ## drop unneeded column created from read_csv
 df = df.iloc[:, 1:]
