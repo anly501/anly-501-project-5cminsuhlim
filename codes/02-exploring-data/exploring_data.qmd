@@ -22,6 +22,8 @@ Initial exploratory data analysis has been conducted below. The data gathered an
 
 Prior to diving into the details of the data, it's important to understand what the Big Five Personality traits are. **Openness** relates to imagination, insight, creativity, and curiousity. **Conscientiousness** relates to thoughtfulness, self-control, attention to detail, and orderliness. **Extraversion** relates to sociability, assertiveness, and excitability. **Agreeableness** relates to prosocial behaviors, such as empathy, altruism, and affection. **Neuroticism** relates to anxiety, low stress tolerance, and emotional instability.^1^
 
+![Verywell / Joshua Seong](big_five_comic.png)
+
 ```{python}
 import  pandas  as  pd
 import seaborn as sns
@@ -191,6 +193,371 @@ print(corr)
 
 We can also numerically represent the previous correlation heatmap and see the raw correlation numbers.
 
+## Twitter Data
+```{python}
+df = pd.read_csv('../../data/01-modified-data/Tweets_final.csv')
 
-# References:
-Cherry, Kendra. "What Are the Big 5 Personality Traits?" Verywell Mind, Verywell Mind, 4 Aug 2022, URL
+# turn DF to a single string of words based on their counts
+hashtags = np.array(np.repeat(df['Word'], df['Count']))
+hashtags_comb = " ".join(hashtags)
+
+def generate_word_cloud(my_text):
+    from wordcloud import WordCloud, STOPWORDS
+    import matplotlib.pyplot as plt
+    # exit()
+    # Import package
+    # Define a function to plot word cloud
+    def plot_cloud(wordcloud):
+        # Set figure size
+        plt.figure(figsize=(40, 30))
+        # Display image
+        plt.imshow(wordcloud)
+        # No axis details
+        plt.axis("off")
+    # Generate word cloud
+    wordcloud = WordCloud(
+        width = 3000,
+        height = 2000,
+        random_state=1,
+        background_color='salmon',
+        colormap='Pastel1',
+        collocations=False,
+        stopwords = STOPWORDS).generate(my_text)
+    plot_cloud(wordcloud)
+    plt.show()
+
+generate_word_cloud(hashtags_comb)
+```
+
+Based on the Twitter API call for multiple keywords associated with both the women's and men's rights movements, we generated the wordcloud shown above. Other than "worldwide," we can see that "mensrights" and "womenvsmen" are most noticeable. Interestingly, despite searching for tweets with 3 terms relating to women's rights and 3 terms relating to men's rights, it's clear that there are more hashtag relating to women's rights (e.g. "womensrightsarehumanrights", "womensrights", "womentalking"), issues (e.g. "votingrights", "saveroevswade", "votebluetoprotectwomen"), and involvements (e.g. "womenintech", "womeninscience", "womeninresearch").
+
+## Wikipedia Data
+```{python}
+#RELOAD FILE AND PRETEND THAT IS OUR STARTING POINT 
+df=pd.read_csv('../../data/00-raw-data/wiki-crawl-results.csv')  
+print(df.shape)
+
+#CONVERT FROM STRING LABELS TO INTEGERS 
+labels=[]; #y1=[]; y2=[]
+y1=[]
+for label in df["label"]:
+    if label not in labels:
+        labels.append(label)
+        print("index =",len(labels)-1,": label =",label)
+    for i in range(0,len(labels)):
+        if(label==labels[i]):
+            y1.append(i)
+y1=np.array(y1)
+
+# CONVERT DF TO LIST OF STRINGS 
+corpus=df["text"].to_list()
+y2=df["sentiment"].to_numpy()
+
+df = df.rename(columns={'label': 'Search Terms', 'sentiment': 'Sentiment Score'})
+sentiment_f = df[df['Search Terms'] == "Women's rights"]['Sentiment Score']
+sentiment_m = df[df['Search Terms'] == "Men's rights"]['Sentiment Score']
+
+ax = sns.displot(df, x="Sentiment Score", hue='Search Terms', kind="kde", palette=['red', 'blue'])
+ax.fig.suptitle('Sentiment score density plots of Wikicrawl', x=0.4, y = 1.05, fontsize=15)
+```
+
+Based on the Wikicrawl, we created density plots based on the sentiment scores of the vectorized sentences. We can see that the resulting distributions for the search terms "Women's rights" and "Men's rights" are both bimodal around -0.75 and 1.0. It's also worth mentioning that the sentiment scores for "Women's rights" appears to be more polarized, as there is a large peak for negative sentiment at -0.75, then a large dip towards neutral sentiment at 0.0, and then another large peak at positive sentiment at 1.0. However, the sentiment scores for "Men's rights" appears to be a bit more consistent throughout when compared to the sentiment of "Women's rights", not varying too much across negative, neutral, and positive sentiment. This may suggest that "Women's rights" may be a more polarizing topic than "Men's rights."
+
+## NCES Data
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(scales)
+
+df <- read.csv('../../data/01-modified-data/degrees_(by_sex_and_by_field)_final.csv')
+df <- df %>% group_by(Measure, sex) %>% summarize(count=sum(Value)) %>% filter(sex=='M' | sex=='F')
+level_order <- c("Bachelor's", "Master's", "Doctor's")
+ggplot(df, aes(fill=sex, x=factor(Measure, level=level_order), y=count)) + 
+        geom_bar(position='fill', stat='identity') + 
+        scale_y_continuous(expand = c(0,0)) +
+        ggtitle("Frequency of Degrees by sex (2018-2019)") +
+        xlab('Degree') + 
+        ylab('Frequency') + 
+        theme_classic()
+```
+
+Observing the Bachelor's, Master's, and Doctor's degrees earned in 2018-2019, the bar graph above shows once again that women pursuit higher education at a greater frequency than men.
+
+```{r}
+df <- read.csv('../../data/01-modified-data/counts_(by_sex_and_by_field)_final.csv')
+level_order <- c("Transportation and materials moving", "Engineering technologies", 
+                 "Military technologies and applied sciences",  
+                 "Computer and information sciences and support services", 
+                 "Engineering", "Philosophy and religious studies", 
+                 "Theology and religious vocations", "History", "Mathematics and statistics", 
+                 "Physical sciences and science technologies",  "Communications technologies", 
+                 "Business", "Architecture and related services", 
+                 "Parks, recreation, leisure, fitness, and kinesiology", 
+                 "Homeland security, law enforcement, and firefighting",
+                 "Social sciences and history", "Social sciences", 
+                 "Agriculture and natural resources", "Precision production", 
+                 "Visual and performing arts", "Communication, journalism, and related programs", 
+                 "Biological and biomedical sciences", 
+                 "Liberal arts and sciences, general studies, and humanities", 
+                 "Multi/interdisciplinary studies", "Foreign languages, literatures, and linguistics", 
+                 "Legal professions and studies", "English language and literature/letters", 
+                 "Area, ethnic, cultural, gender, and group studies", "Psychology", 
+                 "Education", "Public administration and social services", 
+                 "Health professions and related programs", "Family and consumer sciences/human sciences", 
+                 "Library science", "All fields, total")
+ggplot(df, aes(fill=sex, x=factor(Occupations, level=level_order), y=Value)) + 
+        geom_bar(position='fill', stat='identity') + 
+        scale_y_continuous(expand = c(0,0)) +
+        coord_flip() +
+        ggtitle("Frequency of Bachelor's degrees in specific fields of study by sex (2019-2020)") +
+        xlab('Fields of Study') + 
+        ylab('Frequency') + 
+        theme_classic()
+```
+
+The figure above shows the distribution of Bachelor's degrees given to men and women across various fields of study in 2019-2020 with the fields of study arranged in descending order according to female representation (except the top most bar, which is the total representation across all fields). We can see from the bar graph that there is a noticeable contrast in the fields of study men and women pursuit. For example, women seem to make up the majority in the social sciences, liberal arts, and humanities (except for fields such as Biology), while men seem to make up the majority in STEM and manual labor fields (except for fields such as Theology and Philosophy).
+
+## BLS Data
+```{r}
+df <- read.csv('../../data/01-modified-data/earnings_and_unemployment_rates_(by_educational_attainment)_final.csv')
+ggplot(df[1:8,], aes(x=reorder(Educational.attainment, Value), y=Value)) + 
+        geom_bar(stat='identity', position=position_dodge(), alpha=0.75, fill='darkgreen') + 
+        scale_y_continuous(expand = c(0,0)) +
+        coord_flip() +
+        geom_text(aes(label=Value), fontface="bold", vjust=0.5, hjust=1.5, color="white", size=4) +
+        ggtitle("Median weekly earnings (USD) for people above age 25 by level of education (2021)") +
+        xlab('Level of Education') + 
+        ylab('Median Weekly Earning (USD)') + 
+        theme_classic()
+```
+
+Observing bar graph above, we can see that for people above 25 years old in 2021 the median weekly earnings (USD) increased at their level of educational attainment increased.
+
+```{r}
+ggplot(df[9:16,], aes(x=reorder(Educational.attainment, -Value), y=Value)) + 
+        geom_bar(stat='identity', position=position_dodge(), alpha=0.75, fill='red') + 
+        scale_y_continuous(expand = c(0,0)) +
+        coord_flip() +
+        geom_text(aes(label=Value), fontface="bold", vjust=0.5, hjust=1.5, color="white", size=4) +
+        ggtitle("Unemployment rate (%) for people above age 25 by level of education (2021)") +
+        xlab('Level of Education') + 
+        ylab('Unemployment Rate (%)') + 
+        theme_classic()
+```
+
+The inverse observation can be seen with the unemployment rate, which shows a lower unemployment rate for those achieving higher levels of education.
+
+```{r}
+df <- read.csv('../../data/01-modified-data/employment_(by_occupation_and_by_sex)_final.csv')
+df <- df %>% filter(sex=='M' | sex=='F')
+dfm <- df[df$sex=='M',]
+dff <- df[df$sex=='F',]
+level_order <- c("Healthcare support occupations" ,
+                 "Personal care and service occupations", "Healthcare practitioners and technical occupations", 
+                 "Education, training, and library occupations", "Office and administrative support occupations", 
+                 "Community and social service occupations", "Production occupations", "Computer and mathematical occupations", 
+                 "Production, transportation, and material moving occupations", "Farming, fishing, and forestry occupations", 
+                 "Protective service occupations", "Transportation and material moving occupations", 
+                 "Architecture and engineering occupations", "Natural resources, construction, and maintenance occupations", 
+                 "Construction and extraction occupations", "Installation, maintenance, and repair occupations")
+ggplot(df[abs(dfm$Value - dff$Value) > 33,], aes(fill=sex, x=factor(Occupation, level=level_order), y=Value)) +
+        geom_bar(position='fill', stat='identity') +
+        scale_y_continuous(expand = c(0,0)) +
+        coord_flip() +
+        ggtitle("Most polarized occupations for people above age 16 by sex (2021)") +
+        xlab('Occupation') + 
+        ylab('Frequency') + 
+        theme_classic()
+```
+
+Additionally, the frequency plot above shows the most polarized (i.e. one sex having double or more employment in) occupations for people above 16 years old in 2021. Based on the listed occupations, we can see that fields dominated by men tend to be physical / manual labor or dealing with objects, while fields dominated by women tend to relate to service and interacting with people.
+
+```{r}
+df <- read.csv('../../data/01-modified-data/employmentRates_final.csv')
+ggplot(df, aes(x=date, y=Value, group=sex, color=sex)) +
+        geom_line() +
+        ggtitle("Employment Rates for various age groups in the U.S. (1948-2022)") +
+        xlab('Date') + 
+        ylab('Employment Rate (%)') + 
+        scale_color_manual(values=c('darkgreen', 'red', 'blue')) +
+        theme_classic() +
+        theme(axis.ticks.x=element_blank(),
+              axis.text.x=element_blank()) +
+        facet_wrap(~Measure)
+```
+
+The line graph above shows employment rates for men and women across various age groups in the U.S. from 1948 to 2022. From this figure, we can see that over the span of nearly eight decades, the employment rate of men has been slowly declining while women's employment rate has been drastically rising. However, other than the 16-24 age bracket, there still is quite noticeable disparities in male and female employment.
+
+```{r}
+df <- read.csv('../../data/01-modified-data/hours_worked_(by_sex_and_by_occupation)_final.csv')
+df1 <- df[df$Measure=="No. people at work" | df$Measure=='No. people who worked < 35hrs' | df$Measure=='No. people who worked 35+ hrs',] %>%
+        filter(!row_number() %in% c(1, 7, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, 79, 85)) %>% 
+        mutate(Value = Value / 1000)
+df2 <- df[df$Measure=="Average hrs worked among all workers" | df$Measure=='Average hrs worked among full-time workers',] %>%
+        filter(!row_number() %in% c(1, 7, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, 79, 85))
+ggplot(df1[df1$sex=='M' | df1$sex=='F',], aes(fill=sex, x=Category, y=Value)) + 
+        geom_bar(position='dodge', stat='identity') + 
+        scale_y_continuous(expand = c(0,0)) +
+        coord_flip() +
+        ggtitle("Number of workers (in thousands) in various fields by sex (2021)") +
+        xlab('Fields') + 
+        ylab('Number of workers (in thousands)') + 
+        theme_classic() +
+        facet_wrap(~Measure)
+```
+
+The bar graph shows the number of workers (in thousands) in various fields by sex in 2021. This is further categorized based on those who work <35 hours and those who work 35+ hours. When observing just the number of people at work, we can once again see that women tend to dominate fields that engage with people, while men tend to dominate fields that involve manual labor and handling objects. This trend is consistent even across those working <35 hours and those who work 35+ hours, with the only exception being Management/Professional occupations.
+
+```{r}
+ggplot(df2[df2$sex=='M' | df2$sex=='F',], aes(fill=sex, x=Category, y=Value)) + 
+        geom_bar(position='dodge', stat='identity') + 
+        scale_y_continuous(expand = c(0,0)) +
+        coord_flip() +
+        ggtitle("Hours worked in various fields by sex (2021)") +
+        xlab('Fields') + 
+        ylab('Hours worked') + 
+        theme_classic() +
+        facet_wrap(~Measure)
+df2[df2$sex=='M',]$Value - df2[df2$sex=='F',]$Value
+```
+
+The bar graph above shows the number of hours worked in various fields by sex in 2021 and is further specified to only full-time workers. In both cases, men tend to work anywhere from 0.8 to 4.1 more hours than women.
+
+```{r}
+df <- read.csv('../../data/01-modified-data/wages_(by_occupation_may_2021)_final.csv')
+ggplot(df[df$Measure=='Mean Annual Wage',], aes(fill=Occupation, x=Occupation, y=Value)) + 
+        geom_bar(position='dodge', stat='identity') + 
+        scale_y_continuous(expand = c(0,0)) +
+        coord_flip() +
+        ggtitle("Mean annual wage (USD) in various fields (May 2021)") +
+        xlab('Fields') + 
+        ylab('Mean Annual Wage (USD)') + 
+        theme_classic() +
+        theme(legend.position="none")
+df[df$Measure=='Mean Annual Wage',] %>% arrange(desc(Value))
+```
+
+The bar graph above shows the mean annual wage (USD) in various fields in May 2021. From this graph, we can see that the top three highest paying jobs as of May 2021 were:
+
+1) Management
+2) Legal
+3) Computer and Mathematical
+
+Similarly, the three lowest paying jobs were:
+1) Food Preparation and Serving Related
+2) Healthcare Support
+3) Personal Care and Service
+
+Upon closer inspection, we can see that STEM and business-related made up higher paying jobs, while the lower paying end consisted of service and manual labor jobs.
+
+## CAWP Data
+```{r}
+df <- read.csv('../../data/01-modified-data/percent_us_women_in_gov_final.csv')
+ggplot(df, aes(x=Year, y=Value)) +
+        geom_line() +
+        ggtitle("Female representation (%) in the U.S. government (1965-2021)") +
+        xlab('Year') + 
+        ylab('Female Representation (%)') + 
+        theme_classic() +
+        facet_wrap(~Measure)
+df[df$Year=='2021',]
+```
+
+The line graphs show various forms of female representation in the U.S. government from 1965 to 2021. We can see from the graphs that female representation in the U.S. government has been steadily increasing over the past six decades, but it should also be noted that women only make up 18% of state governors, 27.3% of U.S. representatives, 26% of senators, and 30.8% of state legislators.
+
+## CB Data
+```{r}
+df <- read.csv('../../data/01-modified-data/Percentage-of-the-us-population-with-a-college-degree-by-gender-1940-2021.csv')
+ggplot(df, aes(x=Year, y=Value, group=Measure, color=Measure)) +
+        geom_line(size=1.5) +
+        ggtitle("Percentage of college degree holders in the U.S. by sex (1940-2021)") +
+        xlab('Date') + 
+        ylab('Percentage of college degree holders (%)') + 
+        scale_color_manual(values=c('blue', 'red')) +
+        theme_classic()
+df[df$Value[df$Measure=='Men with a college degree in the U.S. (%)'] < df$Value[df$Measure=='Women with a college degree in the U.S. (%)'],]
+```
+
+The line graph above shows the percentage of college degrees holders in the U.S. within their sex from 1940 to 2021. We can see from the graph that from 1940 to around 2010 there was a greater proportion of college degree holders among men than among women. However, after 2014, we can see the inflection point in which women have now become a greater proportion of women have attained college degrees than men.
+
+The following line graphs show varying ranges of education people (in thousands) have completed in the U.S. based on sex and age groups (25-34, 35-54, 55+) from 1940 to 2021.
+
+```{r}
+df <- read.csv('../../data/01-modified-data/School_Completion_(by_Age_and_Sex)_from_1940_to_2021_final.csv')
+df$Value <- df$Value / 1000
+ggplot(filter(df, grepl("0-4 years of education", Measure)), aes(x=Year, y=Value, group=sex, color=sex)) +
+        geom_line() +
+        ggtitle("Number of people (in thousands) by sex and by age group who have completed 0-4 years of education (1940-2021)") +
+        xlab('Year') + 
+        ylab('Number of people (in thousands)') + 
+        scale_color_manual(values=c('red', 'blue')) +
+        theme_classic() +
+        facet_wrap(~Measure)
+```
+
+Among 25-35 and 35-54 year olds, there has been a relatively consistent downwards trend in the number of people obtaining 0-4 years of education. Among 55+ year olds, there was an increase in the number of people obtaining 0-4 years of education, peaking around 1970 but sees a downwards trend thereafter.
+
+```{r}
+ggplot(filter(df, grepl("5-8 years of education", Measure)), aes(x=Year, y=Value, group=sex, color=sex)) +
+        geom_line() +
+        ggtitle("Number of people (in thousands) by sex and by age group who have completed 5-8 years of education (1940-2021)") +
+        xlab('Year') + 
+        ylab('Number of people (in thousands)') + 
+        scale_color_manual(values=c('red', 'blue')) +
+        theme_classic() +
+        facet_wrap(~Measure)
+```
+
+Among 25-35 and 35-54 year olds, there has been a relatively consistent downwards trend in the number of people obtaining 5-8 years of education. Among 55+ year olds, there was an increase in the number of people obtaining 0-4 years of education, peaking around 1960 for men and 1980 for women but sees a downwards trend thereafter.
+
+```{r}
+ggplot(filter(df, grepl("9-11 years of education", Measure)), aes(x=Year, y=Value, group=sex, color=sex)) +
+        geom_line() +
+        ggtitle("Number of people (in thousands) by sex and by age group who have completed 9-11 years of education (1940-2021)") +
+        xlab('Year') + 
+        ylab('Number of people (in thousands)') + 
+        scale_color_manual(values=c('red', 'blue')) +
+        theme_classic() +
+        facet_wrap(~Measure)
+```
+
+Among 25-35 year olds, there has been a relatively consistent downwards trend in the number of women obtaining 9-11 years of education, while men saw a peak around 1990 before returning on a downwards trajectory. Among 35-54 year olds, both men and women obtaining 9-11 years of education increased, peaking around 1960 before returning to a downwards trend; however, the number of men obtaining 9-11 years of education saw an increase from around 1990 to 2010 before declining again. Among 55+ year olds, there was an increase in the number of people obtaining 9-11 years of education, peaking around 1990 and declining thereafter.
+
+```{r}
+ggplot(filter(df, grepl("12 years of education", Measure)), aes(x=Year, y=Value, group=sex, color=sex)) +
+        geom_line() +
+        ggtitle("Number of people (in thousands) by sex and by age group who have completed 12 years of education (1940-2021)") +
+        xlab('Year') + 
+        ylab('Number of people (in thousands)') + 
+        scale_color_manual(values=c('red', 'blue')) +
+        theme_classic() +
+        facet_wrap(~Measure)
+```
+
+Among all age groups, the number of people obtaining 12 years of education has seen a relatively consistent increasing trend. However, among 25-34 year olds, there was a dip from around 1990 to 2005 for men and from around 1990 to 2015 for women before returning upwards; similarly, among 35-54 year olds, there was a dip from around 2010 for men and 2005 for women.
+
+```{r}
+ggplot(filter(df, grepl("13-15 years of education", Measure)), aes(x=Year, y=Value, group=sex, color=sex)) +
+        geom_line() +
+        ggtitle("Number of people (in thousands) by sex and by age group who have completed 13-15 years of education (1940-2021)") +
+        xlab('Year') + 
+        ylab('Number of people (in thousands)') + 
+        scale_color_manual(values=c('red', 'blue')) +
+        theme_classic() +
+        facet_wrap(~Measure)
+```
+
+Among all age groups, the number of people obtaining 13-15 years of education has seen a relatively consistent increasing trend. However, among 35-54 year olds, there was a dip from around 2005 for both men and women.
+
+```{r}
+ggplot(filter(df, grepl("16", Measure)), aes(x=Year, y=Value, group=sex, color=sex)) +
+        geom_line() +
+        ggtitle("Number of people (in thousands) by sex and by age group who have completed 16+ years of education (1940-2021)") +
+        xlab('Year') + 
+        ylab('Number of people (in thousands)') + 
+        scale_color_manual(values=c('red', 'blue')) +
+        theme_classic() +
+        facet_wrap(~Measure)
+```
+
+Among all age groups, the number of people obtaining 16+ years of education has seen a relatively consistent increasing trend.

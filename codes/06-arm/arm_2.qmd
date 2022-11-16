@@ -1,0 +1,25 @@
+---
+jupyter: python3
+pdf-engine: lualatex
+format:
+  html:
+    theme : yeti
+    toc: true
+    code-fold: true #enable code dropdown for html output
+    code-code-overflow: wrap  
+    toc-title: Contents
+    error: false
+    warning: false
+execute:
+    echo: True  #True=show code in output, false=don't
+---
+
+# Association Rule Mining (ARM) and Networking
+
+## Introduction
+
+## Theory
+
+## Methods
+
+## Results
