@@ -1,0 +1,927 @@
+---
+pdf-engine: lualatex
+format:
+  html:
+    theme: yeti
+    toc: true
+    code-fold: true
+    code-code-overflow: wrap
+    toc-title: Contents
+    error: false
+    warning: false
+execute:
+  echo: true
+jupyter: python3
+---
+
+# Decision Trees (DTs)
+
+## Introduction
+
+The data set that will be used for Decision Tree classification is from the BLS data. This data set contains information on occupations and their respective employment and wages. Our goal is to determine a job type based on its employment and wage metrics. We will also apply Decision Tree regression to another BLS data set. This data set contains information on the number of hours worked by sex and by occupation. Our goal is to determine the average number of hours worked by an employee based on employee sex, job type, and the number of employees who worked 35+ hours per week. For the specific code that achieved these data sets, please refer to the data cleaning section. For further detail about these data sets, please refer to the exploring data section.
+
+## Theory
+
+Decision Trees (DTs) are a non-parametric supervised learning method used for classification and regression. As the name suggests, DTs creates a tree-like structure consisting of decisions in the form of conditional (if) statements and their respective resulting consequences. DTs are conceptually similar to a flowchart, where each node of the tree represents a “Yes” or “No” test on a particular attribute, each branch represents the outcome of the test, and each leaf node represents a particular class to which a particular item would most likely belong.
+
+![Xoriant / “Decision Trees for Classification: A Machine Learning Algorithm”](../../images/decisiontrees/dt_example.png)
+
+For example, the above image is an example of a very elementary DT to decide (or classify) whether or not a person is fit. At the very top node (the root node), we typically have a question that can split the data set as “efficiently” as possible (although the metric for efficiency will differ based on the criterion). In this case, we first ask if a person is less than 30 years old. If so, we then ask if this person eats a lot of pizzas. If the answer is yes, then we’d conclude that this person is unfit; if the answer is no, we’d conclude that this person is fit. However, if this person is older than 30 years old, we ask if this person exercises in the morning. If the answer is yes, then we conclude that the person is fit; otherwise, we conclude that the person is unfit.
+
+As per the example, simply asking a person’s age, frequency of pizza consumption, and exercise habits is probably insufficient to truly decide if a person is fit. This is a simplistic workflow, but the algorithms used by the DTs search for good tree rules that attempts to best classify the given dataset. However, finding the optimal tree is very difficult due to the infinite number of possible decision trees that can be constructed given the attributes of a data set. As such, DTs can be a good, computationally cheap starting point to find interesting trends within the data, which can later be further explored with more detailed and computationally expensive methods.
+
+## Methods
+
+### Decision Tree Classification
+
+#### Imports
+
+```{python}
+import sklearn
+from sklearn import datasets
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+```
+
+#### Load Data
+
+```{python}
+df = pd.read_csv('../../../data/01-modified-data/occupations_detailed_(employment_and_wage).csv')
+
+## drop unneeded column created from read_csv
+df = df.iloc[:, 1:]
+
+## rename
+df.rename(columns={'TOT_EMP':'Total Employment', 'EMP_PRSE': 'Employment PRSE', 'A_MEAN':'Annual Mean Wage', 'MEAN_PRSE':'Mean Wage PRSE'}, inplace=True)
+```
+
+#### Separate Predictor and Response Variables
+
+```{python}
+# Y="Target" COLUMN and X="everything else"
+X = df.iloc[:, 2:6]
+Y = df.iloc[:, 7]
+```
+
+#### Normalization
+
+Since our predictors (X) consist of employment rates and mean annual wages, we first normalize our data to bring all the predictor values into a space that is unitless. This transformation of data brings everything to a similar scale, which makes it easier for the DT algorithm to "learn" the data. 
+
+```{python}
+X=0.1+(X-np.min(X,axis=0))/(np.max(X,axis=0)-np.min(X,axis=0))
+```
+
+#### Class Distribution
+
+##### Numerical EDA
+
+As shown in the output below, our target class is heavily imbalanced. Since this imbalance can skew the way the data is split into training and test sets, we will later stratify the data so the proportion of values in the training and test sets also reflect this imbalance.
+
+```{python}
+df['Target'].value_counts(ascending=True)
+```
+
+##### Multivariable Pair Plot
+
+As mentioned before, the distributions of the target class is heavily imbalanced. Again, we can see this visually represented in the density plots in the correlation multivariable pair plot below. 
+
+```{python}
+sns.pairplot(df.iloc[:, 2:7], hue='Target')
+plt.show()
+```
+
+#### Baseline: Random Classifier
+
+In order to have some baseline to compare our DT's performance, we defined a random classifier below.
+
+##### Define Random Classifier Function
+
+```{python}
+from collections import Counter
+from sklearn.metrics import precision_recall_fscore_support
+np.random.seed(seed=1234)
+
+def random_classifier(y_data):
+    ypred=[];
+    max_label=np.max(y_data); #print(max_label)
+    for i in range(0,len(y_data)):
+        ypred.append(int(np.floor((max_label+1)*np.random.uniform(0,1))))
+
+    print("-----RANDOM CLASSIFIER-----")
+    print("count of prediction:",Counter(ypred).values()) # counts the elements' frequency
+    print("probability of prediction:",np.fromiter(Counter(ypred).values(), dtype=float)/len(y_data)) # counts the elements' frequency
+    print("accuracy",accuracy_score(y_data, ypred))
+    print("precision, recall, fscore,",precision_recall_fscore_support(y_data, ypred))
+random_classifier(Y)
+```
+
+Based on the output above, we can see that accuracy of the random classifier is 0.04, which is around what we'd expect from randomly taking guesses for 22 target classes. We can also see that the precision, recall, and f-scores from the random classifier are all below 0.1. 
+
+#### Feature Selection
+
+##### Correlation
+
+The correlation output below shows a strong positive correlation (> 0.8) between employment percent relative standard error (EMP_PRSE) and mean annual salary percent relative standard error (MEAN_PRSE). Since we need to maintain independence among the predictor variables, I will drop employment percent relative standard error (EMP_PRSE) to prevent the model from overcounting similar features.
+
+```{python}
+corr = X.corr()
+print(corr)	
+```
+
+##### Correlation Matrix Heatmap
+
+The correlation matrix heatmap below reflects the previous correlation output. Again, there is a strong positive correlation between Employment percent relative standard error (PRSE) and mean annual salary PRSE.
+
+```{python}
+sns.set_theme(style="white")
+f, ax = plt.subplots(figsize=(11, 9))  # Set up the matplotlib figure
+cmap = sns.diverging_palette(230, 20, as_cmap=True) 	# Generate a custom diverging colormap
+# Draw the heatmap with the mask and correct aspect ratio
+sns.heatmap(corr,  cmap=cmap, vmin=-1, vmax=1, center=0,
+        square=True, linewidths=.5, cbar_kws={"shrink": .5})
+plt.show();
+```
+
+##### Remove Correlated Features
+
+```{python}
+X.drop(columns=['Employment PRSE'], inplace=True)
+```
+
+#### Split Data
+
+```{python}
+# PARTITION THE DATASET INTO TRAINING AND TEST SETS
+from sklearn.model_selection import train_test_split
+test_ratio=0.2
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=test_ratio, random_state=1234, stratify=Y)
+```
+
+#### Training the Model w/ Default Parameters
+
+```{python}
+# TRAIN A SKLEARN DECISION TREE MODEL ON x_train,y_train 
+from sklearn import tree
+model = tree.DecisionTreeClassifier(random_state=1234)
+model = model.fit(x_train, y_train)
+```
+
+#### Check the Results
+
+```{python}
+# USE THE MODEL TO MAKE PREDICTIONS FOR THE TRAINING AND TEST SET 
+yp_train = model.predict(x_train)
+yp_test = model.predict(x_test)
+
+# GENERATES A CONFUSION MATRIX PLOT AND PRINTS MODEL PERFORMANCE METRICS
+def confusion_plot(y_data, y_pred):    
+    cm = confusion_matrix(y_data, y_pred)
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+    disp.plot()
+    
+    print('ACCURACY:', accuracy_score(y_data, y_pred))
+    print('RECALL:', recall_score(y_data, y_pred, average='weighted'))
+    print('PRECISION:', precision_score(y_data, y_pred, average='weighted'))
+    
+    plt.show()
+
+
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+
+print("------TRAINING------")
+confusion_plot(y_train,yp_train)
+print("------TEST------")
+confusion_plot(y_test,yp_test)
+```
+
+As shown in the correlation matrices above for both the training and test data sets, we can see that the DT resulted in a perfect fit for the training set but a much less adequate fit for the test set. Such a drastic difference in the accuracy, recall, and precision scores between the training and test sets suggest significant overfitting of the model (which is a notable characteristic of DTs). 
+
+#### Visualize the Tree
+
+```{python}
+# VISUALIZE THE DECISION TREE
+from sklearn.tree import DecisionTreeRegressor
+
+regr = DecisionTreeRegressor(random_state=1234)
+model = regr.fit(x_train, y_train)
+
+def plot_tree(model, X, Y):
+    fig = plt.figure(figsize=(25,20))
+    _ = tree.plot_tree(model, 
+                    feature_names=X.columns,  
+                    class_names=Y.name,
+                    filled=True)
+
+plot_tree(model, X, Y)
+```
+
+#### Model Tuning
+
+As mentioned previously, the model with default parameters resulted in a heavily overfit DT. In order to find a more well-rounded model, we will perform model tuning.
+
+##### Hyperparameter Tuning
+
+First, we loop over possible hyperparameter values, ranging from 1 to 50, keeping track of the training and test sets' accuracy and recall scores for each hyperparameter value. We then create plots for accuracy and recall scores for the training and test sets to identify which number of layers for the DT would result in an optimal model. 
+
+```{python}
+# LOOP OVER POSSIBLE HYPER-PARAMETERS VALUES
+test_results=[]
+train_results=[]
+
+for num_layer in range(1,51):
+    model = tree.DecisionTreeClassifier(max_depth=num_layer, random_state=1234)
+    model = model.fit(x_train, y_train)
+
+    yp_train=model.predict(x_train)
+    yp_test=model.predict(x_test)
+
+    # print(y_pred.shape)
+    test_results.append([num_layer,accuracy_score(y_test, yp_test),recall_score(y_test, yp_test, average='weighted')])
+    train_results.append([num_layer,accuracy_score(y_train, yp_train),recall_score(y_train, yp_train, average='weighted')])
+
+layers = [el[0] for el in test_results]
+          
+test_acc = [el[1] for el in test_results]
+test_rec = [el[2] for el in test_results]
+
+train_acc = [el[1] for el in train_results]
+train_rec = [el[2] for el in train_results]
+```
+
+##### Find Optimal Hyperparameter
+
+Based on the plots below, we can narrow down the best hyperparameter value for our model as somewhere between 2-4, since both accuracy and recall scores begin to diverge more and more dramatically beginning from max_depth=5. To avoid our original default model's issue of overfitting, we will proceed with our optimal hyperparameter value of max_depth=4. 
+
+```{python}
+# GENERATE PLOTS TO IDENTIFY OPTIMAL HYPERPARAMETER
+def gen_plots(x, train, test):
+    plt.plot(x,train, c='b')
+    plt.scatter(x,train,c='b')
+    plt.plot(x,test,c='r')
+    plt.scatter(x,test,c='r')
+    plt.xlabel("Number of layers in decision tree (max_depth)")
+    plt.show();
+
+plt.ylabel("ACCURACY: Training (blue) and Test (red)")
+gen_plots(layers, train_acc, test_acc)
+plt.ylabel("RECALL: Training (blue) and Test (red)")
+gen_plots(layers, train_rec, test_rec)
+```
+
+To numerically validate our intuition from the previous graphs, we can once again see from the output below that hyperparameter values 1-4 have training and test mean absolute errors that are relatively similar. However, from value 5, we can see that the difference between the two mean absolute errors begins to grow rather rapidly. As such, we can confirm our prior intution and proceed with max_depth=4 as our optimal hyperparameter value.
+
+```{python}
+from sklearn.metrics import mean_absolute_percentage_error
+from sklearn.metrics import mean_absolute_error
+hyper_param=[]
+train_error=[]
+test_error=[]
+for i in range(1,23):
+    # INITIALIZE MODEL 
+    model = DecisionTreeRegressor(max_depth=i, random_state=1234)
+
+    # TRAIN MODEL 
+    model.fit(x_train,y_train)
+
+    # OUTPUT PREDICTIONS FOR TRAINING AND TEST SET 
+    yp_train = model.predict(x_train)
+    yp_test = model.predict(x_test)
+
+    # GET MAE
+    err1=mean_absolute_error(y_train, yp_train) 
+    err2=mean_absolute_error(y_test, yp_test) 
+
+    hyper_param.append(i)
+    train_error.append(err1)
+    test_error.append(err2)
+
+    print("hyperparam =",i)
+    print(" train error:",err1)
+    print(" test error:" ,err2)
+    print(" error diff:" ,abs(err2-err1))
+```
+
+#### Train Optimal Model
+
+```{python}
+#### TRAIN A SKLEARN DECISION TREE MODEL ON x_train,y_train 
+model = tree.DecisionTreeClassifier(max_depth=4, random_state=1234)
+model = model.fit(x_train, y_train)
+
+yp_train=model.predict(x_train)
+yp_test=model.predict(x_test)
+
+print("------TRAINING------")
+confusion_plot(y_train,yp_train)
+print("------TEST------")
+confusion_plot(y_test,yp_test)
+
+regr = DecisionTreeRegressor(random_state=1234, max_depth=4)
+model = regr.fit(x_train, y_train)
+
+plot_tree(model, X, Y)
+```
+
+### Decision Tree Classification Results
+
+The confusion matrices above show a large decrease in the accuracy, recall, and precision scores for both the training and test sets compared to the metrics from our original model with default parameters; however, we are now no longer overfitting. The accuracy, recall, and precision scores are around 0.3. These trends are also reflected in the new DT. By reducing the depth of the tree, we inevitably reduce the accuracy, recall, and precision scores of the model; however, we also reduce overfitting and increase generalizability. 
+
+
+### Decision Tree Regression
+
+#### Imports
+
+```{python}
+import sklearn
+from sklearn import datasets
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+```
+
+#### Load Data
+
+```{python}
+df = pd.read_csv('../../../data/01-modified-data/hours_worked_(by_sex_and_by_occupation)_final.csv')
+
+## drop unneeded rows
+df = df[df['sex'] != 'B']
+
+# convert from long to wide
+df = pd.pivot(df, index=['Category', 'sex'], columns=['Measure'], values='Value').reset_index()
+
+# create numerical representations for occupation categories
+df['Category_num'] = 0
+df.iloc[0:2, 7] = 1
+df.iloc[2:4, 7] = 2
+df.iloc[4:6, 7] = 3
+df.iloc[6:8, 7] = 4
+df.iloc[8:, 7] = 5
+
+# convert sex to numerical (0 = m, 1 = f)
+df['sex'] = df['sex'].replace('F', 1).replace('M', 0)
+
+df.rename(columns={'Average hrs worked among all workers' : 'Target', 'Average hrs worked among full-time workers':'Full-time hours worked', 'No. people at work':'# People at Work', 'No. people who worked 35+ hrs':'>35 hrs at work', 'No. people who worked < 35hrs':'<35 hrs at work'}, inplace=True)
+```
+
+#### Separate Predictor and Response Variables
+
+```{python}
+X = df.iloc[:, [1,3,4,5,6,7]]
+Y = df['Target']
+```
+
+#### Normalization
+
+Since our predictors (X) consist of hours worked by employees, total number of employees working in job types, and numerical representations for sex and job types, we first normalize our data to bring all the predictor values into a space that is unitless. This transformation of data brings everything to a similar scale, which makes it easier for the DT algorithm to "learn" the data. 
+
+```{python}
+X=0.1+(X-np.min(X,axis=0))/(np.max(X,axis=0)-np.min(X,axis=0))
+Y=0.1+(Y-np.min(Y,axis=0))/(np.max(Y,axis=0)-np.min(Y,axis=0))
+```
+
+#### Class Distribution
+
+##### Numerical EDA
+
+As shown in the output below, our target class is roughly balanced.
+
+```{python}
+df['Target'].value_counts(ascending=True)
+```
+
+##### Multivariable Pair Plot
+
+```{python}
+sns.pairplot(df.iloc[:, 1:7], hue='Target')
+plt.show()
+```
+
+#### Feature Selection
+
+##### Correlation
+
+The correlation output below shows a strong negative correlation (< -0.8) between sex and the average hours worked among full-time workers. Additionally, we can see a strong positive correlation among the number of people at work, the number of people who worked 35+ hours, and the number of people who worked < 35 hours. Since we need to maintain independence among the predictor variables, I will drop the average hours worked among full-time workers, the number of people at work, and the number of people who worked < 35 hours.
+
+```{python}
+corr = X.corr()
+print(corr)	
+```
+
+##### Correlation Matrix Heatmap
+
+The correlation matrix heatmap below reflects the previous correlation output. Again, there is a strong negative correlation between sex and the average hours worked among full-time workers, and a strong positive correlation among the number of people at work, the number of people who worked 35+ hours, and the number of people who worked < 35 hours.
+
+```{python}
+sns.set_theme(style="white")
+f, ax = plt.subplots(figsize=(11, 9))  # Set up the matplotlib figure
+cmap = sns.diverging_palette(230, 20, as_cmap=True) 	# Generate a custom diverging colormap
+# Draw the heatmap with the mask and correct aspect ratio
+sns.heatmap(corr,  cmap=cmap, vmin=-1, vmax=1, center=0,
+        square=True, linewidths=.5, cbar_kws={"shrink": .5})
+plt.show();
+```
+
+##### Remove Correlated Features
+
+```{python}
+X.drop(X.columns[[1,2,4]], axis=1, inplace=True)
+```
+
+#### Split Data
+
+```{python}
+# PARTITION THE DATASET INTO TRAINING AND TEST SETS
+from sklearn.model_selection import train_test_split
+test_ratio=0.2
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=test_ratio, random_state=1234)
+```
+
+#### Model Tuning
+
+A known issue with DTs is the proneness of the model to overfit training data. In order to find a more well-rounded model, we will perform model tuning.
+
+##### Hyperparameter Tuning
+
+First, we loop over possible hyperparameter values, ranging from 1 to 10, keeping track of the training and test sets' mean absolute errors (MAE) for each hyperparameter value. Ideally, we want to find the hyperparameter that minimizes the MAE for both training and test sets while not having the respective MAE values diverge too severely from each other. 
+
+From the output below, we can clearly see that the model begins overfitting quickly, with the MAE difference between training and test set becoming greater than 10 fold by min_samples_split=3. 
+
+```{python}
+from sklearn.metrics import mean_absolute_percentage_error
+from sklearn.metrics import mean_absolute_error
+from sklearn.tree import DecisionTreeRegressor
+
+
+# HYPER PARAMETER SEARCH FOR OPTIMAL NUMBER OF NEIGHBORS 
+hyper_param=[]
+train_error=[]
+test_error=[]
+
+# LOOP OVER HYPER-PARAM
+for i in range(1,11):
+    # INITIALIZE MODEL 
+    model = DecisionTreeRegressor(max_depth=i, random_state=1234)
+
+    # TRAIN MODEL 
+    model.fit(x_train,y_train)
+
+    # OUTPUT PREDICTIONS FOR TRAINING AND TEST SET 
+    yp_train = model.predict(x_train)
+    yp_test = model.predict(x_test)
+
+    # shift=1+np.min(y_train) #add shift to remove division by zero 
+    err1=mean_absolute_error(y_train, yp_train) 
+    err2=mean_absolute_error(y_test, yp_test) 
+    
+    # err1=100.0*np.mean(np.absolute((yp_train-y_train)/y_train))
+    # err2=100.0*np.mean(np.absolute((yp_test-y_test)/y_test))
+
+    hyper_param.append(i)
+    train_error.append(err1)
+    test_error.append(err2)
+
+    print("hyperparam =",i)
+    print(" train error:",err1)
+    print(" test error:" ,err2)
+    print(" error diff:" ,abs(err2-err1))
+```
+
+##### Convergence Plot
+
+Our numerical intuition from above can also be visualized with a convergence plot. Again, we can see quite rapid overfitting occurring, and there really doesn't seem to be a "safe" choice of hyperparameter that avoids overfitting outright; however, our intution of min_samples_split=2 seems to be a moderate choice to avoid the dramatic overfitting that begins to occur from min_samples_split=3. 
+
+```{python}
+plt.plot(hyper_param,train_error ,linewidth=2, color='k')
+plt.plot(hyper_param,test_error ,linewidth=2, color='b')
+
+plt.xlabel("Depth of tree (max depth)")
+plt.ylabel("Training (black) and test (blue) MAE (error)")
+
+plt.show();
+```
+
+#### Train Optimal Model
+
+```{python}
+# INITIALIZE MODEL 
+model = DecisionTreeRegressor(max_depth=2, random_state=1234)
+model.fit(x_train,y_train)                     # TRAIN MODEL 
+
+
+# OUTPUT PREDICTIONS FOR TRAINING AND TEST SET 
+yp_train = model.predict(x_train)
+yp_test = model.predict(x_test)
+
+err1=mean_absolute_error(y_train, yp_train) 
+err2=mean_absolute_error(y_test, yp_test) 
+    
+print(" train error:",err1)
+print(" test error:" ,err2)
+```
+
+#### Plot Tree
+
+```{python}
+from sklearn import tree
+def plot_tree(model):
+    fig = plt.figure(figsize=(25,20))
+    _ = tree.plot_tree(model, 
+                    feature_names=X.columns,  
+                    class_names=Y.name,
+                    filled=True)
+    plt.show()
+plot_tree(model)
+```
+
+#### Parity Plot
+
+```{python}
+plt.plot(y_train,yp_train ,"o", color='k')
+plt.plot(y_test,yp_test ,"o", color='b')
+plt.plot(y_train,y_train ,"-", color='r')
+
+plt.xlabel("y_data")
+plt.ylabel("y_pred (blue=test)(black=Train)")
+
+plt.show();
+```
+
+#### Linear Regression
+
+```{python}
+# LINEAR REGRESSION 
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression().fit(X, Y)
+
+# OUTPUT PREDICTIONS FOR TRAINING AND TEST SET 
+yp_train = model.predict(x_train)
+yp_test = model.predict(x_test)
+
+plt.plot(y_train,yp_train ,"o", color='k')
+plt.plot(y_test,yp_test ,"o", color='b')
+plt.plot(y_train,y_train,"-", color='r')
+
+plt.xlabel("y_data")
+plt.ylabel("y_pred (blue=test)(black=Train)")
+
+    
+err1=100.0*np.mean(np.absolute((yp_train-y_train)/y_train))
+err2=100.0*np.mean(np.absolute((yp_test-y_test)/y_test))
+
+print(" train error:",err1)
+print(" test error:" ,err2)
+
+plt.show();
+```
+
+### Decision Tree Regression Results
+
+The new tree from the optimized model primarily focuses on splitting our data based on Category_num, which corresponds to the occupation categories. The parity plot for our model doesn't fall closely to the desired y=x line, which suggests that the fit for this model definitely has room for improvement. Additionally, the linear regression shows a test error lower than training error, which suggests sampling bias. 
+
+## Conclusions
+
+For the DT Classification, our model, given a job type's employment and wage metrics, can classify the associated job type with an accuracy of 0.28. Based on the DT classification results, we can see that our optimized model outperforms the random classifier by about 7 times (accuracy=0.04 vs. accuracy=0.28), which is quite a large improvement from classifying completely randomly. Nonetheless, the model can definitely see some improvements. Most notably, DTs do not perform well on unbalanced data sets. As such, obtaining more data to create a balanced data set may improve the classifier's performance. Additionally, having more predictor variables with which the classifier could work may generally help fine-tune the classifier further.
+
+For the DT regression, our model can determine the average number of hours worked by an employee based on employee sex, job type, and the number of employees who worked 35+ hours per week. Overall, it appears that the model isn't performing very well; however, it's even difficult to try and truly quantify the extent to which the model is poorly classifying the average number of hours worked by an employee based on employee sex, job type, and the number of employees who worked 35+ hours per week. The most glaring issue with the model at hand stems at the extremely small sample size, that is further divided into training and test sets. Having more predictor variables and a generally larger sample size with which the regressor could work may help fine-tune the regressor even more and create some a foundation from which we can begin to more accurately interpret the performance of the model.
+
+
+# Random Forests (RFs)
+
+## Introduction
+
+The data set that will be used for Random Forest classification is the same BLS data that was used for Decision Tree classification. Once again, our goal is to determine a job type based on its employment and wage metrics.
+
+## Theory
+
+Random Forests (RFs) are an ensemble learning method used for classification and regression. As the name suggests, RFs are composed of multiple decision trees. The algorithm works based on the "consensus of the masses" by creating a forest of uncorrelated decision trees that consider only a select subset of features, which is a notable difference from decision trees, which considers all possible feature splits. As such, the output from RFs is the class selected by the majority of the individual decision trees.
+
+![TIBCO / “What is a Random Forest?”](../../images/decisiontrees/rf_example.svg)
+
+For example, the above image is an example of the RF classification process. From the dataset, multiple decision trees (hence "forest") are generated, with each individual tree spitting out a classification result. Then the individual results from each tree are gathered, and a majority vote is conducted to decide on the final result (hence "consensus of the masses"). Since RFs are the consensus vote of multiple decision trees, we'd also generally expect the RF classification and regression results to outperform a single decision tree.
+
+## Methods
+
+### Random Forest Classification
+
+#### Imports
+
+```{python}
+import sklearn
+from sklearn import datasets
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+```
+
+#### Load Data
+
+```{python}
+df = pd.read_csv('../../../data/01-modified-data/occupations_detailed_(employment_and_wage).csv')
+
+## drop unneeded column created from read_csv
+df = df.iloc[:, 1:]
+
+## rename
+df.rename(columns={'TOT_EMP':'Total Employment', 'EMP_PRSE': 'Employment PRSE', 'A_MEAN':'Annual Mean Wage', 'MEAN_PRSE':'Mean Wage PRSE'}, inplace=True)
+```
+
+#### Separate Predictor and Response Variables
+
+```{python}
+# Y="Target" COLUMN and X="everything else"
+X = df.iloc[:, 2:6]
+Y = df.iloc[:, 7]
+```
+
+#### Normalization
+
+Since our predictors (X) consist of employment rates and mean annual wages, we first normalize our data to bring all the predictor values into a space that is unitless. This transformation of data brings everything to a similar scale, which makes it easier for the DT algorithm to "learn" the data. 
+
+```{python}
+X=0.1+(X-np.min(X,axis=0))/(np.max(X,axis=0)-np.min(X,axis=0))
+```
+
+#### Class Distribution
+
+##### Numerical EDA
+
+As shown in the output below, our target class is heavily imbalanced. Since this imbalance can skew the way the data is split into training and test sets, we will later stratify the data so the proportion of values in the training and test sets also reflect this imbalance.
+
+```{python}
+df['Target'].value_counts(ascending=True)
+```
+
+##### Multivariable Pair Plot
+
+As mentioned before, the distributions of the target class is heavily imbalanced. Again, we can see this visually represented in the density plots in the correlation multivariable pair plot below. 
+
+```{python}
+sns.pairplot(df.iloc[:, 2:7], hue='Target')
+plt.show()
+```
+
+#### Baseline: Random Classifier
+
+In order to have some baseline to compare our DT's performance, we defined a random classifier below.
+
+##### Define Random Classifier Function
+
+```{python}
+from collections import Counter
+from sklearn.metrics import precision_recall_fscore_support
+np.random.seed(seed=1234)
+
+def random_classifier(y_data):
+    ypred=[];
+    max_label=np.max(y_data); #print(max_label)
+    for i in range(0,len(y_data)):
+        ypred.append(int(np.floor((max_label+1)*np.random.uniform(0,1))))
+
+    print("-----RANDOM CLASSIFIER-----")
+    print("count of prediction:",Counter(ypred).values()) # counts the elements' frequency
+    print("probability of prediction:",np.fromiter(Counter(ypred).values(), dtype=float)/len(y_data)) # counts the elements' frequency
+    print("accuracy",accuracy_score(y_data, ypred))
+    print("precision, recall, fscore,",precision_recall_fscore_support(y_data, ypred))
+random_classifier(Y)
+```
+
+Based on the output above, we can see that accuracy of the random classifier is 0.04, which is around what we'd expect from randomly taking guesses for 22 target classes. We can also see that the precision, recall, and f-scores from the random classifier are all below 0.1. 
+
+#### Feature Selection
+
+##### Correlation
+
+The correlation output below shows a strong positive correlation (> 0.8) between employment percent relative standard error (EMP_PRSE) and mean annual salary percent relative standard error (MEAN_PRSE). Since we need to maintain independence among the predictor variables, I will drop employment percent relative standard error (EMP_PRSE) to prevent the model from overcounting similar features.
+
+```{python}
+corr = X.corr()
+print(corr)	
+```
+
+##### Correlation Matrix Heatmap
+
+The correlation matrix heatmap below reflects the previous correlation output. Again, there is a strong positive correlation between Employment percent relative standard error (PRSE) and mean annual salary PRSE.
+
+```{python}
+sns.set_theme(style="white")
+f, ax = plt.subplots(figsize=(11, 9))  # Set up the matplotlib figure
+cmap = sns.diverging_palette(230, 20, as_cmap=True) 	# Generate a custom diverging colormap
+# Draw the heatmap with the mask and correct aspect ratio
+sns.heatmap(corr,  cmap=cmap, vmin=-1, vmax=1, center=0,
+        square=True, linewidths=.5, cbar_kws={"shrink": .5})
+plt.show();
+```
+
+##### Remove Correlated Features
+
+```{python}
+X.drop(columns=['Employment PRSE'], inplace=True)
+```
+
+#### Split Data
+
+```{python}
+# PARTITION THE DATASET INTO TRAINING AND TEST SETS
+from sklearn.model_selection import train_test_split
+test_ratio=0.2
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=test_ratio, random_state=1234, stratify=Y)
+```
+
+#### Training the Model w/ Default Parameters
+
+```{python}
+# TRAIN A SKLEARN RANDOM FOREST MODEL ON x_train,y_train 
+from sklearn.ensemble import RandomForestClassifier
+model = RandomForestClassifier(random_state=1234)
+model = model.fit(x_train, y_train)
+```
+
+#### Check the Results
+
+```{python}
+# USE THE MODEL TO MAKE PREDICTIONS FOR THE TRAINING AND TEST SET 
+yp_train = model.predict(x_train)
+yp_test = model.predict(x_test)
+
+# GENERATES A CONFUSION MATRIX PLOT AND PRINTS MODEL PERFORMANCE METRICS
+def confusion_plot(y_data, y_pred):    
+    cm = confusion_matrix(y_data, y_pred)
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+    disp.plot()
+    
+    print('ACCURACY:', accuracy_score(y_data, y_pred))
+    print('RECALL:', recall_score(y_data, y_pred, average='weighted'))
+    print('PRECISION:', precision_score(y_data, y_pred, average='weighted'))
+    
+    plt.show()
+
+
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+
+print("------TRAINING------")
+confusion_plot(y_train,yp_train)
+print("------TEST------")
+confusion_plot(y_test,yp_test)
+```
+
+As shown in the correlation matrices above for both the training and test data sets, we can see that the RF resulted in a perfect fit for the training set but a much less adequate fit for the test set. Such a drastic difference in the accuracy, recall, and precision scores between the training and test sets suggest significant overfitting of the model (which is a notable characteristic of RFs). 
+
+#### Visualize the Tree
+
+```{python}
+from sklearn.ensemble import RandomForestRegressor
+from sklearn import tree
+
+regr = RandomForestRegressor(random_state=1234)
+model = regr.fit(x_train, y_train)
+
+# VISUALIZE A SINGLE TREE
+def plot_tree(model, X, Y):
+    fig = plt.figure(figsize=(25,20))
+    _ = tree.plot_tree(model.estimators_[0], 
+            feature_names=X.columns,  
+            filled=True)
+
+plot_tree(model, X, Y)
+
+plt.show();
+```
+
+#### Model Tuning
+
+As mentioned previously, the model with default parameters resulted in a heavily overfit RF. In order to find a more well-rounded model, we will perform model tuning.
+
+##### Hyperparameter Tuning
+
+First, we loop over possible hyperparameter values, ranging from 1 to 50, keeping track of the training and test sets' accuracy and recall scores for each hyperparameter value. We then create plots for accuracy and recall scores for the training and test sets to identify which number of layers for the RF would result in an optimal model. 
+
+```{python}
+# LOOP OVER POSSIBLE HYPER-PARAMETERS VALUES
+test_results=[]
+train_results=[]
+
+for num_layer in range(1,51):
+    model = RandomForestClassifier(max_depth=num_layer, random_state=1234)
+    model = model.fit(x_train, y_train)
+
+    yp_train=model.predict(x_train)
+    yp_test=model.predict(x_test)
+
+    # print(y_pred.shape)
+    test_results.append([num_layer,accuracy_score(y_test, yp_test),recall_score(y_test, yp_test, average='weighted')])
+    train_results.append([num_layer,accuracy_score(y_train, yp_train),recall_score(y_train, yp_train, average='weighted')])
+
+layers = [el[0] for el in test_results]
+          
+test_acc = [el[1] for el in test_results]
+test_rec = [el[2] for el in test_results]
+
+train_acc = [el[1] for el in train_results]
+train_rec = [el[2] for el in train_results]
+```
+
+##### Find Optimal Hyperparameter (Visual)
+
+Based on the plots below, we can narrow down the best hyperparameter value for our model as somewhere between 2-4, since both accuracy and recall scores begin to diverge more and more dramatically beginning from max_depth=5. 
+
+```{python}
+# GENERATE PLOTS TO IDENTIFY OPTIMAL HYPERPARAMETER
+def gen_plots(x, train, test):
+    plt.plot(x,train, c='b')
+    plt.scatter(x,train,c='b')
+    plt.plot(x,test,c='r')
+    plt.scatter(x,test,c='r')
+    plt.xlabel("Number of layers in decision tree (max_depth)")
+    plt.show();
+
+plt.ylabel("ACCURACY: Training (blue) and Test (red)")
+gen_plots(layers, train_acc, test_acc)
+plt.ylabel("RECALL: Training (blue) and Test (red)")
+gen_plots(layers, train_rec, test_rec)
+```
+
+##### Find Optimal Hyperparameter (GridSearch)
+
+In addition to the max_depth parameter, we also need to find the optimal number of actual DTs that compose the RF, represented by the n_estimators parameter. To do this, we will do a grid search for max_depth values from 1 to 5 and number of DTs ranging from 1 to 100.
+
+```{python}
+# ref: https://medium.datadriveninvestor.com/random-forest-regression-9871bc9a25eb
+
+from sklearn.model_selection import cross_val_score, GridSearchCV
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.preprocessing import MinMaxScaler
+def rfr_model(X, y):
+# Perform Grid-Search
+    gsc = GridSearchCV(
+        estimator=RandomForestRegressor(random_state=1234),
+        param_grid={
+            'max_depth': range(1,5),
+            'n_estimators': range(1,101),
+        },
+        cv=5, scoring='neg_mean_squared_error', verbose=0, n_jobs=-1)
+    
+    grid_result = gsc.fit(X, y)
+    best_params = grid_result.best_params_
+    return best_params
+
+best_params = rfr_model(X, Y)
+best_params
+```
+
+We can see from the output below that the optimal parameters are max_depth=4 and n_estimators=11. Notably, the max_depth parameter matches our prior visual exploration of optimal hyperparameter values.
+
+#### Train Optimal Model
+
+```{python}
+model = RandomForestClassifier(max_depth=best_params['max_depth'], n_estimators=best_params['n_estimators'], random_state=1234)
+model = model.fit(x_train, y_train)
+
+yp_train=model.predict(x_train)
+yp_test=model.predict(x_test)
+
+print("------TRAINING------")
+confusion_plot(y_train,yp_train)
+print("------TEST------")
+confusion_plot(y_test,yp_test)
+```
+
+```{python}
+# VISUALIZE 5 TREES
+regr = RandomForestRegressor(random_state=1234, max_depth=4, n_estimators=50)
+model = regr.fit(x_train, y_train)
+
+## ref: https://stackoverflow.com/questions/40155128/plot-trees-for-a-random-forest-in-python-with-scikit-learn
+def plot_tree(model, X, Y):
+    fig, axes = plt.subplots(nrows = 1,ncols = 5,figsize = (10,2), dpi=900)
+    for index in range(0, 5):
+        tree.plot_tree(model.estimators_[index],
+                    feature_names=X.columns, 
+                    filled = True,
+                    ax = axes[index]);
+        axes[index].set_title('Estimator: ' + str(index), fontsize = 11)
+        
+plot_tree(model, X, Y)
+```
+
+### Random Forest Classification Results
+
+The confusion matrices above show a large decrease in the accuracy, recall, and precision scores for both the training and test sets compared to the metrics from our original model with default parameters; however, we are now no longer overfitting. The accuracy and recall scores are around 0.3, and precision is around 0.22. These trends are also reflected in the RF. With reducing the depth of the tree, we inevitably reduce the accuracy, recall, and precision scores of the model; however, we also reduce overfitting and increase generalizability. 
+
+## Conclusions
+
+Our RF model, given a job type's employment and wage metrics, can classify the associated job type with an accuracy of 0.3. Based on the RF classification results, we can see that our optimized model outperforms the random classifier by about 8 times (accuracy=0.04 vs. accuracy=0.3), which is quite a large improvement from classifying completely randomly. Additionally, our RF classification model also outperforms the results from our decision tree classification results (accuracy=0.3 vs. accuracy=0.28). This result is to be expected, since RFs are composed of multiple decision trees.
+
+Nonetheless, the model can definitely see some improvements. Most notably, RFs, since they're composed of decision trees, also suffer from similar shortcomings, such as poor performance on unbalanced data sets. As such, obtaining more data to create a balanced data set may improve the classifier's performance. Additionally, having more predictor variables with which the classifier could work may generally help fine-tune the classifier further.
+

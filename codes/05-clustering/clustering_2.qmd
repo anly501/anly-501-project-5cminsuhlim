@@ -39,10 +39,10 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 ```
 
-## Data Selection
+### Load Data
 
 ```{python}
-df = pd.read_csv('../../../data/01-modified-data/occupations_detailed_(employment_by_sex_and_wage).csv')
+df = pd.read_csv('../../data/01-modified-data/occupations_detailed_(employment_by_sex_and_wage).csv')
 
 ## drop unneeded column created from read_csv
 df = df.iloc[:, 1:]
@@ -56,7 +56,7 @@ df = df[['TOT_EMP', 'A_MEAN', 'Women (%)', 'Men (%)', 'Target', 'Target_Num', 'O
 df = df.rename(columns={'TOT_EMP':'Total Employment', 'A_MEAN':'Mean Annual Wage'})
 ```
 
-## Feature Selection
+### Feature Selection
 
 As we can see, we have a heavily imbalanced data set.
 
@@ -70,7 +70,7 @@ We perform some pre-processing to ensure the best clustering results. First, we 
 X = df.iloc[:, 0:4]
 ```
 
-### Normalization
+#### Normalization
 
 Since our predictors (X) consist of values that are outside the ideal range of [0, 1], we first normalize our data to bring all the predictor values into a space that is unitless. This transformation of data brings everything to a similar scale, which makes it easier for the classifiers to "learn" the data. 
 
@@ -78,7 +78,7 @@ Since our predictors (X) consist of values that are outside the ideal range of [
 X=0.1+(X-np.min(X,axis=0))/(np.max(X,axis=0)-np.min(X,axis=0))
 ```
 
-### Correlation
+#### Correlation
 
 The correlation output below shows an inverse correlation (= -1) between % of Women in the occupation and % of Men in the occupation (which is to be expected). Since we need to maintain independence among the predictor variables, I will drop % of Men in the occupation (Men (%)) to prevent the model from overcounting similar features.
 
@@ -108,9 +108,9 @@ plt.show()
 X.drop(columns=['Men (%)'], inplace=True)
 ```
 
-## Model Tuning
+### Model Tuning
 
-### Pre-processing and Helper Functions
+#### Pre-processing and Helper Functions
 
 ```{python}
 X = np.ascontiguousarray(X)
@@ -212,9 +212,9 @@ def plot_silhouette(X,nmax=10):
         silhouette.show()  
 ```
 
-## K-Means
+### K-Means
 
-### Hyperparameter Tuning 
+#### Hyperparameter Tuning 
 
 The plot below shows the silhouette coefficient for varying numbers of clusters. The silhouette coefficient peaks at k=3, which would be our optimal number of clusters.
 
@@ -226,10 +226,11 @@ opt_labels=maximize_silhouette(X,algo="kmeans",i_plot=True)
 The silhouette plots below also show similar results with the silhouette scores peaking when k=3.
 
 ```{python}
+#| layout-ncol: 2
 plot_silhouette(X, nmax=6)
 ```
 
-### Final Results
+#### K-Means Final Results
 
 Given the optimal hyperparameter, we cluster our data below with K-Means.
 
@@ -237,11 +238,11 @@ Given the optimal hyperparameter, we cluster our data below with K-Means.
 plot(X,opt_labels,"K-Means Clustering")
 ```
 
-## DBSCAN
+### DBSCAN
 
 DBSCAN hyperparameter tuning is slightly different from K-Means and Hierarchical, which focuses on the number of clusters. Rather, DBSCAN parameter optimization relies on epsilon (EPS), which dictates how close points have to be to each other to be considered a part of a cluster, and min_samples, which dictates how many points are needed to form a cluster.
 
-### Hyperparameter Tuning 
+#### Hyperparameter Tuning 
 
 The plot below shows the number of data points in our data set and varying epsilon values. Epsilon in the plot below is labeled as "Distance," since epsilon is a measure of maximum distance between two points that are in the same cluster. Here, we're looking for the point of maximum curvature, which seems to be around eps=[0.15, 0.2].
 
@@ -288,7 +289,7 @@ Below, we take the natural log of the total number of observations in our data s
 min_samples = round(np.log(df.shape[0]))
 ```
 
-### Final Results
+#### DBSCAN Final Results
 
 We then create the DBSCAN model with our optimal parameters and get a respectable silhouette coefficient.
 
@@ -304,9 +305,9 @@ Given the optimal hyperparameters, we cluster our data below.
 plot(X,opt_labels,'DBSCAN Clustering')
 ```
 
-## Hierarchical (Agglomerative)
+### Hierarchical (Agglomerative)
 
-### Hyperparameter Tuning 
+#### Hyperparameter Tuning 
 
 The plot below shows the silhouette coefficient for varying numbers of clusters. The silhouette coefficient peaks at k=4, which would be our optimal number of clusters.
 
@@ -315,7 +316,7 @@ The plot below shows the silhouette coefficient for varying numbers of clusters.
 opt_labels=maximize_silhouette(X,algo="ag",i_plot=True)
 ```
 
-### Final Results
+#### Hierarchical Final Results
 
 Given the optimal hyperparameter, we cluster our data below with Agglomerative clustering.
 
@@ -335,10 +336,12 @@ plt.title("Euclidean Distance Dendogram")
 plt.xticks([]) # clear clutter from x axis ticks
 ```
 
-## Results
+### Results
 
 Based on the final results for the three methods, the optimal number of clusters for DBSCAN, K-Means, and Hierarchical were 2, 3, and 4, respectively. Based on the silhouette coefficients across the three clustering algorithms, K-Means performed the best with the highest silhouette coefficient of 0.466, followed by Hierarchical with a coefficient of 0.435, and then DBSCAN with a coefficient of 0.340. In terms of setting up the models and the respective visualizations, K-Means was by far the most straightforward, followed by Hierarchical, and then DBSCAN. Interestingly, despite the ease of set up, this is the exact order of the silhouette coefficients as well.
 
+## Conclusion
+
 None of the algorithms were able to completely accurately create optimal cluster predictions that coincided with the "Target" values we had in the data set; nonetheless, this reveals some new insights regarding our data. Firstly, the clustering results, especially the results from K-Means and Hierarchical clustering, seems to suggest that there are largely 3 or 4 major industries that most occupations fall under. Secondly, based on the results from DBSCAN, it seems that most jobs, when clustered based on total employment, annual mean wages, and female participation, cluster together.
 
-The data with which the clustering was conducted is heavily imbalanced. Occupation categories (labeled as "Target" in the data set) ranged from having a single occupation in a larger category all the way up to 35 occupations. Hence, model improvements definitely could be seen if we had a more balanced data set. Nonetheless, our clustering results reveal some new insights regarding our data. Upon closer inspection of our original data set (from the "Numerical EDA" section in the Methods section) in tandem with our clustering results, these industries seem to be Service, Labor, Engineering, and Management.
+The data with which the clustering was conducted is heavily imbalanced. Occupation categories (labeled as "Target" in the data set) ranged from having a single occupation in a larger category all the way up to 35 occupations. Hence, model improvements definitely could be seen if we had a more balanced data set. Nonetheless, our clustering results reveal some new insights regarding our data. Upon closer inspection of our original data set (from the "Numerical EDA" section in the Methods section) in tandem with our clustering results, these industries seem to be Service, Labor, Professional, and Arts.

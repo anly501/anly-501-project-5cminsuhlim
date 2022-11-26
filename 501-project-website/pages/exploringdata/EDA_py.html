@@ -14572,24 +14572,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
     </script>
     <!-- End of mathjax configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;C:/Users/Eric/&#39;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14599,13 +14582,36 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">seaborn_visualizer</span> <span class="k">as</span> <span class="nn">sbv</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>c:\Users\Eric\anaconda3\envs\ANLY501\lib\site-packages\scipy\__init__.py:146: UserWarning: A NumPy version &gt;=1.16.5 and &lt;1.23.0 is required for this version of SciPy (detected version 1.23.1
+  warnings.warn(f&#34;A NumPy version &gt;={np_minversion} and &lt;{np_maxversion}&#34;
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -14793,14 +14799,227 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../../data/01-modified-data/big_five_final.csv&#39;</span><span class="p">)</span>
-<span class="n">sbv</span><span class="o">.</span><span class="n">get_pd_info</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-<span class="n">sbv</span><span class="o">.</span><span class="n">pd_general_plots</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/01-modified-data/big_five_final.csv&#39;</span><span class="p">)</span>
+<span class="c1">#sbv.get_pd_info(df)</span>
+<span class="c1">#sbv.pd_general_plots(df)</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">2</span><span class="p">:]]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;agreeable_score&quot;</span><span class="p">:</span><span class="s1">&#39;agreeableness&#39;</span><span class="p">,</span> <span class="s2">&quot;extraversion_score&quot;</span><span class="p">:</span><span class="s1">&#39;extraversion&#39;</span><span class="p">,</span> <span class="s2">&quot;openness_score&quot;</span><span class="p">:</span><span class="s1">&#39;openness&#39;</span><span class="p">,</span> <span class="s2">&quot;conscientiousness_score&quot;</span><span class="p">:</span><span class="s1">&#39;conscientiousness&#39;</span><span class="p">,</span> <span class="s2">&quot;neuroticism_score&quot;</span><span class="p">:</span><span class="s1">&#39;neuroticism&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>sex</th>
+      <th>agreeableness</th>
+      <th>extraversion</th>
+      <th>openness</th>
+      <th>conscientiousness</th>
+      <th>neuroticism</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>17</td>
+      <td>1</td>
+      <td>0.603333</td>
+      <td>0.586667</td>
+      <td>0.653333</td>
+      <td>0.596667</td>
+      <td>0.623333</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>18</td>
+      <td>1</td>
+      <td>0.610000</td>
+      <td>0.706667</td>
+      <td>0.886667</td>
+      <td>0.590000</td>
+      <td>0.656667</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>20</td>
+      <td>1</td>
+      <td>0.720000</td>
+      <td>0.730000</td>
+      <td>0.856667</td>
+      <td>0.806667</td>
+      <td>0.303333</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>34</td>
+      <td>1</td>
+      <td>0.786667</td>
+      <td>0.810000</td>
+      <td>0.810000</td>
+      <td>0.810000</td>
+      <td>0.510000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>24</td>
+      <td>1</td>
+      <td>0.573333</td>
+      <td>0.646667</td>
+      <td>0.770000</td>
+      <td>0.926667</td>
+      <td>0.463333</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>212620</th>
+      <td>35</td>
+      <td>2</td>
+      <td>0.723333</td>
+      <td>0.816667</td>
+      <td>0.783333</td>
+      <td>0.853333</td>
+      <td>0.320000</td>
+    </tr>
+    <tr>
+      <th>212621</th>
+      <td>14</td>
+      <td>2</td>
+      <td>0.600000</td>
+      <td>0.540000</td>
+      <td>0.900000</td>
+      <td>0.656667</td>
+      <td>0.780000</td>
+    </tr>
+    <tr>
+      <th>212622</th>
+      <td>20</td>
+      <td>2</td>
+      <td>0.763333</td>
+      <td>0.843333</td>
+      <td>0.710000</td>
+      <td>0.776667</td>
+      <td>0.410000</td>
+    </tr>
+    <tr>
+      <th>212623</th>
+      <td>22</td>
+      <td>2</td>
+      <td>0.750000</td>
+      <td>0.556667</td>
+      <td>0.733333</td>
+      <td>0.766667</td>
+      <td>0.643333</td>
+    </tr>
+    <tr>
+      <th>212624</th>
+      <td>22</td>
+      <td>2</td>
+      <td>0.820000</td>
+      <td>0.716667</td>
+      <td>0.753333</td>
+      <td>0.723333</td>
+      <td>0.526667</td>
+    </tr>
+  </tbody>
+</table>
+<p>212625 rows × 7 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div>

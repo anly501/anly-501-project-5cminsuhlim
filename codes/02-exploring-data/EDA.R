@@ -136,6 +136,15 @@ ggplot(df[df$Measure=='Mean Annual Wage',], aes(fill=Occupation, x=Occupation, y
         theme(legend.position="none")
 df[df$Measure=='Mean Annual Wage',] %>% arrange(desc(Value))
 
+df <- read.csv('../../data/01-modified-data/occupations_detailed_(employment_and_wage).csv')
+df <- df[df['O_GROUP']=='detailed',]
+rownames(df) <- NULL # reset indices
+
+service <- (sum(df[176:192,]$A_MEAN) + sum(df[201:265,]$A_MEAN) + sum(df[372:546,]$A_MEAN))/(length(df[176:192,]$A_MEAN) + length(df[372:546,]$A_MEAN) + length(df[201:265,]$A_MEAN))
+labor <- mean(df[547:nrow(df),]$A_MEAN)
+professional <- (sum(df[1:38,]$A_MEAN) + sum(df[71:175,]$A_MEAN) + sum(df[193:200,]$A_MEAN) + sum(df[301:371,]$A_MEAN))/(length(df[1:38,]$A_MEAN) + length(df[71:175,]$A_MEAN) + length(df[193:200,]$A_MEAN) + length(df[301:371,]$A_MEAN))
+arts <- mean(df[265:299,]$A_MEAN)
+
 ## CAWP DATA ##
 df <- read.csv('../../data/01-modified-data/percent_us_women_in_gov_final.csv')
 ggplot(df, aes(x=Year, y=Value)) +

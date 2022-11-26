@@ -11,7 +11,7 @@
 10,Advertising and Promotions Managers,broad,22520,3.4,142860,1.9,Management Occupations,1
 11,Advertising and Promotions Managers,detailed,22520,3.4,142860,1.9,Management Occupations,1
 12,Marketing and Sales Managers,broad,732490,0.9,146600,0.4,Management Occupations,1
-13,Marketing Managers,detailed,278690,1.0,153440,0.5,Management Occupations,1
+13,Marketing Managers,detailed,278690,1,153440,0.5,Management Occupations,1
 14,Sales Managers,detailed,453800,1.2,142390,0.4,Management Occupations,1
 15,Public Relations and Fundraising Managers,broad,83040,1.7,132800,0.7,Management Occupations,1
 16,Public Relations Managers,detailed,59850,2.2,138000,0.9,Management Occupations,1
@@ -59,12 +59,12 @@
 58,Medical and Health Services Managers,detailed,436770,0.5,119840,0.3,Management Occupations,1
 59,Natural Sciences Managers,broad,74760,1.6,156110,0.7,Management Occupations,1
 60,Natural Sciences Managers,detailed,74760,1.6,156110,0.7,Management Occupations,1
-61,Postmasters and Mail Superintendents,broad,12750,0.0,81820,0,Management Occupations,1
-62,Postmasters and Mail Superintendents,detailed,12750,0.0,81820,0,Management Occupations,1
+61,Postmasters and Mail Superintendents,broad,12750,0,81820,0,Management Occupations,1
+62,Postmasters and Mail Superintendents,detailed,12750,0,81820,0,Management Occupations,1
 63,"Property, Real Estate, and Community Association Managers",broad,234680,2.6,70030,1.4,Management Occupations,1
 64,"Property, Real Estate, and Community Association Managers",detailed,234680,2.6,70030,1.4,Management Occupations,1
-65,Social and Community Service Managers,broad,156400,1.0,76790,0.5,Management Occupations,1
-66,Social and Community Service Managers,detailed,156400,1.0,76790,0.5,Management Occupations,1
+65,Social and Community Service Managers,broad,156400,1,76790,0.5,Management Occupations,1
+66,Social and Community Service Managers,detailed,156400,1,76790,0.5,Management Occupations,1
 67,Emergency Management Directors,broad,10320,1.6,84800,0.8,Management Occupations,1
 68,Emergency Management Directors,detailed,10320,1.6,84800,0.8,Management Occupations,1
 69,Personal Service Managers,broad,20060,6.5,74360,2.4,Management Occupations,1
@@ -80,7 +80,7 @@
 79,Buyers and Purchasing Agents,detailed,439020,0.6,72540,0.3,Business and Financial Operations Occupations,2
 80,"Claims Adjusters, Appraisers, Examiners, and Investigators",broad,289580,1.3,70850,0.5,Business and Financial Operations Occupations,2
 81,"Claims Adjusters, Examiners, and Investigators",detailed,278140,1.4,70960,0.5,Business and Financial Operations Occupations,2
-82,"Insurance Appraisers, Auto Damage",detailed,11430,4.0,68180,1,Business and Financial Operations Occupations,2
+82,"Insurance Appraisers, Auto Damage",detailed,11430,4,68180,1,Business and Financial Operations Occupations,2
 83,Compliance Officers,broad,334340,1.5,75810,0.5,Business and Financial Operations Occupations,2
 84,Compliance Officers,detailed,334340,1.5,75810,0.5,Business and Financial Operations Occupations,2
 85,Cost Estimators,broad,208950,1.1,73740,0.5,Business and Financial Operations Occupations,2
@@ -90,20 +90,20 @@
 89,Farm Labor Contractors,detailed,440,24.9,54400,7.2,Business and Financial Operations Occupations,2
 90,Labor Relations Specialists,detailed,63810,1.6,77070,1.1,Business and Financial Operations Occupations,2
 91,Logisticians and Project Management Specialists,broad,933180,0.7,94530,0.3,Business and Financial Operations Occupations,2
-92,Logisticians,detailed,189320,1.0,79230,0.5,Business and Financial Operations Occupations,2
+92,Logisticians,detailed,189320,1,79230,0.5,Business and Financial Operations Occupations,2
 93,Project Management Specialists,detailed,743860,0.8,98420,0.4,Business and Financial Operations Occupations,2
-94,Management Analysts,broad,768450,1.0,100530,0.5,Business and Financial Operations Occupations,2
-95,Management Analysts,detailed,768450,1.0,100530,0.5,Business and Financial Operations Occupations,2
+94,Management Analysts,broad,768450,1,100530,0.5,Business and Financial Operations Occupations,2
+95,Management Analysts,detailed,768450,1,100530,0.5,Business and Financial Operations Occupations,2
 96,"Meeting, Convention, and Event Planners",broad,98150,1.9,57850,0.9,Business and Financial Operations Occupations,2
 97,"Meeting, Convention, and Event Planners",detailed,98150,1.9,57850,0.9,Business and Financial Operations Occupations,2
 98,Fundraisers,broad,82080,1.3,64870,0.6,Business and Financial Operations Occupations,2
 99,Fundraisers,detailed,82080,1.3,64870,0.6,Business and Financial Operations Occupations,2
 100,"Compensation, Benefits, and Job Analysis Specialists",broad,87750,1.6,73810,0.5,Business and Financial Operations Occupations,2
 101,"Compensation, Benefits, and Job Analysis Specialists",detailed,87750,1.6,73810,0.5,Business and Financial Operations Occupations,2
-102,Training and Development Specialists,broad,336030,1.0,67620,0.6,Business and Financial Operations Occupations,2
-103,Training and Development Specialists,detailed,336030,1.0,67620,0.6,Business and Financial Operations Occupations,2
-104,Market Research Analysts and Marketing Specialists,broad,727540,1.0,76080,0.4,Business and Financial Operations Occupations,2
-105,Market Research Analysts and Marketing Specialists,detailed,727540,1.0,76080,0.4,Business and Financial Operations Occupations,2
+102,Training and Development Specialists,broad,336030,1,67620,0.6,Business and Financial Operations Occupations,2
+103,Training and Development Specialists,detailed,336030,1,67620,0.6,Business and Financial Operations Occupations,2
+104,Market Research Analysts and Marketing Specialists,broad,727540,1,76080,0.4,Business and Financial Operations Occupations,2
+105,Market Research Analysts and Marketing Specialists,detailed,727540,1,76080,0.4,Business and Financial Operations Occupations,2
 106,Miscellaneous Business Operations Specialists,broad,1030330,0.6,79240,0.4,Business and Financial Operations Occupations,2
 107,"Business Operations Specialists, All Other",detailed,1030330,0.6,79240,0.4,Business and Financial Operations Occupations,2
 108,Financial Specialists,minor,2900840,0.5,87350,0.3,Business and Financial Operations Occupations,2
@@ -133,8 +133,8 @@
 132,Computer and Mathematical Occupations,major,4654750,0.4,99860,0.3,Computer and Mathematical Occupations,3
 133,Computer Occupations,minor,4389910,0.4,99620,0.3,Computer and Mathematical Occupations,3
 134,Computer and Information Analysts,broad,662370,0.9,104840,0.4,Computer and Mathematical Occupations,3
-135,Computer Systems Analysts,detailed,505150,1.0,102210,0.5,Computer and Mathematical Occupations,3
-136,Information Security Analysts,detailed,157220,2.0,113270,0.6,Computer and Mathematical Occupations,3
+135,Computer Systems Analysts,detailed,505150,1,102210,0.5,Computer and Mathematical Occupations,3
+136,Information Security Analysts,detailed,157220,2,113270,0.6,Computer and Mathematical Occupations,3
 137,Computer and Information Research Scientists,broad,30840,3.8,142650,1.7,Computer and Mathematical Occupations,3
 138,Computer and Information Research Scientists,detailed,30840,3.8,142650,1.7,Computer and Mathematical Occupations,3
 139,Computer Support Specialists,broad,830510,0.8,60550,0.4,Computer and Mathematical Occupations,3
@@ -146,7 +146,7 @@
 145,Database Architects,detailed,50440,5.5,121840,2.5,Computer and Mathematical Occupations,3
 146,Network and Computer Systems Administrators,detailed,316760,1.1,91250,0.8,Computer and Mathematical Occupations,3
 147,"Software and Web Developers, Programmers, and Testers",broad,1874100,0.6,113720,0.4,Computer and Mathematical Occupations,3
-148,Computer Programmers,detailed,152610,2.0,96650,1.1,Computer and Mathematical Occupations,3
+148,Computer Programmers,detailed,152610,2,96650,1.1,Computer and Mathematical Occupations,3
 149,Software Developers,detailed,1364180,0.7,120990,0.4,Computer and Mathematical Occupations,3
 150,Software Quality Assurance Analysts and Testers,detailed,190120,1.7,97710,0.7,Computer and Mathematical Occupations,3
 151,Web Developers,detailed,84820,2.7,81320,1.1,Computer and Mathematical Occupations,3
@@ -160,8 +160,8 @@
 159,Mathematicians,detailed,1770,2.8,112430,1.1,Computer and Mathematical Occupations,3
 160,Operations Research Analysts,broad,98700,3.2,95830,2.1,Computer and Mathematical Occupations,3
 161,Operations Research Analysts,detailed,98700,3.2,95830,2.1,Computer and Mathematical Occupations,3
-162,Statisticians,broad,31370,3.0,99450,1.1,Computer and Mathematical Occupations,3
-163,Statisticians,detailed,31370,3.0,99450,1.1,Computer and Mathematical Occupations,3
+162,Statisticians,broad,31370,3,99450,1.1,Computer and Mathematical Occupations,3
+163,Statisticians,detailed,31370,3,99450,1.1,Computer and Mathematical Occupations,3
 164,Data Scientists,broad,105980,2.4,108660,1.1,Computer and Mathematical Occupations,3
 165,Data Scientists,detailed,105980,2.4,108660,1.1,Computer and Mathematical Occupations,3
 166,Miscellaneous Mathematical Science Occupations,broad,3970,6.1,77960,2.3,Computer and Mathematical Occupations,3
@@ -170,9 +170,9 @@
 169,"Architects, Surveyors, and Cartographers",minor,176840,1.2,82880,0.7,Architecture and Engineering Occupations,4
 170,"Architects, Except Naval",broad,117830,1.3,89400,0.8,Architecture and Engineering Occupations,4
 171,"Architects, Except Landscape and Naval",detailed,100400,1.5,91900,0.9,Architecture and Engineering Occupations,4
-172,Landscape Architects,detailed,17430,4.0,74980,1.3,Architecture and Engineering Occupations,4
+172,Landscape Architects,detailed,17430,4,74980,1.3,Architecture and Engineering Occupations,4
 173,"Surveyors, Cartographers, and Photogrammetrists",broad,59000,2.2,69870,1,Architecture and Engineering Occupations,4
-174,Cartographers and Photogrammetrists,detailed,12610,3.0,73510,1.1,Architecture and Engineering Occupations,4
+174,Cartographers and Photogrammetrists,detailed,12610,3,73510,1.1,Architecture and Engineering Occupations,4
 175,Surveyors,detailed,46390,2.8,68880,1.3,Architecture and Engineering Occupations,4
 176,Engineers,minor,1631080,0.5,104000,0.3,Architecture and Engineering Occupations,4
 177,Aerospace Engineers,broad,56640,2.6,122970,0.7,Architecture and Engineering Occupations,4
@@ -185,22 +185,22 @@
 184,Chemical Engineers,detailed,24180,3.3,121840,3.6,Architecture and Engineering Occupations,4
 185,Civil Engineers,broad,304310,1.3,95490,0.5,Architecture and Engineering Occupations,4
 186,Civil Engineers,detailed,304310,1.3,95490,0.5,Architecture and Engineering Occupations,4
-187,Computer Hardware Engineers,broad,73750,2.0,136230,0.9,Architecture and Engineering Occupations,4
-188,Computer Hardware Engineers,detailed,73750,2.0,136230,0.9,Architecture and Engineering Occupations,4
+187,Computer Hardware Engineers,broad,73750,2,136230,0.9,Architecture and Engineering Occupations,4
+188,Computer Hardware Engineers,detailed,73750,2,136230,0.9,Architecture and Engineering Occupations,4
 189,Electrical and Electronics Engineers,broad,293190,1.1,110670,0.4,Architecture and Engineering Occupations,4
 190,Electrical Engineers,detailed,186020,1.4,107890,0.5,Architecture and Engineering Occupations,4
 191,"Electronics Engineers, Except Computer",detailed,107170,1.4,115490,0.5,Architecture and Engineering Occupations,4
 192,Environmental Engineers,broad,42660,2.6,100220,1.2,Architecture and Engineering Occupations,4
 193,Environmental Engineers,detailed,42660,2.6,100220,1.2,Architecture and Engineering Occupations,4
 194,"Industrial Engineers, Including Health and Safety",broad,316820,0.9,95520,0.4,Architecture and Engineering Occupations,4
-195,"Health and Safety Engineers, Except Mining Safety Engineers and Inspectors",detailed,22870,4.0,99700,0.9,Architecture and Engineering Occupations,4
+195,"Health and Safety Engineers, Except Mining Safety Engineers and Inspectors",detailed,22870,4,99700,0.9,Architecture and Engineering Occupations,4
 196,Industrial Engineers,detailed,293950,0.9,95200,0.4,Architecture and Engineering Occupations,4
 197,Marine Engineers and Naval Architects,broad,7380,8.9,97820,3.9,Architecture and Engineering Occupations,4
 198,Marine Engineers and Naval Architects,detailed,7380,8.9,97820,3.9,Architecture and Engineering Occupations,4
 199,Materials Engineers,broad,21530,2.7,101950,0.8,Architecture and Engineering Occupations,4
 200,Materials Engineers,detailed,21530,2.7,101950,0.8,Architecture and Engineering Occupations,4
-201,Mechanical Engineers,broad,278240,1.0,97000,0.6,Architecture and Engineering Occupations,4
-202,Mechanical Engineers,detailed,278240,1.0,97000,0.6,Architecture and Engineering Occupations,4
+201,Mechanical Engineers,broad,278240,1,97000,0.6,Architecture and Engineering Occupations,4
+202,Mechanical Engineers,detailed,278240,1,97000,0.6,Architecture and Engineering Occupations,4
 203,"Mining and Geological Engineers, Including Mining Safety Engineers",broad,7370,3.7,100450,1.1,Architecture and Engineering Occupations,4
 204,"Mining and Geological Engineers, Including Mining Safety Engineers",detailed,7370,3.7,100450,1.1,Architecture and Engineering Occupations,4
 205,Nuclear Engineers,broad,12670,5.1,121760,2.3,Architecture and Engineering Occupations,4
@@ -221,7 +221,7 @@
 220,Electrical and Electronic Engineering Technologists and Technicians,detailed,101450,1.4,69070,0.5,Architecture and Engineering Occupations,4
 221,Electro-Mechanical and Mechatronics Technologists and Technicians,detailed,11590,4.6,63880,1.4,Architecture and Engineering Occupations,4
 222,Environmental Engineering Technologists and Technicians,detailed,14910,5.5,56590,1.5,Architecture and Engineering Occupations,4
-223,Industrial Engineering Technologists and Technicians,detailed,62030,2.0,61230,0.5,Architecture and Engineering Occupations,4
+223,Industrial Engineering Technologists and Technicians,detailed,62030,2,61230,0.5,Architecture and Engineering Occupations,4
 224,Mechanical Engineering Technologists and Technicians,detailed,40180,2.2,63390,0.6,Architecture and Engineering Occupations,4
 225,Calibration Technologists and Technicians,detailed,8500,4.9,62800,1.4,Architecture and Engineering Occupations,4
 226,"Engineering Technologists and Technicians, Except Drafters, All Other",detailed,73600,1.8,68290,0.6,Architecture and Engineering Occupations,4
@@ -229,7 +229,7 @@
 228,Surveying and Mapping Technicians,detailed,56070,2.7,49810,0.9,Architecture and Engineering Occupations,4
 229,"Life, Physical, and Social Science Occupations",major,1273640,0.5,80730,0.5,"Life, Physical, and Social Science Occupations",5
 230,Life Scientists,minor,304980,1.2,93190,0.7,"Life, Physical, and Social Science Occupations",5
-231,Agricultural and Food Scientists,broad,31920,3.0,79970,1.4,"Life, Physical, and Social Science Occupations",5
+231,Agricultural and Food Scientists,broad,31920,3,79970,1.4,"Life, Physical, and Social Science Occupations",5
 232,Animal Scientists,detailed,2790,7.1,80390,7.2,"Life, Physical, and Social Science Occupations",5
 233,Food Scientists and Technologists,detailed,13510,4.8,84150,2,"Life, Physical, and Social Science Occupations",5
 234,Soil and Plant Scientists,detailed,15610,4.8,76290,2,"Life, Physical, and Social Science Occupations",5
@@ -237,16 +237,16 @@
 236,Biochemists and Biophysicists,detailed,35050,6.7,113460,2.2,"Life, Physical, and Social Science Occupations",5
 237,Microbiologists,detailed,19430,3.9,87820,1.4,"Life, Physical, and Social Science Occupations",5
 238,Zoologists and Wildlife Biologists,detailed,15930,3.1,70300,0.6,"Life, Physical, and Social Science Occupations",5
-239,"Biological Scientists, All Other",detailed,47050,3.0,90010,1.1,"Life, Physical, and Social Science Occupations",5
+239,"Biological Scientists, All Other",detailed,47050,3,90010,1.1,"Life, Physical, and Social Science Occupations",5
 240,Conservation Scientists and Foresters,broad,32040,2.1,68080,0.9,"Life, Physical, and Social Science Occupations",5
-241,Conservation Scientists,detailed,22550,2.0,68230,0.8,"Life, Physical, and Social Science Occupations",5
+241,Conservation Scientists,detailed,22550,2,68230,0.8,"Life, Physical, and Social Science Occupations",5
 242,Foresters,detailed,9500,5.6,67710,2,"Life, Physical, and Social Science Occupations",5
 243,Medical Scientists,broad,116740,1.6,102830,0.9,"Life, Physical, and Social Science Occupations",5
 244,Epidemiologists,detailed,8180,2.2,86740,1.2,"Life, Physical, and Social Science Occupations",5
 245,"Medical Scientists, Except Epidemiologists",detailed,108550,1.7,104050,0.9,"Life, Physical, and Social Science Occupations",5
 246,Miscellaneous Life Scientists,broad,6820,6.6,94430,3.9,"Life, Physical, and Social Science Occupations",5
 247,"Life Scientists, All Other",detailed,6820,6.6,94430,3.9,"Life, Physical, and Social Science Occupations",5
-248,Physical Scientists,minor,244340,1.0,96340,0.6,"Life, Physical, and Social Science Occupations",5
+248,Physical Scientists,minor,244340,1,96340,0.6,"Life, Physical, and Social Science Occupations",5
 249,Astronomers and Physicists,broad,21950,4.3,150510,0.7,"Life, Physical, and Social Science Occupations",5
 250,Astronomers,detailed,1930,16.4,139410,2.8,"Life, Physical, and Social Science Occupations",5
 251,Physicists,detailed,20020,4.4,151580,0.7,"Life, Physical, and Social Science Occupations",5
@@ -259,8 +259,8 @@
 258,"Environmental Scientists and Specialists, Including Health",detailed,76890,1.5,81240,0.9,"Life, Physical, and Social Science Occupations",5
 259,"Geoscientists, Except Hydrologists and Geographers",detailed,23620,3.2,103550,1.4,"Life, Physical, and Social Science Occupations",5
 260,Hydrologists,detailed,6390,5.5,94780,2.3,"Life, Physical, and Social Science Occupations",5
-261,Miscellaneous Physical Scientists,broad,19680,2.0,113220,0.8,"Life, Physical, and Social Science Occupations",5
-262,"Physical Scientists, All Other",detailed,19680,2.0,113220,0.8,"Life, Physical, and Social Science Occupations",5
+261,Miscellaneous Physical Scientists,broad,19680,2,113220,0.8,"Life, Physical, and Social Science Occupations",5
+262,"Physical Scientists, All Other",detailed,19680,2,113220,0.8,"Life, Physical, and Social Science Occupations",5
 263,Social Scientists and Related Workers,minor,246680,0.9,90810,0.8,"Life, Physical, and Social Science Occupations",5
 264,Economists,broad,15640,4.5,120830,1.7,"Life, Physical, and Social Science Occupations",5
 265,Economists,detailed,15640,4.5,120830,1.7,"Life, Physical, and Social Science Occupations",5
@@ -293,8 +293,8 @@
 292,"Environmental Science and Protection Technicians, Including Health",detailed,34110,3.1,50550,1,"Life, Physical, and Social Science Occupations",5
 293,"Geological Technicians, Except Hydrologic Technicians",detailed,9210,6.4,59080,2.5,"Life, Physical, and Social Science Occupations",5
 294,Hydrologic Technicians,detailed,3550,4.7,71760,2.6,"Life, Physical, and Social Science Occupations",5
-295,Nuclear Technicians,broad,5360,4.0,95200,1.1,"Life, Physical, and Social Science Occupations",5
-296,Nuclear Technicians,detailed,5360,4.0,95200,1.1,"Life, Physical, and Social Science Occupations",5
+295,Nuclear Technicians,broad,5360,4,95200,1.1,"Life, Physical, and Social Science Occupations",5
+296,Nuclear Technicians,detailed,5360,4,95200,1.1,"Life, Physical, and Social Science Occupations",5
 297,Social Science Research Assistants,broad,28690,1.9,56430,0.9,"Life, Physical, and Social Science Occupations",5
 298,Social Science Research Assistants,detailed,28690,1.9,56430,0.9,"Life, Physical, and Social Science Occupations",5
 299,Forest and Conservation Technicians,broad,30440,1.6,43420,0.3,"Life, Physical, and Social Science Occupations",5
@@ -305,14 +305,14 @@
 304,Occupational Health and Safety Specialists and Technicians,minor,128090,2.5,75150,1,"Life, Physical, and Social Science Occupations",5
 305,Occupational Health and Safety Specialists and Technicians,broad,128090,2.5,75150,1,"Life, Physical, and Social Science Occupations",5
 306,Occupational Health and Safety Specialists,detailed,106340,2.3,78740,1.1,"Life, Physical, and Social Science Occupations",5
-307,Occupational Health and Safety Technicians,detailed,21750,7.0,57560,2.2,"Life, Physical, and Social Science Occupations",5
+307,Occupational Health and Safety Technicians,detailed,21750,7,57560,2.2,"Life, Physical, and Social Science Occupations",5
 308,Community and Social Service Occupations,major,2239680,0.4,53960,0.3,Community and Social Service Occupations,6
 309,"Counselors, Social Workers, and Other Community and Social Service Specialists",minor,2157410,0.4,53950,0.3,Community and Social Service Occupations,6
 310,Counselors,broad,781830,0.6,56410,0.4,Community and Social Service Occupations,6
 311,"Educational, Guidance, and Career Counselors and Advisors",detailed,296370,0.8,63090,0.4,Community and Social Service Occupations,6
 312,Marriage and Family Therapists,detailed,54800,3.4,59660,1.5,Community and Social Service Occupations,6
 313,Rehabilitation Counselors,detailed,90310,2.3,44740,0.8,Community and Social Service Occupations,6
-314,"Substance Abuse, Behavioral Disorder, and Mental Health Counselors",detailed,310880,1.0,53490,0.5,Community and Social Service Occupations,6
+314,"Substance Abuse, Behavioral Disorder, and Mental Health Counselors",detailed,310880,1,53490,0.5,Community and Social Service Occupations,6
 315,"Counselors, All Other",detailed,29480,4.1,49730,1.8,Community and Social Service Occupations,6
 316,Social Workers,broad,677440,0.6,57880,0.3,Community and Social Service Occupations,6
 317,"Child, Family, and School Social Workers",detailed,340050,1.1,54880,0.4,Community and Social Service Occupations,6
@@ -322,20 +322,20 @@
 321,Miscellaneous Community and Social Service Specialists,broad,698130,0.7,47380,0.4,Community and Social Service Occupations,6
 322,Health Education Specialists,detailed,55830,2.3,64930,1,Community and Social Service Occupations,6
 323,Probation Officers and Correctional Treatment Specialists,detailed,92140,0.6,63290,0.3,Community and Social Service Occupations,6
-324,Social and Human Service Assistants,detailed,398380,1.0,40460,0.5,Community and Social Service Occupations,6
+324,Social and Human Service Assistants,detailed,398380,1,40460,0.5,Community and Social Service Occupations,6
 325,Community Health Workers,detailed,61010,2.2,47780,0.7,Community and Social Service Occupations,6
 326,"Community and Social Service Specialists, All Other",detailed,90770,1.9,50510,0.6,Community and Social Service Occupations,6
 327,Religious Workers,minor,82280,1.8,54340,1.1,Community and Social Service Occupations,6
-328,Clergy,broad,50790,2.0,57230,1.2,Community and Social Service Occupations,6
-329,Clergy,detailed,50790,2.0,57230,1.2,Community and Social Service Occupations,6
+328,Clergy,broad,50790,2,57230,1.2,Community and Social Service Occupations,6
+329,Clergy,detailed,50790,2,57230,1.2,Community and Social Service Occupations,6
 330,"Directors, Religious Activities and Education",broad,21000,4.2,52880,2.3,Community and Social Service Occupations,6
 331,"Directors, Religious Activities and Education",detailed,21000,4.2,52880,2.3,Community and Social Service Occupations,6
 332,Miscellaneous Religious Workers,broad,10490,7.9,43290,3.6,Community and Social Service Occupations,6
 333,"Religious Workers, All Other",detailed,10490,7.9,43290,3.6,Community and Social Service Occupations,6
 334,Legal Occupations,major,1178140,0.5,113100,1,Legal Occupations,7
 335,"Lawyers, Judges, and Related Workers",minor,744760,0.9,144470,1.1,Legal Occupations,7
-336,Lawyers and Judicial Law Clerks,broad,695810,1.0,146220,1.1,Legal Occupations,7
-337,Lawyers,detailed,681010,1.0,148030,1.1,Legal Occupations,7
+336,Lawyers and Judicial Law Clerks,broad,695810,1,146220,1.1,Legal Occupations,7
+337,Lawyers,detailed,681010,1,148030,1.1,Legal Occupations,7
 338,Judicial Law Clerks,detailed,14800,1.6,62730,1,Legal Occupations,7
 339,"Judges, Magistrates, and Other Judicial Workers",broad,48950,2.4,119690,1.9,Legal Occupations,7
 340,"Administrative Law Judges, Adjudicators, and Hearing Officers",detailed,13840,0.4,104160,0.6,Legal Occupations,7
@@ -344,7 +344,7 @@
 343,Legal Support Workers,minor,433380,1.4,59190,1,Legal Occupations,7
 344,Paralegals and Legal Assistants,broad,336250,1.8,58330,1.1,Legal Occupations,7
 345,Paralegals and Legal Assistants,detailed,336250,1.8,58330,1.1,Legal Occupations,7
-346,Miscellaneous Legal Support Workers,broad,97130,2.0,62170,0.9,Legal Occupations,7
+346,Miscellaneous Legal Support Workers,broad,97130,2,62170,0.9,Legal Occupations,7
 347,"Title Examiners, Abstractors, and Searchers",detailed,51040,2.7,52390,1.3,Legal Occupations,7
 348,"Legal Support Workers, All Other",detailed,46090,3.1,73000,1.3,Legal Occupations,7
 349,Educational Instruction and Library Occupations,major,8191930,0.2,62140,0.3,Educational Instruction and Library Occupations,8
@@ -360,7 +360,7 @@
 359,"Life Sciences Teachers, Postsecondary",broad,57440,0.4,98430,0.3,Educational Instruction and Library Occupations,8
 360,"Agricultural Sciences Teachers, Postsecondary",detailed,8570,1.5,97520,0.5,Educational Instruction and Library Occupations,8
 361,"Biological Science Teachers, Postsecondary",detailed,47690,0.3,98710,0.3,Educational Instruction and Library Occupations,8
-362,"Forestry and Conservation Science Teachers, Postsecondary",detailed,1180,1.0,93510,0.5,Educational Instruction and Library Occupations,8
+362,"Forestry and Conservation Science Teachers, Postsecondary",detailed,1180,1,93510,0.5,Educational Instruction and Library Occupations,8
 363,"Physical Sciences Teachers, Postsecondary",broad,48420,0.3,97110,0.3,Educational Instruction and Library Occupations,8
 364,"Atmospheric, Earth, Marine, and Space Sciences Teachers, Postsecondary",detailed,10250,0.7,102840,0.4,Educational Instruction and Library Occupations,8
 365,"Chemistry Teachers, Postsecondary",detailed,20260,0.4,94060,0.3,Educational Instruction and Library Occupations,8
@@ -405,8 +405,8 @@
 404,"Elementary School Teachers, Except Special Education",detailed,1329280,0.9,67080,0.5,Educational Instruction and Library Occupations,8
 405,"Middle School Teachers, Except Special and Career/Technical Education",detailed,592000,1.8,66880,0.9,Educational Instruction and Library Occupations,8
 406,"Career/Technical Education Teachers, Middle School",detailed,11840,5.4,69410,1.6,Educational Instruction and Library Occupations,8
-407,Secondary School Teachers,broad,1104600,1.0,69490,0.5,Educational Instruction and Library Occupations,8
-408,"Secondary School Teachers, Except Special and Career/Technical Education",detailed,1020240,1.0,69530,0.5,Educational Instruction and Library Occupations,8
+407,Secondary School Teachers,broad,1104600,1,69490,0.5,Educational Instruction and Library Occupations,8
+408,"Secondary School Teachers, Except Special and Career/Technical Education",detailed,1020240,1,69530,0.5,Educational Instruction and Library Occupations,8
 409,"Career/Technical Education Teachers, Secondary School",detailed,84360,2.8,68960,1.2,Educational Instruction and Library Occupations,8
 410,Special Education Teachers,broad,470960,0.9,68880,0.5,Educational Instruction and Library Occupations,8
 411,"Special Education Teachers, Preschool",detailed,21130,5.1,71970,1.5,Educational Instruction and Library Occupations,8
@@ -425,13 +425,13 @@
 424,Tutors,detailed,147100,2.1,41780,1.7,Educational Instruction and Library Occupations,8
 425,Miscellaneous Teachers and Instructors,broad,164650,1.9,62200,1.1,Educational Instruction and Library Occupations,8
 426,"Teachers and Instructors, All Other",detailed,164650,1.9,62200,1.1,Educational Instruction and Library Occupations,8
-427,"Librarians, Curators, and Archivists",minor,228900,1.0,55520,0.4,Educational Instruction and Library Occupations,8
+427,"Librarians, Curators, and Archivists",minor,228900,1,55520,0.4,Educational Instruction and Library Occupations,8
 428,"Archivists, Curators, and Museum Technicians",broad,28110,1.7,58830,1,Educational Instruction and Library Occupations,8
 429,Archivists,detailed,6120,4.5,61880,1.5,Educational Instruction and Library Occupations,8
 430,Curators,detailed,11030,2.1,63880,1.9,Educational Instruction and Library Occupations,8
 431,Museum Technicians and Conservators,detailed,10960,2.1,52030,1.2,Educational Instruction and Library Occupations,8
-432,Librarians and Media Collections Specialists,broad,127790,1.0,64180,0.4,Educational Instruction and Library Occupations,8
-433,Librarians and Media Collections Specialists,detailed,127790,1.0,64180,0.4,Educational Instruction and Library Occupations,8
+432,Librarians and Media Collections Specialists,broad,127790,1,64180,0.4,Educational Instruction and Library Occupations,8
+433,Librarians and Media Collections Specialists,detailed,127790,1,64180,0.4,Educational Instruction and Library Occupations,8
 434,Library Technicians,broad,73000,1.6,39070,0.5,Educational Instruction and Library Occupations,8
 435,Library Technicians,detailed,73000,1.6,39070,0.5,Educational Instruction and Library Occupations,8
 436,Other Educational Instruction and Library Occupations,minor,1659870,0.5,38620,0.3,Educational Instruction and Library Occupations,8
@@ -461,15 +461,15 @@
 460,Merchandise Displayers and Window Trimmers,detailed,159790,1.4,35520,0.8,"Arts, Design, Entertainment, Sports, and Media Occupations",9
 461,Set and Exhibit Designers,detailed,6850,8.1,62960,2.7,"Arts, Design, Entertainment, Sports, and Media Occupations",9
 462,"Designers, All Other",detailed,10190,5.8,73480,4.5,"Arts, Design, Entertainment, Sports, and Media Occupations",9
-463,"Entertainers and Performers, Sports and Related Workers",minor,438600,2.0,71870,2.9,"Arts, Design, Entertainment, Sports, and Media Occupations",9
+463,"Entertainers and Performers, Sports and Related Workers",minor,438600,2,71870,2.9,"Arts, Design, Entertainment, Sports, and Media Occupations",9
 464,"Actors, Producers, and Directors",broad,168350,4.8,95360,4.6,"Arts, Design, Entertainment, Sports, and Media Occupations",9
 466,Producers and Directors,detailed,138250,5.2,101950,4.5,"Arts, Design, Entertainment, Sports, and Media Occupations",9
 467,"Athletes, Coaches, Umpires, and Related Workers",broad,215690,1.5,54390,1.6,"Arts, Design, Entertainment, Sports, and Media Occupations",9
 468,Athletes and Sports Competitors,detailed,12320,8.8,116930,4.9,"Arts, Design, Entertainment, Sports, and Media Occupations",9
 469,Coaches and Scouts,detailed,193740,1.5,50550,1.1,"Arts, Design, Entertainment, Sports, and Media Occupations",9
-470,"Umpires, Referees, and Other Sports Officials",detailed,9620,8.0,51710,16.4,"Arts, Design, Entertainment, Sports, and Media Occupations",9
+470,"Umpires, Referees, and Other Sports Officials",detailed,9620,8,51710,16.4,"Arts, Design, Entertainment, Sports, and Media Occupations",9
 471,Dancers and Choreographers,broad,7850,8.2,50280,4.4,"Arts, Design, Entertainment, Sports, and Media Occupations",9
-473,Choreographers,detailed,3990,12.0,49630,6.3,"Arts, Design, Entertainment, Sports, and Media Occupations",9
+473,Choreographers,detailed,3990,12,49630,6.3,"Arts, Design, Entertainment, Sports, and Media Occupations",9
 475,Music Directors and Composers,detailed,9560,4.7,65080,3.1,"Arts, Design, Entertainment, Sports, and Media Occupations",9
 480,Media and Communication Workers,minor,573200,0.9,71760,1.4,"Arts, Design, Entertainment, Sports, and Media Occupations",9
 481,Broadcast Announcers and Radio Disc Jockeys,broad,24580,3.8,56110,2.4,"Arts, Design, Entertainment, Sports, and Media Occupations",9
@@ -490,7 +490,7 @@
 496,"Broadcast, Sound, and Lighting Technicians",broad,90940,3.2,55750,1.7,"Arts, Design, Entertainment, Sports, and Media Occupations",9
 497,Audio and Video Technicians,detailed,50590,3.9,55310,1.9,"Arts, Design, Entertainment, Sports, and Media Occupations",9
 498,Broadcast Technicians,detailed,25270,6.4,51280,3.3,"Arts, Design, Entertainment, Sports, and Media Occupations",9
-499,Sound Engineering Technicians,detailed,10800,10.0,67360,3,"Arts, Design, Entertainment, Sports, and Media Occupations",9
+499,Sound Engineering Technicians,detailed,10800,10,67360,3,"Arts, Design, Entertainment, Sports, and Media Occupations",9
 500,Lighting Technicians,detailed,4280,13.1,58020,4,"Arts, Design, Entertainment, Sports, and Media Occupations",9
 501,Photographers,broad,38420,4.6,48210,1.6,"Arts, Design, Entertainment, Sports, and Media Occupations",9
 502,Photographers,detailed,38420,4.6,48210,1.6,"Arts, Design, Entertainment, Sports, and Media Occupations",9
@@ -513,23 +513,23 @@
 519,Dietitians and Nutritionists,detailed,66690,1.6,65620,0.7,Healthcare Practitioners and Technical Occupations,10
 520,Optometrists,broad,38720,3.6,125440,1.2,Healthcare Practitioners and Technical Occupations,10
 521,Optometrists,detailed,38720,3.6,125440,1.2,Healthcare Practitioners and Technical Occupations,10
-522,Pharmacists,broad,312550,1.0,125690,0.3,Healthcare Practitioners and Technical Occupations,10
-523,Pharmacists,detailed,312550,1.0,125690,0.3,Healthcare Practitioners and Technical Occupations,10
+522,Pharmacists,broad,312550,1,125690,0.3,Healthcare Practitioners and Technical Occupations,10
+523,Pharmacists,detailed,312550,1,125690,0.3,Healthcare Practitioners and Technical Occupations,10
 524,Physician Assistants,broad,132940,1.6,119460,0.6,Healthcare Practitioners and Technical Occupations,10
 525,Physician Assistants,detailed,132940,1.6,119460,0.6,Healthcare Practitioners and Technical Occupations,10
-526,Podiatrists,broad,8840,6.0,158380,2.9,Healthcare Practitioners and Technical Occupations,10
-527,Podiatrists,detailed,8840,6.0,158380,2.9,Healthcare Practitioners and Technical Occupations,10
+526,Podiatrists,broad,8840,6,158380,2.9,Healthcare Practitioners and Technical Occupations,10
+527,Podiatrists,detailed,8840,6,158380,2.9,Healthcare Practitioners and Technical Occupations,10
 528,Therapists,broad,687440,0.5,84080,0.3,Healthcare Practitioners and Technical Occupations,10
 529,Occupational Therapists,detailed,127830,1.3,89470,0.8,Healthcare Practitioners and Technical Occupations,10
-530,Physical Therapists,detailed,225350,1.0,92920,0.4,Healthcare Practitioners and Technical Occupations,10
+530,Physical Therapists,detailed,225350,1,92920,0.4,Healthcare Practitioners and Technical Occupations,10
 531,Radiation Therapists,detailed,16050,3.2,94000,1,Healthcare Practitioners and Technical Occupations,10
 532,Recreational Therapists,detailed,16980,2.5,53900,0.9,Healthcare Practitioners and Technical Occupations,10
 533,Respiratory Therapists,detailed,133410,0.7,68190,0.2,Healthcare Practitioners and Technical Occupations,10
 534,Speech-Language Pathologists,detailed,147470,1.5,85820,0.5,Healthcare Practitioners and Technical Occupations,10
 535,Exercise Physiologists,detailed,6860,3.1,54030,1.1,Healthcare Practitioners and Technical Occupations,10
 536,"Therapists, All Other",detailed,13490,5.3,65030,2.1,Healthcare Practitioners and Technical Occupations,10
-537,Veterinarians,broad,77260,1.0,109920,0.7,Healthcare Practitioners and Technical Occupations,10
-538,Veterinarians,detailed,77260,1.0,109920,0.7,Healthcare Practitioners and Technical Occupations,10
+537,Veterinarians,broad,77260,1,109920,0.7,Healthcare Practitioners and Technical Occupations,10
+538,Veterinarians,detailed,77260,1,109920,0.7,Healthcare Practitioners and Technical Occupations,10
 539,Registered Nurses,broad,3047530,0.2,82750,0.2,Healthcare Practitioners and Technical Occupations,10
 540,Registered Nurses,detailed,3047530,0.2,82750,0.2,Healthcare Practitioners and Technical Occupations,10
 541,Nurse Anesthetists,broad,43950,4.7,202470,1.1,Healthcare Practitioners and Technical Occupations,10
@@ -540,7 +540,7 @@
 546,Nurse Practitioners,detailed,234690,1.3,118040,0.4,Healthcare Practitioners and Technical Occupations,10
 547,Audiologists,broad,13240,4.2,86050,2.1,Healthcare Practitioners and Technical Occupations,10
 548,Audiologists,detailed,13240,4.2,86050,2.1,Healthcare Practitioners and Technical Occupations,10
-549,Physicians,broad,641380,1.0,252480,0.6,Healthcare Practitioners and Technical Occupations,10
+549,Physicians,broad,641380,1,252480,0.6,Healthcare Practitioners and Technical Occupations,10
 550,Anesthesiologists,detailed,31130,8.1,331190,2,Healthcare Practitioners and Technical Occupations,10
 551,Cardiologists,detailed,18610,12.7,353970,1.5,Healthcare Practitioners and Technical Occupations,10
 552,Dermatologists,detailed,9230,13.1,302740,4.3,Healthcare Practitioners and Technical Occupations,10
@@ -556,7 +556,7 @@
 562,"Physicians, All Other",detailed,256670,1.6,231500,0.7,Healthcare Practitioners and Technical Occupations,10
 563,Surgeons,broad,58280,4.8,294520,2.7,Healthcare Practitioners and Technical Occupations,10
 564,"Ophthalmologists, Except Pediatric",detailed,11610,20.4,270090,10.5,Healthcare Practitioners and Technical Occupations,10
-565,"Orthopedic Surgeons, Except Pediatric",detailed,16260,7.0,306220,3.6,Healthcare Practitioners and Technical Occupations,10
+565,"Orthopedic Surgeons, Except Pediatric",detailed,16260,7,306220,3.6,Healthcare Practitioners and Technical Occupations,10
 566,Pediatric Surgeons,detailed,820,10.1,290310,1.7,Healthcare Practitioners and Technical Occupations,10
 567,"Surgeons, All Other",detailed,29590,5.2,297800,2.6,Healthcare Practitioners and Technical Occupations,10
 568,Miscellaneous Healthcare Diagnosing or Treating Practitioners,broad,240690,1.9,84550,0.7,Healthcare Practitioners and Technical Occupations,10
@@ -591,7 +591,7 @@
 597,"Opticians, Dispensing",detailed,73270,1.9,43060,1.2,Healthcare Practitioners and Technical Occupations,10
 598,Miscellaneous Health Technologists and Technicians,broad,161980,1.5,51910,0.6,Healthcare Practitioners and Technical Occupations,10
 599,Orthotists and Prosthetists,detailed,10410,4.5,79820,1.8,Healthcare Practitioners and Technical Occupations,10
-600,Hearing Aid Specialists,detailed,10790,6.0,59960,2.7,Healthcare Practitioners and Technical Occupations,10
+600,Hearing Aid Specialists,detailed,10790,6,59960,2.7,Healthcare Practitioners and Technical Occupations,10
 601,"Health Technologists and Technicians, All Other",detailed,140770,1.6,49230,0.6,Healthcare Practitioners and Technical Occupations,10
 602,Other Healthcare Practitioners and Technical Occupations,minor,128060,1.5,61470,1.2,Healthcare Practitioners and Technical Occupations,10
 603,Health Information Technologists and Medical Registrars,broad,37900,2.1,61410,1.3,Healthcare Practitioners and Technical Occupations,10
@@ -660,16 +660,16 @@
 666,Other Protective Service Workers,minor,1507480,0.5,36280,0.4,Protective Service Occupations,12
 667,Animal Control Workers,broad,11600,1.7,42620,0.8,Protective Service Occupations,12
 668,Animal Control Workers,detailed,11600,1.7,42620,0.8,Protective Service Occupations,12
-669,Private Detectives and Investigators,broad,28860,4.0,60970,1.5,Protective Service Occupations,12
-670,Private Detectives and Investigators,detailed,28860,4.0,60970,1.5,Protective Service Occupations,12
+669,Private Detectives and Investigators,broad,28860,4,60970,1.5,Protective Service Occupations,12
+670,Private Detectives and Investigators,detailed,28860,4,60970,1.5,Protective Service Occupations,12
 671,Security Guards and Gambling Surveillance Officers,broad,1066280,0.4,35860,0.4,Protective Service Occupations,12
 672,Gambling Surveillance Officers and Gambling Investigators,detailed,9190,2.1,38080,0.7,Protective Service Occupations,12
 673,Security Guards,detailed,1057100,0.4,35830,0.4,Protective Service Occupations,12
 674,Miscellaneous Protective Service Workers,broad,400740,1.4,35450,0.6,Protective Service Occupations,12
 675,Crossing Guards and Flaggers,detailed,82690,2.9,35670,1,Protective Service Occupations,12
-676,"Lifeguards, Ski Patrol, and Other Recreational Protective Service Workers",detailed,114320,4.0,27320,1.3,Protective Service Occupations,12
+676,"Lifeguards, Ski Patrol, and Other Recreational Protective Service Workers",detailed,114320,4,27320,1.3,Protective Service Occupations,12
 677,Transportation Security Screeners,detailed,48320,0.4,46380,0.2,Protective Service Occupations,12
-678,School Bus Monitors,detailed,55310,2.0,30220,0.6,Protective Service Occupations,12
+678,School Bus Monitors,detailed,55310,2,30220,0.6,Protective Service Occupations,12
 679,"Protective Service Workers, All Other",detailed,100110,2.4,42160,0.7,Protective Service Occupations,12
 680,Food Preparation and Serving Related Occupations,major,11201480,0.2,29450,0.4,Food Preparation and Serving Related Occupations,13
 681,Supervisors of Food Preparation and Serving Workers,minor,1170410,0.8,41130,0.6,Food Preparation and Serving Related Occupations,13
@@ -705,8 +705,8 @@
 711,Miscellaneous Food Preparation and Serving Related Workers,broad,83240,5.8,28760,1.3,Food Preparation and Serving Related Occupations,13
 712,"Food Preparation and Serving Related Workers, All Other",detailed,83240,5.8,28760,1.3,Food Preparation and Serving Related Occupations,13
 713,Building and Grounds Cleaning and Maintenance Occupations,major,4108810,0.3,33750,0.2,Building and Grounds Cleaning and Maintenance Occupations,14
-714,Supervisors of Building and Grounds Cleaning and Maintenance Workers,minor,270020,1.0,48620,0.4,Building and Grounds Cleaning and Maintenance Occupations,14
-715,First-Line Supervisors of Building and Grounds Cleaning and Maintenance Workers,broad,270020,1.0,48620,0.4,Building and Grounds Cleaning and Maintenance Occupations,14
+714,Supervisors of Building and Grounds Cleaning and Maintenance Workers,minor,270020,1,48620,0.4,Building and Grounds Cleaning and Maintenance Occupations,14
+715,First-Line Supervisors of Building and Grounds Cleaning and Maintenance Workers,broad,270020,1,48620,0.4,Building and Grounds Cleaning and Maintenance Occupations,14
 716,First-Line Supervisors of Housekeeping and Janitorial Workers,detailed,153640,1.1,45100,0.4,Building and Grounds Cleaning and Maintenance Occupations,14
 717,"First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers",detailed,116380,1.9,53270,0.7,Building and Grounds Cleaning and Maintenance Occupations,14
 718,Building Cleaning and Pest Control Workers,minor,2862840,0.3,31590,0.3,Building and Grounds Cleaning and Maintenance Occupations,14
@@ -714,8 +714,8 @@
 720,"Janitors and Cleaners, Except Maids and Housekeeping Cleaners",detailed,2036680,0.4,31860,0.3,Building and Grounds Cleaning and Maintenance Occupations,14
 721,Maids and Housekeeping Cleaners,detailed,723430,1.2,29580,0.3,Building and Grounds Cleaning and Maintenance Occupations,14
 722,"Building Cleaning Workers, All Other",detailed,17350,7.2,38530,3.1,Building and Grounds Cleaning and Maintenance Occupations,14
-723,Pest Control Workers,broad,85370,1.0,40640,0.8,Building and Grounds Cleaning and Maintenance Occupations,14
-724,Pest Control Workers,detailed,85370,1.0,40640,0.8,Building and Grounds Cleaning and Maintenance Occupations,14
+723,Pest Control Workers,broad,85370,1,40640,0.8,Building and Grounds Cleaning and Maintenance Occupations,14
+724,Pest Control Workers,detailed,85370,1,40640,0.8,Building and Grounds Cleaning and Maintenance Occupations,14
 725,Grounds Maintenance Workers,minor,975950,0.5,35960,0.3,Building and Grounds Cleaning and Maintenance Occupations,14
 726,Grounds Maintenance Workers,broad,975950,0.5,35960,0.3,Building and Grounds Cleaning and Maintenance Occupations,14
 727,Landscaping and Groundskeeping Workers,detailed,892450,0.6,35240,0.3,Building and Grounds Cleaning and Maintenance Occupations,14
@@ -723,7 +723,7 @@
 729,Tree Trimmers and Pruners,detailed,41920,5.8,47450,1.2,Building and Grounds Cleaning and Maintenance Occupations,14
 730,"Grounds Maintenance Workers, All Other",detailed,15770,7.7,39120,1.6,Building and Grounds Cleaning and Maintenance Occupations,14
 731,Personal Care and Service Occupations,major,2566440,0.6,33620,0.5,Personal Care and Service Occupations,15
-732,Supervisors of Personal Care and Service Workers,minor,187400,1.0,46950,0.6,Personal Care and Service Occupations,15
+732,Supervisors of Personal Care and Service Workers,minor,187400,1,46950,0.6,Personal Care and Service Occupations,15
 733,First-Line Supervisors of Entertainment and Recreation Workers,broad,86370,1.5,48370,0.6,Personal Care and Service Occupations,15
 734,First-Line Supervisors of Gambling Services Workers,detailed,19510,2.3,52590,0.8,Personal Care and Service Occupations,15
 735,"First-Line Supervisors of Entertainment and Recreation Workers, Except Gambling Services",detailed,66860,1.9,47130,0.6,Personal Care and Service Occupations,15
@@ -738,7 +738,7 @@
 744,Gambling Services Workers,broad,82860,1.7,29340,1.3,Personal Care and Service Occupations,15
 745,Gambling Dealers,detailed,64700,1.7,28960,1.6,Personal Care and Service Occupations,15
 746,Gambling and Sports Book Writers and Runners,detailed,7340,5.8,29110,2.3,Personal Care and Service Occupations,15
-747,"Gambling Service Workers, All Other",detailed,10820,5.0,31790,1.7,Personal Care and Service Occupations,15
+747,"Gambling Service Workers, All Other",detailed,10820,5,31790,1.7,Personal Care and Service Occupations,15
 748,Motion Picture Projectionists,broad,1620,8.9,32970,2.6,Personal Care and Service Occupations,15
 749,Motion Picture Projectionists,detailed,1620,8.9,32970,2.6,Personal Care and Service Occupations,15
 750,"Ushers, Lobby Attendants, and Ticket Takers",broad,54970,3.1,26390,1.2,Personal Care and Service Occupations,15
@@ -749,7 +749,7 @@
 755,"Locker Room, Coatroom, and Dressing Room Attendants",detailed,9670,5.7,30220,1.4,Personal Care and Service Occupations,15
 756,"Entertainment Attendants and Related Workers, All Other",detailed,4290,11.3,29680,3.6,Personal Care and Service Occupations,15
 757,Funeral Service Workers,minor,63300,1.1,42800,0.9,Personal Care and Service Occupations,15
-758,Embalmers and Crematory Operators,broad,6110,5.0,47350,1.8,Personal Care and Service Occupations,15
+758,Embalmers and Crematory Operators,broad,6110,5,47350,1.8,Personal Care and Service Occupations,15
 759,Embalmers,detailed,4070,5.5,51210,2.1,Personal Care and Service Occupations,15
 760,Crematory Operators,detailed,2040,11.8,39660,1.5,Personal Care and Service Occupations,15
 761,Funeral Attendants,broad,32490,1.7,31630,1.1,Personal Care and Service Occupations,15
@@ -761,7 +761,7 @@
 767,Barbers,detailed,12910,8.1,35700,3.2,Personal Care and Service Occupations,15
 768,"Hairdressers, Hairstylists, and Cosmetologists",detailed,285980,1.6,35990,1.3,Personal Care and Service Occupations,15
 769,Miscellaneous Personal Appearance Workers,broad,182640,3.6,34310,1.9,Personal Care and Service Occupations,15
-770,"Makeup Artists, Theatrical and Performance",detailed,1960,39.0,124380,12.2,Personal Care and Service Occupations,15
+770,"Makeup Artists, Theatrical and Performance",detailed,1960,39,124380,12.2,Personal Care and Service Occupations,15
 771,Manicurists and Pedicurists,detailed,120540,2.1,30480,1,Personal Care and Service Occupations,15
 772,Shampooers,detailed,9560,11.2,25160,2.6,Personal Care and Service Occupations,15
 773,Skincare Specialists,detailed,50580,9.1,41700,2.4,Personal Care and Service Occupations,15
@@ -775,9 +775,9 @@
 781,Other Personal Care and Service Workers,minor,1088670,1.2,33260,0.5,Personal Care and Service Occupations,15
 782,Childcare Workers,broad,438520,1.6,27680,0.5,Personal Care and Service Occupations,15
 783,Childcare Workers,detailed,438520,1.6,27680,0.5,Personal Care and Service Occupations,15
-784,Recreation and Fitness Workers,broad,485620,1.0,38340,0.7,Personal Care and Service Occupations,15
+784,Recreation and Fitness Workers,broad,485620,1,38340,0.7,Personal Care and Service Occupations,15
 785,Exercise Trainers and Group Fitness Instructors,detailed,221600,1.6,45870,1,Personal Care and Service Occupations,15
-786,Recreation Workers,detailed,264020,1.0,32020,0.4,Personal Care and Service Occupations,15
+786,Recreation Workers,detailed,264020,1,32020,0.4,Personal Care and Service Occupations,15
 787,Residential Advisors,broad,92500,1.9,34950,0.6,Personal Care and Service Occupations,15
 788,Residential Advisors,detailed,92500,1.9,34950,0.6,Personal Care and Service Occupations,15
 789,Miscellaneous Personal Care and Service Workers,broad,72030,9.4,30790,1,Personal Care and Service Occupations,15
@@ -793,7 +793,7 @@
 799,Gambling Change Persons and Booth Cashiers,detailed,17150,3.3,29130,1.1,Sales and Related Occupations,16
 800,Counter and Rental Clerks and Parts Salespersons,broad,636750,1.1,36480,0.4,Sales and Related Occupations,16
 801,Counter and Rental Clerks,detailed,371620,1.5,36170,0.5,Sales and Related Occupations,16
-802,Parts Salespersons,detailed,265130,1.0,36920,0.5,Sales and Related Occupations,16
+802,Parts Salespersons,detailed,265130,1,36920,0.5,Sales and Related Occupations,16
 803,Retail Salespersons,broad,3693490,0.3,31920,0.2,Sales and Related Occupations,16
 804,Retail Salespersons,detailed,3693490,0.3,31920,0.2,Sales and Related Occupations,16
 805,"Sales Representatives, Services",minor,2009700,0.6,74770,0.4,Sales and Related Occupations,16
@@ -838,8 +838,8 @@
 845,Financial Clerks,minor,2768230,0.4,43340,0.1,Office and Administrative Support Occupations,17
 846,Bill and Account Collectors,broad,212900,1.5,41280,0.6,Office and Administrative Support Occupations,17
 847,Bill and Account Collectors,detailed,212900,1.5,41280,0.6,Office and Administrative Support Occupations,17
-848,Billing and Posting Clerks,broad,429080,1.0,42750,0.3,Office and Administrative Support Occupations,17
-849,Billing and Posting Clerks,detailed,429080,1.0,42750,0.3,Office and Administrative Support Occupations,17
+848,Billing and Posting Clerks,broad,429080,1,42750,0.3,Office and Administrative Support Occupations,17
+849,Billing and Posting Clerks,detailed,429080,1,42750,0.3,Office and Administrative Support Occupations,17
 850,"Bookkeeping, Accounting, and Auditing Clerks",broad,1509370,0.6,45140,0.2,Office and Administrative Support Occupations,17
 851,"Bookkeeping, Accounting, and Auditing Clerks",detailed,1509370,0.6,45140,0.2,Office and Administrative Support Occupations,17
 852,Gambling Cage Workers,broad,11140,2.6,30770,0.8,Office and Administrative Support Occupations,17
@@ -848,8 +848,8 @@
 855,Payroll and Timekeeping Clerks,detailed,149290,1.3,49560,0.4,Office and Administrative Support Occupations,17
 856,Procurement Clerks,broad,61930,1.6,44930,0.5,Office and Administrative Support Occupations,17
 857,Procurement Clerks,detailed,61930,1.6,44930,0.5,Office and Administrative Support Occupations,17
-858,Tellers,broad,364210,1.0,34930,0.3,Office and Administrative Support Occupations,17
-859,Tellers,detailed,364210,1.0,34930,0.3,Office and Administrative Support Occupations,17
+858,Tellers,broad,364210,1,34930,0.3,Office and Administrative Support Occupations,17
+859,Tellers,detailed,364210,1,34930,0.3,Office and Administrative Support Occupations,17
 860,Miscellaneous Financial Clerks,broad,30310,2.9,47830,0.9,Office and Administrative Support Occupations,17
 861,"Financial Clerks, All Other",detailed,30310,2.9,47830,0.9,Office and Administrative Support Occupations,17
 862,Information and Record Clerks,minor,5461400,0.3,38670,0.1,Office and Administrative Support Occupations,17
@@ -857,8 +857,8 @@
 864,Brokerage Clerks,detailed,39980,3.6,57710,1.2,Office and Administrative Support Occupations,17
 865,Correspondence Clerks,broad,7060,6.2,41710,2.9,Office and Administrative Support Occupations,17
 866,Correspondence Clerks,detailed,7060,6.2,41710,2.9,Office and Administrative Support Occupations,17
-867,"Court, Municipal, and License Clerks",broad,150170,1.0,44870,0.2,Office and Administrative Support Occupations,17
-868,"Court, Municipal, and License Clerks",detailed,150170,1.0,44870,0.2,Office and Administrative Support Occupations,17
+867,"Court, Municipal, and License Clerks",broad,150170,1,44870,0.2,Office and Administrative Support Occupations,17
+868,"Court, Municipal, and License Clerks",detailed,150170,1,44870,0.2,Office and Administrative Support Occupations,17
 869,"Credit Authorizers, Checkers, and Clerks",broad,16820,2.5,44540,0.7,Office and Administrative Support Occupations,17
 870,"Credit Authorizers, Checkers, and Clerks",detailed,16820,2.5,44540,0.7,Office and Administrative Support Occupations,17
 871,Customer Service Representatives,broad,2787070,0.5,39070,0.1,Office and Administrative Support Occupations,17
@@ -867,8 +867,8 @@
 874,"Eligibility Interviewers, Government Programs",detailed,151340,0.5,48570,0.1,Office and Administrative Support Occupations,17
 875,File Clerks,broad,85460,3.2,36820,0.7,Office and Administrative Support Occupations,17
 876,File Clerks,detailed,85460,3.2,36820,0.7,Office and Administrative Support Occupations,17
-877,"Hotel, Motel, and Resort Desk Clerks",broad,220380,1.0,28040,0.4,Office and Administrative Support Occupations,17
-878,"Hotel, Motel, and Resort Desk Clerks",detailed,220380,1.0,28040,0.4,Office and Administrative Support Occupations,17
+877,"Hotel, Motel, and Resort Desk Clerks",broad,220380,1,28040,0.4,Office and Administrative Support Occupations,17
+878,"Hotel, Motel, and Resort Desk Clerks",detailed,220380,1,28040,0.4,Office and Administrative Support Occupations,17
 879,"Interviewers, Except Eligibility and Loan",broad,169840,1.3,38840,0.3,Office and Administrative Support Occupations,17
 880,"Interviewers, Except Eligibility and Loan",detailed,169840,1.3,38840,0.3,Office and Administrative Support Occupations,17
 881,"Library Assistants, Clerical",broad,78470,2.1,32490,0.4,Office and Administrative Support Occupations,17
@@ -885,8 +885,8 @@
 892,Receptionists and Information Clerks,detailed,983150,0.6,32910,0.2,Office and Administrative Support Occupations,17
 893,Reservation and Transportation Ticket Agents and Travel Clerks,broad,100860,1.5,45630,0.4,Office and Administrative Support Occupations,17
 894,Reservation and Transportation Ticket Agents and Travel Clerks,detailed,100860,1.5,45630,0.4,Office and Administrative Support Occupations,17
-895,Miscellaneous Information and Record Clerks,broad,155080,1.0,43950,0.3,Office and Administrative Support Occupations,17
-896,"Information and Record Clerks, All Other",detailed,155080,1.0,43950,0.3,Office and Administrative Support Occupations,17
+895,Miscellaneous Information and Record Clerks,broad,155080,1,43950,0.3,Office and Administrative Support Occupations,17
+896,"Information and Record Clerks, All Other",detailed,155080,1,43950,0.3,Office and Administrative Support Occupations,17
 897,"Material Recording, Scheduling, Dispatching, and Distributing Workers",minor,2213750,0.3,45710,0.1,Office and Administrative Support Occupations,17
 898,Cargo and Freight Agents,broad,85750,2.2,48420,1.1,Office and Administrative Support Occupations,17
 899,Cargo and Freight Agents,detailed,85750,2.2,48420,1.1,Office and Administrative Support Occupations,17
@@ -897,9 +897,9 @@
 904,"Dispatchers, Except Police, Fire, and Ambulance",detailed,194330,1.1,46650,0.4,Office and Administrative Support Occupations,17
 905,"Meter Readers, Utilities",broad,24000,2.8,47430,0.8,Office and Administrative Support Occupations,17
 906,"Meter Readers, Utilities",detailed,24000,2.8,47430,0.8,Office and Administrative Support Occupations,17
-907,Postal Service Workers,broad,527000,0.0,53480,0,Office and Administrative Support Occupations,17
-908,Postal Service Clerks,detailed,79320,0.0,53210,0,Office and Administrative Support Occupations,17
-909,Postal Service Mail Carriers,detailed,335540,0.0,54370,0,Office and Administrative Support Occupations,17
+907,Postal Service Workers,broad,527000,0,53480,0,Office and Administrative Support Occupations,17
+908,Postal Service Clerks,detailed,79320,0,53210,0,Office and Administrative Support Occupations,17
+909,Postal Service Mail Carriers,detailed,335540,0,54370,0,Office and Administrative Support Occupations,17
 910,"Postal Service Mail Sorters, Processors, and Processing Machine Operators",detailed,112130,0.1,51010,0,Office and Administrative Support Occupations,17
 911,"Production, Planning, and Expediting Clerks",broad,367200,0.8,52220,0.3,Office and Administrative Support Occupations,17
 912,"Production, Planning, and Expediting Clerks",detailed,367200,0.8,52220,0.3,Office and Administrative Support Occupations,17
@@ -946,7 +946,7 @@
 953,"Graders and Sorters, Agricultural Products",detailed,25560,4.7,30400,0.7,"Farming, Fishing, and Forestry Occupations",18
 954,Miscellaneous Agricultural Workers,broad,343630,0.9,31980,0.7,"Farming, Fishing, and Forestry Occupations",18
 955,Agricultural Equipment Operators,detailed,26180,3.3,36280,0.9,"Farming, Fishing, and Forestry Occupations",18
-956,"Farmworkers and Laborers, Crop, Nursery, and Greenhouse",detailed,277200,1.0,31440,0.7,"Farming, Fishing, and Forestry Occupations",18
+956,"Farmworkers and Laborers, Crop, Nursery, and Greenhouse",detailed,277200,1,31440,0.7,"Farming, Fishing, and Forestry Occupations",18
 957,"Farmworkers, Farm, Ranch, and Aquacultural Animals",detailed,34140,2.6,32150,0.9,"Farming, Fishing, and Forestry Occupations",18
 958,"Agricultural Workers, All Other",detailed,6100,7.4,37190,2.5,"Farming, Fishing, and Forestry Occupations",18
 959,"Forest, Conservation, and Logging Workers",minor,42330,2.7,43320,1.4,"Farming, Fishing, and Forestry Occupations",18
@@ -967,8 +967,8 @@
 974,"Brickmasons, Blockmasons, and Stonemasons",broad,64950,2.6,59870,1,Construction and Extraction Occupations,19
 975,Brickmasons and Blockmasons,detailed,55950,3.2,61430,1,Construction and Extraction Occupations,19
 976,Stonemasons,detailed,9000,6.8,50170,2,Construction and Extraction Occupations,19
-977,Carpenters,broad,668060,1.0,55190,0.5,Construction and Extraction Occupations,19
-978,Carpenters,detailed,668060,1.0,55190,0.5,Construction and Extraction Occupations,19
+977,Carpenters,broad,668060,1,55190,0.5,Construction and Extraction Occupations,19
+978,Carpenters,detailed,668060,1,55190,0.5,Construction and Extraction Occupations,19
 979,"Carpet, Floor, and Tile Installers and Finishers",broad,83600,2.4,51890,1.3,Construction and Extraction Occupations,19
 980,Carpet Installers,detailed,19790,5.6,48710,2,Construction and Extraction Occupations,19
 981,"Floor Layers, Except Carpet, Wood, and Hard Tiles",detailed,18300,5.2,53880,2.3,Construction and Extraction Occupations,19
@@ -992,7 +992,7 @@
 999,Glaziers,detailed,52700,2.5,51950,1.1,Construction and Extraction Occupations,19
 1000,Insulation Workers,broad,58370,3.1,50300,1.5,Construction and Extraction Occupations,19
 1001,"Insulation Workers, Floor, Ceiling, and Wall",detailed,30360,3.9,44810,1.5,Construction and Extraction Occupations,19
-1002,"Insulation Workers, Mechanical",detailed,28010,5.0,56260,2.2,Construction and Extraction Occupations,19
+1002,"Insulation Workers, Mechanical",detailed,28010,5,56260,2.2,Construction and Extraction Occupations,19
 1003,Painters and Paperhangers,broad,216560,1.3,47180,0.6,Construction and Extraction Occupations,19
 1004,"Painters, Construction and Maintenance",detailed,214220,1.3,47140,0.6,Construction and Extraction Occupations,19
 1005,Paperhangers,detailed,2340,15.1,51560,5.2,Construction and Extraction Occupations,19
@@ -1018,7 +1018,7 @@
 1025,Helpers--Electricians,detailed,72150,2.6,36720,0.6,Construction and Extraction Occupations,19
 1026,"Helpers--Painters, Paperhangers, Plasterers, and Stucco Masons",detailed,8940,8.4,35270,1.3,Construction and Extraction Occupations,19
 1027,"Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters",detailed,45930,3.2,36350,1.1,Construction and Extraction Occupations,19
-1028,Helpers--Roofers,detailed,6830,7.0,36000,1.7,Construction and Extraction Occupations,19
+1028,Helpers--Roofers,detailed,6830,7,36000,1.7,Construction and Extraction Occupations,19
 1029,"Helpers, Construction Trades, All Other",detailed,27300,3.3,37610,0.9,Construction and Extraction Occupations,19
 1030,Other Construction and Related Workers,minor,430760,0.9,54670,0.8,Construction and Extraction Occupations,19
 1031,Construction and Building Inspectors,broad,117830,2.1,68480,1.5,Construction and Extraction Occupations,19
@@ -1064,7 +1064,7 @@
 1071,"Supervisors of Installation, Maintenance, and Repair Workers",minor,526240,0.6,73590,0.4,"Installation, Maintenance, and Repair Occupations",20
 1072,"First-Line Supervisors of Mechanics, Installers, and Repairers",broad,526240,0.6,73590,0.4,"Installation, Maintenance, and Repair Occupations",20
 1073,"First-Line Supervisors of Mechanics, Installers, and Repairers",detailed,526240,0.6,73590,0.4,"Installation, Maintenance, and Repair Occupations",20
-1074,"Electrical and Electronic Equipment Mechanics, Installers, and Repairers",minor,499670,1.0,57260,0.4,"Installation, Maintenance, and Repair Occupations",20
+1074,"Electrical and Electronic Equipment Mechanics, Installers, and Repairers",minor,499670,1,57260,0.4,"Installation, Maintenance, and Repair Occupations",20
 1075,"Computer, Automated Teller, and Office Machine Repairers",broad,86420,3.1,44170,0.9,"Installation, Maintenance, and Repair Occupations",20
 1076,"Computer, Automated Teller, and Office Machine Repairers",detailed,86420,3.1,44170,0.9,"Installation, Maintenance, and Repair Occupations",20
 1077,Radio and Telecommunications Equipment Installers and Repairers,broad,186530,1.8,60510,0.6,"Installation, Maintenance, and Repair Occupations",20
@@ -1072,23 +1072,23 @@
 1079,"Telecommunications Equipment Installers and Repairers, Except Line Installers",detailed,172830,1.8,60350,0.7,"Installation, Maintenance, and Repair Occupations",20
 1080,"Miscellaneous Electrical and Electronic Equipment Mechanics, Installers, and Repairers",broad,226720,1.3,59590,0.4,"Installation, Maintenance, and Repair Occupations",20
 1081,Avionics Technicians,detailed,18910,2.8,69860,0.9,"Installation, Maintenance, and Repair Occupations",20
-1082,"Electric Motor, Power Tool, and Related Repairers",detailed,15880,5.0,48740,1.1,"Installation, Maintenance, and Repair Occupations",20
-1083,"Electrical and Electronics Installers and Repairers, Transportation Equipment",detailed,10710,5.0,70650,1.5,"Installation, Maintenance, and Repair Occupations",20
+1082,"Electric Motor, Power Tool, and Related Repairers",detailed,15880,5,48740,1.1,"Installation, Maintenance, and Repair Occupations",20
+1083,"Electrical and Electronics Installers and Repairers, Transportation Equipment",detailed,10710,5,70650,1.5,"Installation, Maintenance, and Repair Occupations",20
 1084,"Electrical and Electronics Repairers, Commercial and Industrial Equipment",detailed,50780,1.9,64230,0.7,"Installation, Maintenance, and Repair Occupations",20
 1085,"Electrical and Electronics Repairers, Powerhouse, Substation, and Relay",detailed,22490,2.5,87640,0.9,"Installation, Maintenance, and Repair Occupations",20
 1086,"Electronic Equipment Installers and Repairers, Motor Vehicles",detailed,9000,8.1,43690,1.3,"Installation, Maintenance, and Repair Occupations",20
-1087,Audiovisual Equipment Installers and Repairers,detailed,21540,7.0,46120,1.5,"Installation, Maintenance, and Repair Occupations",20
+1087,Audiovisual Equipment Installers and Repairers,detailed,21540,7,46120,1.5,"Installation, Maintenance, and Repair Occupations",20
 1088,Security and Fire Alarm Systems Installers,detailed,77420,2.9,52170,0.8,"Installation, Maintenance, and Repair Occupations",20
 1089,"Vehicle and Mobile Equipment Mechanics, Installers, and Repairers",minor,1570020,0.4,50400,0.2,"Installation, Maintenance, and Repair Occupations",20
 1090,Aircraft Mechanics and Service Technicians,broad,125440,1.3,69470,0.4,"Installation, Maintenance, and Repair Occupations",20
 1091,Aircraft Mechanics and Service Technicians,detailed,125440,1.3,69470,0.4,"Installation, Maintenance, and Repair Occupations",20
 1092,Automotive Technicians and Repairers,broad,783310,0.5,48310,0.3,"Installation, Maintenance, and Repair Occupations",20
-1093,Automotive Body and Related Repairers,detailed,137300,2.0,50660,0.7,"Installation, Maintenance, and Repair Occupations",20
+1093,Automotive Body and Related Repairers,detailed,137300,2,50660,0.7,"Installation, Maintenance, and Repair Occupations",20
 1094,Automotive Glass Installers and Repairers,detailed,16230,5.1,40690,1.3,"Installation, Maintenance, and Repair Occupations",20
 1095,Automotive Service Technicians and Mechanics,detailed,629780,0.7,47990,0.3,"Installation, Maintenance, and Repair Occupations",20
 1096,Bus and Truck Mechanics and Diesel Engine Specialists,broad,261420,1.1,53020,0.3,"Installation, Maintenance, and Repair Occupations",20
 1097,Bus and Truck Mechanics and Diesel Engine Specialists,detailed,261420,1.1,53020,0.3,"Installation, Maintenance, and Repair Occupations",20
-1098,Heavy Vehicle and Mobile Equipment Service Technicians and Mechanics,broad,203060,1.0,55900,0.3,"Installation, Maintenance, and Repair Occupations",20
+1098,Heavy Vehicle and Mobile Equipment Service Technicians and Mechanics,broad,203060,1,55900,0.3,"Installation, Maintenance, and Repair Occupations",20
 1099,Farm Equipment Mechanics and Service Technicians,detailed,35030,1.8,47250,0.5,"Installation, Maintenance, and Repair Occupations",20
 1100,"Mobile Heavy Equipment Mechanics, Except Engines",detailed,145230,1.2,57280,0.4,"Installation, Maintenance, and Repair Occupations",20
 1101,Rail Car Repairers,detailed,22800,1.9,60400,0.7,"Installation, Maintenance, and Repair Occupations",20
@@ -1098,12 +1098,12 @@
 1105,Outdoor Power Equipment and Other Small Engine Mechanics,detailed,34700,2.5,40360,0.6,"Installation, Maintenance, and Repair Occupations",20
 1106,"Miscellaneous Vehicle and Mobile Equipment Mechanics, Installers, and Repairers",broad,123980,1.4,34340,0.5,"Installation, Maintenance, and Repair Occupations",20
 1107,Bicycle Repairers,detailed,14760,5.1,34360,0.8,"Installation, Maintenance, and Repair Occupations",20
-1108,Recreational Vehicle Service Technicians,detailed,16030,3.0,44930,1.2,"Installation, Maintenance, and Repair Occupations",20
+1108,Recreational Vehicle Service Technicians,detailed,16030,3,44930,1.2,"Installation, Maintenance, and Repair Occupations",20
 1109,Tire Repairers and Changers,detailed,93180,1.6,32520,0.5,"Installation, Maintenance, and Repair Occupations",20
 1110,"Other Installation, Maintenance, and Repair Occupations",minor,2978490,0.3,50730,0.2,"Installation, Maintenance, and Repair Occupations",20
 1111,Control and Valve Installers and Repairers,broad,68170,2.2,59860,0.6,"Installation, Maintenance, and Repair Occupations",20
 1112,Mechanical Door Repairers,detailed,23300,4.7,45520,1.1,"Installation, Maintenance, and Repair Occupations",20
-1113,"Control and Valve Installers and Repairers, Except Mechanical Door",detailed,44870,2.0,67310,0.7,"Installation, Maintenance, and Repair Occupations",20
+1113,"Control and Valve Installers and Repairers, Except Mechanical Door",detailed,44870,2,67310,0.7,"Installation, Maintenance, and Repair Occupations",20
 1114,"Heating, Air Conditioning, and Refrigeration Mechanics and Installers",broad,356960,1.3,54690,0.5,"Installation, Maintenance, and Repair Occupations",20
 1115,"Heating, Air Conditioning, and Refrigeration Mechanics and Installers",detailed,356960,1.3,54690,0.5,"Installation, Maintenance, and Repair Occupations",20
 1116,Home Appliance Repairers,broad,28120,3.5,45340,1.1,"Installation, Maintenance, and Repair Occupations",20
@@ -1119,7 +1119,7 @@
 1126,Precision Instrument and Equipment Repairers,broad,74530,2.7,54870,1.1,"Installation, Maintenance, and Repair Occupations",20
 1127,Camera and Photographic Equipment Repairers,detailed,2340,13.6,44260,3,"Installation, Maintenance, and Repair Occupations",20
 1128,Medical Equipment Repairers,detailed,53400,3.5,56420,1.3,"Installation, Maintenance, and Repair Occupations",20
-1129,Musical Instrument Repairers and Tuners,detailed,5710,5.0,39740,2,"Installation, Maintenance, and Repair Occupations",20
+1129,Musical Instrument Repairers and Tuners,detailed,5710,5,39740,2,"Installation, Maintenance, and Repair Occupations",20
 1130,Watch and Clock Repairers,detailed,1970,13.8,45460,5.9,"Installation, Maintenance, and Repair Occupations",20
 1131,"Precision Instrument and Equipment Repairers, All Other",detailed,11110,5.2,59070,1.5,"Installation, Maintenance, and Repair Occupations",20
 1132,"Maintenance and Repair Workers, General",broad,1416740,0.4,44920,0.3,"Installation, Maintenance, and Repair Occupations",20
@@ -1156,8 +1156,8 @@
 1163,Miscellaneous Assemblers and Fabricators,broad,1328550,0.6,37780,0.2,Production Occupations,21
 1164,Miscellaneous Assemblers and Fabricators,detailed,1328550,0.6,37780,0.2,Production Occupations,21
 1165,Food Processing Workers,minor,795640,0.9,33830,0.3,Production Occupations,21
-1166,Bakers,broad,181800,3.0,32300,0.6,Production Occupations,21
-1167,Bakers,detailed,181800,3.0,32300,0.6,Production Occupations,21
+1166,Bakers,broad,181800,3,32300,0.6,Production Occupations,21
+1167,Bakers,detailed,181800,3,32300,0.6,Production Occupations,21
 1168,"Butchers and Other Meat, Poultry, and Fish Processing Workers",broad,364480,0.9,33360,0.3,Production Occupations,21
 1169,Butchers and Meat Cutters,detailed,145930,1.6,35670,0.4,Production Occupations,21
 1170,"Meat, Poultry, and Fish Cutters and Trimmers",detailed,132100,1.6,31680,0.3,Production Occupations,21
@@ -1206,7 +1206,7 @@
 1213,Printing Workers,broad,211930,1.2,40660,0.4,Production Occupations,21
 1214,Prepress Technicians and Workers,detailed,25840,2.5,43800,0.8,Production Occupations,21
 1215,Printing Press Operators,detailed,145290,1.2,41120,0.4,Production Occupations,21
-1216,Print Binding and Finishing Workers,detailed,40810,4.0,37060,1.3,Production Occupations,21
+1216,Print Binding and Finishing Workers,detailed,40810,4,37060,1.3,Production Occupations,21
 1217,"Textile, Apparel, and Furnishings Workers",minor,445950,0.8,31210,0.3,Production Occupations,21
 1218,Laundry and Dry-Cleaning Workers,broad,157400,1.3,27830,0.3,Production Occupations,21
 1219,Laundry and Dry-Cleaning Workers,detailed,157400,1.3,27830,0.3,Production Occupations,21
@@ -1217,25 +1217,25 @@
 1224,Shoe and Leather Workers,broad,9240,5.4,32950,2.2,Production Occupations,21
 1225,Shoe and Leather Workers and Repairers,detailed,5620,5.7,34890,2.1,Production Occupations,21
 1226,Shoe Machine Operators and Tenders,detailed,3610,9.7,29920,4.2,Production Occupations,21
-1227,"Tailors, Dressmakers, and Sewers",broad,21450,6.0,34630,1.5,Production Occupations,21
+1227,"Tailors, Dressmakers, and Sewers",broad,21450,6,34630,1.5,Production Occupations,21
 1228,"Sewers, Hand",detailed,4170,9.7,31350,1.4,Production Occupations,21
 1229,"Tailors, Dressmakers, and Custom Sewers",detailed,17270,7.2,35430,1.9,Production Occupations,21
 1230,"Textile Machine Setters, Operators, and Tenders",broad,56700,1.4,33110,0.5,Production Occupations,21
 1231,Textile Bleaching and Dyeing Machine Operators and Tenders,detailed,6240,6.5,31940,1,Production Occupations,21
-1232,"Textile Cutting Machine Setters, Operators, and Tenders",detailed,11970,3.0,33100,0.8,Production Occupations,21
+1232,"Textile Cutting Machine Setters, Operators, and Tenders",detailed,11970,3,33100,0.8,Production Occupations,21
 1233,"Textile Knitting and Weaving Machine Setters, Operators, and Tenders",detailed,16330,2.4,33640,0.7,Production Occupations,21
 1234,"Textile Winding, Twisting, and Drawing Out Machine Setters, Operators, and Tenders",detailed,22160,1.9,33050,0.8,Production Occupations,21
-1235,"Miscellaneous Textile, Apparel, and Furnishings Workers",broad,58030,2.0,39050,0.7,Production Occupations,21
+1235,"Miscellaneous Textile, Apparel, and Furnishings Workers",broad,58030,2,39050,0.7,Production Occupations,21
 1236,"Extruding and Forming Machine Setters, Operators, and Tenders, Synthetic and Glass Fibers",detailed,14040,4.4,40600,1.1,Production Occupations,21
 1237,Fabric and Apparel Patternmakers,detailed,3220,7.3,64070,4,Production Occupations,21
 1238,Upholsterers,detailed,28020,2.7,38220,0.7,Production Occupations,21
 1239,"Textile, Apparel, and Furnishings Workers, All Other",detailed,12750,5.6,32840,1.1,Production Occupations,21
-1240,Woodworkers,minor,230400,1.0,37520,0.3,Production Occupations,21
+1240,Woodworkers,minor,230400,1,37520,0.3,Production Occupations,21
 1241,Cabinetmakers and Bench Carpenters,broad,93070,1.8,40070,0.5,Production Occupations,21
 1242,Cabinetmakers and Bench Carpenters,detailed,93070,1.8,40070,0.5,Production Occupations,21
 1243,Furniture Finishers,broad,16300,2.8,37310,0.8,Production Occupations,21
 1244,Furniture Finishers,detailed,16300,2.8,37310,0.8,Production Occupations,21
-1245,"Model Makers and Patternmakers, Wood",broad,550,16.0,56560,3.4,Production Occupations,21
+1245,"Model Makers and Patternmakers, Wood",broad,550,16,56560,3.4,Production Occupations,21
 1246,"Model Makers, Wood",detailed,340,22.3,60040,4.6,Production Occupations,21
 1247,"Patternmakers, Wood",detailed,210,17.8,51020,4.7,Production Occupations,21
 1248,"Woodworking Machine Setters, Operators, and Tenders",broad,112560,1.2,35450,0.3,Production Occupations,21
@@ -1246,7 +1246,7 @@
 1253,Plant and System Operators,minor,280900,0.7,66210,0.3,Production Occupations,21
 1254,"Power Plant Operators, Distributors, and Dispatchers",broad,43440,1.4,89410,0.4,Production Occupations,21
 1255,Nuclear Power Reactor Operators,detailed,4820,1.1,111220,0.5,Production Occupations,21
-1256,Power Distributors and Dispatchers,detailed,9660,3.0,95520,0.6,Production Occupations,21
+1256,Power Distributors and Dispatchers,detailed,9660,3,95520,0.6,Production Occupations,21
 1257,Power Plant Operators,detailed,28960,1.8,83740,0.6,Production Occupations,21
 1258,Stationary Engineers and Boiler Operators,broad,29820,2.3,70510,0.6,Production Occupations,21
 1259,Stationary Engineers and Boiler Operators,detailed,29820,2.3,70510,0.6,Production Occupations,21
@@ -1327,7 +1327,7 @@
 1334,"Bus Drivers, School",detailed,361420,1.2,38750,0.7,Transportation and Material Moving Occupations,22
 1335,"Bus Drivers, Transit and Intercity",detailed,145720,1.2,51310,0.4,Transportation and Material Moving Occupations,22
 1336,Shuttle Drivers and Chauffeurs,detailed,175660,1.2,32570,0.3,Transportation and Material Moving Occupations,22
-1337,Taxi Drivers,detailed,13950,4.0,30050,1.6,Transportation and Material Moving Occupations,22
+1337,Taxi Drivers,detailed,13950,4,30050,1.6,Transportation and Material Moving Occupations,22
 1338,Miscellaneous Motor Vehicle Operators,broad,48690,3.3,36410,1.7,Transportation and Material Moving Occupations,22
 1339,"Motor Vehicle Operators, All Other",detailed,48690,3.3,36410,1.7,Transportation and Material Moving Occupations,22
 1340,Rail Transportation Workers,minor,119120,0.4,68330,0.4,Transportation and Material Moving Occupations,22
@@ -1347,12 +1347,12 @@
 1354,Sailors and Marine Oilers,detailed,26610,3.7,57800,2.7,Transportation and Material Moving Occupations,22
 1355,Ship and Boat Captains and Operators,broad,36220,3.2,94250,1.8,Transportation and Material Moving Occupations,22
 1356,"Captains, Mates, and Pilots of Water Vessels",detailed,33490,3.4,98330,1.8,Transportation and Material Moving Occupations,22
-1357,Motorboat Operators,detailed,2740,11.0,44410,2.8,Transportation and Material Moving Occupations,22
+1357,Motorboat Operators,detailed,2740,11,44410,2.8,Transportation and Material Moving Occupations,22
 1358,Ship Engineers,broad,7650,4.2,96910,2.2,Transportation and Material Moving Occupations,22
 1359,Ship Engineers,detailed,7650,4.2,96910,2.2,Transportation and Material Moving Occupations,22
 1360,Other Transportation Workers,minor,286680,1.6,35900,0.5,Transportation and Material Moving Occupations,22
-1361,Bridge and Lock Tenders,broad,4040,5.0,44760,1.6,Transportation and Material Moving Occupations,22
-1362,Bridge and Lock Tenders,detailed,4040,5.0,44760,1.6,Transportation and Material Moving Occupations,22
+1361,Bridge and Lock Tenders,broad,4040,5,44760,1.6,Transportation and Material Moving Occupations,22
+1362,Bridge and Lock Tenders,detailed,4040,5,44760,1.6,Transportation and Material Moving Occupations,22
 1363,Parking Attendants,broad,91160,3.6,29210,0.9,Transportation and Material Moving Occupations,22
 1364,Parking Attendants,detailed,91160,3.6,29210,0.9,Transportation and Material Moving Occupations,22
 1365,Transportation Service Attendants,broad,123660,1.7,30810,0.4,Transportation and Material Moving Occupations,22
@@ -1360,8 +1360,8 @@
 1367,Aircraft Service Attendants,detailed,12170,6.7,38640,1.4,Transportation and Material Moving Occupations,22
 1368,Traffic Technicians,broad,7770,6.3,53210,2,Transportation and Material Moving Occupations,22
 1369,Traffic Technicians,detailed,7770,6.3,53210,2,Transportation and Material Moving Occupations,22
-1370,Transportation Inspectors,broad,25070,2.0,77620,1.1,Transportation and Material Moving Occupations,22
-1371,Transportation Inspectors,detailed,25070,2.0,77620,1.1,Transportation and Material Moving Occupations,22
+1370,Transportation Inspectors,broad,25070,2,77620,1.1,Transportation and Material Moving Occupations,22
+1371,Transportation Inspectors,detailed,25070,2,77620,1.1,Transportation and Material Moving Occupations,22
 1372,Passenger Attendants,broad,21240,7.1,34380,1.6,Transportation and Material Moving Occupations,22
 1373,Passenger Attendants,detailed,21240,7.1,34380,1.6,Transportation and Material Moving Occupations,22
 1374,Miscellaneous Transportation Workers,broad,13750,4.7,39990,1.3,Transportation and Material Moving Occupations,22
@@ -1381,12 +1381,12 @@
 1388,Cleaners of Vehicles and Equipment,detailed,351960,0.7,30550,0.3,Transportation and Material Moving Occupations,22
 1389,"Laborers and Freight, Stock, and Material Movers, Hand",detailed,2729010,0.6,34950,0.2,Transportation and Material Moving Occupations,22
 1390,Machine Feeders and Offbearers,detailed,60880,2.4,36660,0.4,Transportation and Material Moving Occupations,22
-1391,"Packers and Packagers, Hand",detailed,585270,1.0,30950,0.3,Transportation and Material Moving Occupations,22
+1391,"Packers and Packagers, Hand",detailed,585270,1,30950,0.3,Transportation and Material Moving Occupations,22
 1392,Stockers and Order Fillers,detailed,2451430,0.4,33020,0.2,Transportation and Material Moving Occupations,22
 1393,Pumping Station Operators,broad,29550,4.5,62590,1.3,Transportation and Material Moving Occupations,22
 1394,Gas Compressor and Gas Pumping Station Operators,detailed,2910,6.1,67130,1.6,Transportation and Material Moving Occupations,22
 1395,"Pump Operators, Except Wellhead Pumpers",detailed,10600,7.2,54400,2.4,Transportation and Material Moving Occupations,22
-1396,Wellhead Pumpers,detailed,16040,7.0,67170,1.7,Transportation and Material Moving Occupations,22
+1396,Wellhead Pumpers,detailed,16040,7,67170,1.7,Transportation and Material Moving Occupations,22
 1397,Refuse and Recyclable Material Collectors,broad,126050,1.5,42780,0.7,Transportation and Material Moving Occupations,22
 1398,Refuse and Recyclable Material Collectors,detailed,126050,1.5,42780,0.7,Transportation and Material Moving Occupations,22
 1399,"Tank Car, Truck, and Ship Loaders",broad,12090,6.8,55330,2.6,Transportation and Material Moving Occupations,22
