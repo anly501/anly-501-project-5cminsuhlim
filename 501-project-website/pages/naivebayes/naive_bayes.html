@@ -112,13 +112,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#theory" id="toc-theory" class="nav-link" data-scroll-target="#theory">Theory</a></li>
-  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a></li>
+  <li><a href="#gaussian-naive-bayes" id="toc-gaussian-naive-bayes" class="nav-link" data-scroll-target="#gaussian-naive-bayes">Gaussian Naive Bayes</a>
   <ul class="collapse">
-  <li><a href="#gaussian-naive-bayes" id="toc-gaussian-naive-bayes" class="nav-link" data-scroll-target="#gaussian-naive-bayes">Gaussian Naive Bayes</a></li>
-  </ul></li>
   <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
-  <li><a href="#multinomial-naive-bayes" id="toc-multinomial-naive-bayes" class="nav-link" data-scroll-target="#multinomial-naive-bayes">Multinomial Naive Bayes</a></li>
+  </ul></li>
+  <li><a href="#multinomial-naive-bayes" id="toc-multinomial-naive-bayes" class="nav-link" data-scroll-target="#multinomial-naive-bayes">Multinomial Naive Bayes</a>
+  <ul class="collapse">
   <li><a href="#conclusions-1" id="toc-conclusions-1" class="nav-link" data-scroll-target="#conclusions-1">Conclusions</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -140,8 +142,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
-<section id="gaussian-naive-bayes" class="level3">
-<h3 class="anchored" data-anchor-id="gaussian-naive-bayes">Gaussian Naive Bayes</h3>
+</section>
+<section id="gaussian-naive-bayes" class="level2">
+<h2 class="anchored" data-anchor-id="gaussian-naive-bayes">Gaussian Naive Bayes</h2>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -267,11 +270,10 @@ modelPred Female  Male
 </div>
 </div>
 <p>Marginal probabilities of the predictor variables (agreeable_score, extraversion_score, openness_score, conscientiousness_score, and neuroticism_score) based on class are also visualized above.</p>
-</section>
-</section>
-<section id="conclusions" class="level2">
-<h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
+<section id="conclusions" class="level3">
+<h3 class="anchored" data-anchor-id="conclusions">Conclusions</h3>
 <p>The model itself isn’t very strong. Since there are only two classifier groups (i.e.&nbsp;Male or Female), random guesses would result in an accuracy of 0.5. As such, our model is only 17-18% better than if the model were to just guess an individual’s randomly. This makes the model not great, but not completely useless; rather, these results suggest that this model shouldn’t be the sole determinant for predicting an individual’s sex from their Big Five Personality scores.</p>
+</section>
 </section>
 <section id="multinomial-naive-bayes" class="level2">
 <h2 class="anchored" data-anchor-id="multinomial-naive-bayes">Multinomial Naive Bayes</h2>
@@ -478,10 +480,10 @@ ERRORS: [1 1 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 1 1 0]</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>           words  importance
 0     employment         0.0
-6601          ur         0.0
-6594   certainly         0.0
-6595     healing         0.0
-6596   debatable         0.0</code></pre>
+6604  philosophy         0.0
+6597  conclusion         0.0
+6598      coined         0.0
+6599       1890s         0.0</code></pre>
 </div>
 <details>
 <summary>Code</summary>
@@ -495,12 +497,12 @@ ERRORS: [1 1 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 1 1 0]</code></pre>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(least_important)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>             words  importance
-776           1857   -0.011905
-9442        foment   -0.011905
-6448  ratification   -0.011905
-9399   transparent   -0.011905
-9624    psychiatry   -0.011905</code></pre>
+<pre><code>            words  importance
+4414      closely   -0.011905
+776          1857   -0.011905
+2151      liberty   -0.011905
+7171        sings   -0.011905
+9091  detrimental   -0.011905</code></pre>
 </div>
 </div>
 <p>The plot below shows the 5 least important words gathered by the model.</p>
@@ -523,10 +525,10 @@ ERRORS: [1 1 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 1 1 0]</code></pre>
 <p><img src="naive_bayes_files/figure-html/unnamed-chunk-9-5.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section>
-<section id="conclusions-1" class="level2">
-<h2 class="anchored" data-anchor-id="conclusions-1">Conclusions</h2>
+<section id="conclusions-1" class="level3">
+<h3 class="anchored" data-anchor-id="conclusions-1">Conclusions</h3>
 <p>Again, since there are only two classifier groups (i.e.&nbsp;the two search terms), random guesses would result in an accuracy of 0.5. As such, our model performs a little over 30% better than if the model were to just guess randomly based on given words in a sentence. This suggests that the model performs decently well in determining which sentences generally are associated with either “Women’s rights” or “Men’s rights.”</p>
+</section>
 </section>
 </section>
 

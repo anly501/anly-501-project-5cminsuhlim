@@ -14844,6 +14844,255 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="WikiCrawl-for-ARM">WikiCrawl for ARM<a class="anchor-link" href="#WikiCrawl-for-ARM">&#182;</a></h1>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">wikipedia</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">import</span> <span class="nn">string</span> 
+<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">WordNetLemmatizer</span>
+<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">PorterStemmer</span>
+<span class="kn">from</span> <span class="nn">nltk.sentiment</span> <span class="kn">import</span> <span class="n">SentimentIntensityAnalyzer</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># PARAMETERS </span>
+<span class="n">label_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Women&#39;s rights&quot;</span><span class="p">,</span> <span class="s2">&quot;Men&#39;s rights&quot;</span><span class="p">]</span>
+
+<span class="n">max_num_pages</span><span class="o">=</span><span class="mi">30</span>
+<span class="n">sentence_per_chunk</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">min_sentence_length</span><span class="o">=</span><span class="mi">20</span>
+
+<span class="c1"># GET STOPWORDS</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="n">stop_words</span><span class="o">=</span><span class="n">nltk</span><span class="o">.</span><span class="n">corpus</span><span class="o">.</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+
+<span class="c1"># INITALIZE STEMMER+LEMITZIZER+SIA</span>
+<span class="n">sia</span> <span class="o">=</span> <span class="n">SentimentIntensityAnalyzer</span><span class="p">()</span>
+<span class="n">stemmer</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span>
+<span class="n">lemmatizer</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Define-text-cleaning-function">Define text cleaning function<a class="anchor-link" href="#Define-text-cleaning-function">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">clean_string</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+	<span class="c1"># #FILTER OUT UNWANTED CHAR</span>
+	<span class="n">new_text</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+	<span class="c1"># keep=string.printable</span>
+	<span class="n">keep</span><span class="o">=</span><span class="s2">&quot; abcdefghijklmnopqrstuvwxyz0123456789&quot;</span>
+	<span class="k">for</span> <span class="n">character</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">character</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">keep</span><span class="p">:</span>
+			<span class="n">new_text</span><span class="o">+=</span><span class="n">character</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+		<span class="k">else</span><span class="p">:</span> 
+			<span class="n">new_text</span><span class="o">+=</span><span class="s2">&quot; &quot;</span>
+	<span class="n">text</span><span class="o">=</span><span class="n">new_text</span>
+	<span class="c1"># print(text)</span>
+
+	<span class="c1"># #FILTER OUT UNWANTED WORDS</span>
+	<span class="n">new_text</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+	<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">nltk</span><span class="o">.</span><span class="n">tokenize</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">:</span>
+			<span class="c1">#lemmatize </span>
+			<span class="n">tmp</span><span class="o">=</span><span class="n">lemmatizer</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+			<span class="c1"># tmp=stemmer.stem(tmp)</span>
+
+			<span class="c1"># update word if there is a change</span>
+			<span class="c1"># if(tmp!=word): print(tmp,word)</span>
+			
+			<span class="n">word</span><span class="o">=</span><span class="n">tmp</span>
+			<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;,&quot;</span><span class="p">,</span><span class="s2">&quot;!&quot;</span><span class="p">,</span><span class="s2">&quot;?&quot;</span><span class="p">,</span><span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="s2">&quot;;&quot;</span><span class="p">]:</span>
+					<span class="c1">#remove the last space</span>
+					<span class="n">new_text</span><span class="o">=</span><span class="n">new_text</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">word</span><span class="o">+</span><span class="s2">&quot; &quot;</span>
+				<span class="k">else</span><span class="p">:</span> <span class="c1">#add a space</span>
+					<span class="n">new_text</span><span class="o">+=</span><span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">+</span><span class="s2">&quot; &quot;</span>
+	<span class="n">text</span><span class="o">=</span><span class="n">new_text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+	<span class="k">return</span> <span class="n">text</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Perform-Wiki-crawl">Perform Wiki crawl<a class="anchor-link" href="#Perform-Wiki-crawl">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#INITIALIZE </span>
+<span class="n">corpus</span><span class="o">=</span><span class="p">[]</span>  <span class="c1"># list of strings (input variables X)</span>
+<span class="n">targets</span><span class="o">=</span><span class="p">[]</span> <span class="c1"># list of targets (labels or response variables Y)</span>
+
+<span class="c1">#--------------------------</span>
+<span class="c1"># LOOP OVER TOPICS </span>
+<span class="c1">#--------------------------</span>
+<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">label_list</span><span class="p">:</span>
+
+	<span class="c1">#SEARCH FOR RELEVANT PAGES </span>
+	<span class="n">titles</span><span class="o">=</span><span class="n">wikipedia</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="n">results</span><span class="o">=</span><span class="n">max_num_pages</span><span class="p">)</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pages for label =&quot;</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="n">titles</span><span class="p">)</span>
+
+	<span class="c1">#LOOP OVER WIKI-PAGES</span>
+	<span class="k">for</span> <span class="n">title</span> <span class="ow">in</span> <span class="n">titles</span><span class="p">:</span>
+		<span class="k">try</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;	&quot;</span><span class="p">,</span><span class="n">title</span><span class="p">)</span>
+			<span class="n">wiki_page</span> <span class="o">=</span> <span class="n">wikipedia</span><span class="o">.</span><span class="n">page</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">auto_suggest</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+			<span class="c1"># LOOP OVER SECTIONS IN ARTICLE AND GET PAGE TEXT</span>
+			<span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">wiki_page</span><span class="o">.</span><span class="n">sections</span><span class="p">:</span>
+				<span class="n">text</span><span class="o">=</span><span class="n">wiki_page</span><span class="o">.</span><span class="n">section</span><span class="p">(</span><span class="n">section</span><span class="p">);</span> <span class="c1">#print(text)</span>
+
+				<span class="c1">#BREAK IN TO SENTENCES </span>
+				<span class="n">sentences</span><span class="o">=</span><span class="n">nltk</span><span class="o">.</span><span class="n">tokenize</span><span class="o">.</span><span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+				<span class="n">counter</span><span class="o">=</span><span class="mi">0</span>
+				<span class="n">text_chunk</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+
+				<span class="c1">#LOOP OVER SENTENCES </span>
+				<span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
+					<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span><span class="o">&gt;</span><span class="n">min_sentence_length</span><span class="p">:</span>
+						<span class="k">if</span><span class="p">(</span><span class="n">counter</span><span class="o">%</span><span class="k">sentence_per_chunk</span>==0 and counter!=0):
+							<span class="c1"># PROCESS COMPLETED CHUNK </span>
+							
+							<span class="c1"># CLEAN STRING</span>
+							<span class="n">text_chunk</span><span class="o">=</span><span class="n">clean_string</span><span class="p">(</span><span class="n">text_chunk</span><span class="p">)</span>
+
+							<span class="c1"># REMOVE LABEL IF IN STRING (MAKES IT TOO EASY)</span>
+							<span class="n">text_chunk</span><span class="o">=</span><span class="n">text_chunk</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+							
+							<span class="c1"># REMOVE ANY DOUBLE SPACES</span>
+							<span class="n">text_chunk</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text_chunk</span><span class="o">.</span><span class="n">split</span><span class="p">())</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+							<span class="c1">#UPDATE CORPUS </span>
+							<span class="n">corpus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text_chunk</span><span class="p">)</span>
+
+							<span class="c1">#UPDATE TARGETS</span>
+							<span class="n">score</span><span class="o">=</span><span class="n">sia</span><span class="o">.</span><span class="n">polarity_scores</span><span class="p">(</span><span class="n">text_chunk</span><span class="p">)</span>
+							<span class="n">target</span><span class="o">=</span><span class="p">[</span><span class="n">label</span><span class="p">,</span><span class="n">score</span><span class="p">[</span><span class="s1">&#39;compound&#39;</span><span class="p">]]</span>
+							<span class="n">targets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+
+							<span class="c1">#print(&quot;TEXT\n&quot;,text_chunk,target)</span>
+
+							<span class="c1"># RESET CHUNK FOR NEXT ITERATION </span>
+							<span class="n">text_chunk</span><span class="o">=</span><span class="n">sentence</span>
+						<span class="k">else</span><span class="p">:</span>
+							<span class="n">text_chunk</span><span class="o">+=</span><span class="n">sentence</span>
+						<span class="c1">#print(&quot;--------\n&quot;, sentence)</span>
+						<span class="n">counter</span><span class="o">+=</span><span class="mi">1</span>
+
+		<span class="k">except</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: SOMETHING WENT WRONG:&quot;</span><span class="p">,</span> <span class="n">title</span><span class="p">);</span>  
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Save-results">Save results<a class="anchor-link" href="#Save-results">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#SANITY CHECKS AND PRINT TO FILE </span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;number of text chunks = &quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">corpus</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;number of targets = &quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">targets</span><span class="p">))</span>
+
+<span class="n">tmp</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">corpus</span><span class="p">)):</span>
+    <span class="n">tmp</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">corpus</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">targets</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">targets</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+<span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;label&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;sentiment&quot;</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;wiki-crawl-results-arm.csv&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
 </body>
 
 

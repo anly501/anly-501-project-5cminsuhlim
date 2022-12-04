@@ -76,9 +76,19 @@
         <div class="container">
             <h1 class="text-center">Conclusions</h1>
             <div class="row">
-                This project had the objective of analyzing various metrics of gender equality in the U.S. by exploring 12 different questions. 
+                <p>This project had the objective of analyzing various metrics of gender equality in the U.S. Our numerous model analyses revealed some interesting findings.</p>
 
-                <p></p>
+                <p>First, our Naive Bayes analyses revealed that Big Five Personality data can be somewhat predictive of an individual's sex, which suggests that there may be personality differences between men and women, but the magnitude of such differences may not be very large. Additionally, our WikiCrawl data analysis performed quite well, suggesting that there are commonly used words in certain sentence contexts that appear in Wikipedia pages related to "Women's Rights" or "Men's Rights" frequently.</p>
+
+                <p>Second, our Decision Tree and Random Forest analyses revealed that an occupation type can be classified based on employment and wage metrics. We also found that our Decision Tree Regression can determine the average number of hours worked by an employee based on the employee's sex, job type, and the number of employees who work 35+ hours per week in the respective field. However, for both the regression and classification, we suffered from an imbalanced data set, as well as insufficient sample size.</p>
+
+                <p>Third, our Support Vector Machines showed, once again, that the WikiCrawl data could classify certain words used in specific sentence contexts to Wikipedia pages related to "Women's Rights" or "Men's Rights." However, the SVM linear kernel (which was our most optimal model) still underperformed compared to our Naive Bayes analysis. We could achieve potentially better results by gathering attempting more crawls with varying number of pages and sentences.</p>
+
+                <p>Fourth, our Clustering models failed to accurate create optimal cluster predictions for the broad occupation types we had in our data set; however, despite the seemingly unfruitful results, we did see that the models created 3 or 4 clusters, which suggests that there are largely 3 or 4 major industries under which most occupations fall.</p>
+
+                <p>Finally, our Association Rule Mining of the WikiCrawl data revealed that Wikipedia pages relating to "Women's Rights" appeared to have more consistency, since most of the associations found dealt with women's rights, women's equality, and women's violence. Additionally, the word male only appeared in relation to the word woman.x</p>
+
+                <p>In addition to our model analyses, we can come to a couple of conclusions regarding the 12 different questions posed in our Introduction below:</p>
 
                 <h3>Educational</h3>
                 <ol type="1">
@@ -97,7 +107,7 @@
                     <li class="questions">What are the wages associated with each level of education?</li>
 
                     <p>
-                        Based on 2021 earnings data for 25 year olds from the Bureau of Labor Statistics, there's a very strong correlation between increasing levels of education and an increase in income. Additionally, there's an inverse relationship between increasing levels of education and unemployment rate. Also, the occupations with the highest mean annual wage, as of May 2021, were in Management, Legal, and Computer/Maths, while the lowest pay jobs were all in the service industry.p
+                        Based on 2021 earnings data for 25 year olds from the Bureau of Labor Statistics, there's a very strong correlation between increasing levels of education and an increase in income. Additionally, there's an inverse relationship between increasing levels of education and unemployment rate. Also, the occupations with the highest mean annual wage, as of May 2021, were in Management, Legal, and Computer/Maths, while the lowest pay jobs were all in the service industry.
                     </p>
 
                     <li class="questions">For what fields do men and women tend to get degrees?</li>
@@ -175,8 +185,6 @@
                     </p>
                 </ol>
             </div>
-
-
 
             <div class="col-lg-8">
                 <p>

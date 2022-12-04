@@ -29,7 +29,7 @@ There are multiple Naive Bayes classifiers. The Gaussian Naive Bayes algorithm a
 
 ## Methods
 
-### Gaussian Naive Bayes
+## Gaussian Naive Bayes
 
 ```{r}
 ## imports
@@ -101,7 +101,7 @@ plot(big5, vars = c("agreeable_score","extraversion_score","openness_score",
 
 Marginal probabilities of the predictor variables (agreeable_score, extraversion_score, openness_score, conscientiousness_score, and neuroticism_score) based on class are also visualized above.
 
-## Conclusions
+### Conclusions
 
 The model itself isn't very strong. Since there are only two classifier groups (i.e. Male or Female), random guesses would result in an accuracy of 0.5. As such, our model is only 17-18% better than if the model were to just guess an individual's randomly. This makes the model not great, but not completely useless; rather, these results suggest that this model shouldn't be the sole determinant for predicting an individual's sex from their Big Five Personality scores.
 
@@ -279,7 +279,7 @@ ax.set_title('Feature Importance of the 7 Least Important Words')
 ax.set_xlabel('Word')
 ```
 
-## Conclusions
+### Conclusions
 
 Again, since there are only two classifier groups (i.e. the two search terms), random guesses would result in an accuracy of 0.5. As such, our model performs a little over 30% better than if the model were to just guess randomly based on given words in a sentence. This suggests that the model performs decently well in determining which sentences generally are associated with either "Women's rights" or "Men's rights."
 
